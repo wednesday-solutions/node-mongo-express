@@ -27,7 +27,6 @@ module.exports = app => {
     router.get('/query/:_id', (req, res, next) => {
         const { _id } = req.params;
         const query = req.query;
-
         Post.find({ userId: _id })
             .skip(query.post_skip)
             .limit(query.post_limit)

@@ -6,7 +6,7 @@ const prettierOptions = JSON.parse(
 );
 
 module.exports = {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     extends: ['prettier'],
     plugins: ['prettier'],
     env: {
