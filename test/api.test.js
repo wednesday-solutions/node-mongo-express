@@ -9,25 +9,24 @@ let db;
 // const Mockgoose = require('mockgoose').Mockgoose;
 // const mockgoose = new Mockgoose(mongoose);
 describe('User', () => {
-  it('create user', async done => {
-    const res = await request(app)
-      .post('/create')
-      .send({
-        name: 'Almera',
-        password: 'almera',
-        email: 'almera@example.com',
-      })
-      .then(res => {
-        const body = res.body;
-        console.log('body: ', body);
-      });
+    it('create user', async done => {
+        const res = await request(app)
+            .post('/create')
+            .send({
+                name: 'Almera',
+                password: 'almera',
+                email: 'almera@example.com'
+            })
+            .then(res => {
+                const body = res.body;
+                console.log('body: ', body);
+            });
 
-    expect(res.status).to.equal(200);
-    expect(res.body).to.have.property('_id');
-    expect(res.body).to.have.property('name', 'Almera');
-  })
-})
-
+        expect(res.status).to.equal(200);
+        expect(res.body).to.have.property('_id');
+        expect(res.body).to.have.property('name', 'Almera');
+    });
+});
 
 // describe('User', async () => {
 //   before(async done => {
