@@ -27,6 +27,9 @@
     ],
     "author": "Wednesday Solutions",
     "license": "MIT",
+    "engines": {
+        "node": "14.17.x"
+    },
     "bugs": {
         "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
     },
@@ -49,12 +52,12 @@
         "@babel/eslint-parser": "^7.5.4",
         "@babel/node": "^7.16.7",
         "@babel/preset-env": "^7.16.7",
+        "@faker-js/faker": "^6.0.0-alpha.5",
         "babel-eslint": "^10.1.0",
         "chai": "^4.3.4",
         "eslint": "^8.6.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
-        "faker": "^6.6.6",
         "jest": "^27.4.7",
         "link-module-alias": "^1.2.0",
         "mocha": "^9.1.3",
@@ -81,6 +84,9 @@
         }
     },
     "_moduleAliases": {
-        "@utils": "./utils"
+        "@utils": "./server/utils",
+        "@database": "./server/database",
+        "@middlewares": "./server/middlewares",
+        "@server": "./server"
     }
 }
