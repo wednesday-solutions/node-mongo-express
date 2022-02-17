@@ -11,6 +11,10 @@ import database from './database';
 import mongoose from 'mongoose';
 import faker from '@faker-js/faker';
 import Product from '../seeders/multiple-collections/products';
+import Store from '../seeders/multiple-collections/store';
+import Supplier from '../seeders/multiple-collections/suppliers';
+import random from 'lodash/random';
+import { randomiser } from './utils/random';
 /**
  * Connect to database
  */
@@ -48,12 +52,27 @@ mongoose
     });
 
 const seedDB = async () => {
+    await Store.deleteMany({});
     await Product.deleteMany({});
-    const seedProducts = range(1, 20000).map((value, index) => ({
-        name: faker.commerce.productName(),
-        price: parseFloat(faker.commerce.price()) * 100,
-        category: faker.commerce.department()
+    await Supplier.deleteMany({});
+
+    const seedStores = range(0, 5).map((value, index) => ({
+        name: faker.company.companyName(),
+        address: faker.address.streetAddress(true)
     }));
+
+    const dbStoreIds = (await Store.insertMany(seedStores)).map(m => m._id);
+    const seedProducts = await Promise.all(
+        range(1, 20).map(async (value, index) => {
+            let stores = randomiser(arr, 3);
+            return {
+                name: faker.commerce.productName(),
+                price: parseFloat(faker.commerce.price()) * 100,
+                category: faker.commerce.department(),
+                storeId: stores
+            };
+        })
+    );
     await Product.insertMany(seedProducts);
 };
 
