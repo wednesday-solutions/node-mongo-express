@@ -13,22 +13,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    suppliers: [
-        {
-            ref: 'Supplier',
-            type: 'ObjectId'
-        }
-    ],
-    stores: [
-        {
-            ref: 'Store',
-            type: 'ObjectId'
-        }
-    ],
-    schema: {
-        type: Number,
-        required: true
-    },
     totalSales: {
         type: Number,
         required: true
@@ -36,12 +20,16 @@ const schema = new mongoose.Schema({
     quantityAverage: {
         type: Number,
         required: true
+    },
+    schema: {
+        type: Number,
+        required: true
     }
 });
 
-const Product = mongoose.model('Product', schema);
+const Product = mongoose.model('products', schema);
 
-module.exports = Product;
+module.exports = { model: Product, schema };
 
 /**
  Store: {

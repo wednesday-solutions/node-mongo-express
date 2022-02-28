@@ -4,24 +4,11 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    stores: [
-        {
-            ref: 'Store',
-            type: 'ObjectId'
-        }
-    ],
-    products: [
-        {
-            ref: 'Product',
-            type: 'ObjectId'
-        }
-    ],
     schema: {
         type: Number,
         required: true
     }
 });
 
-const Store = mongoose.model('Store', schema);
-
-module.exports = Store;
+const Supplier = mongoose.model('suppliers', schema);
+module.exports = { model: Supplier, schema };
