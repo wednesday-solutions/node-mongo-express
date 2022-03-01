@@ -43,7 +43,7 @@
         "helmet": "^5.0.1",
         "husky": "^7.0.4",
         "kill-port": "^1.6.1",
-        "mongoose": "^6.1.5",
+        "mongoose": "6.2.4",
         "nodemon": "^2.0.15",
         "save": "^2.4.0"
     },

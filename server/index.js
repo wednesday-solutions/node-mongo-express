@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 mongoose
-    .connect('mongodb://localhost:27027/ecommerce', {
+    .connect('mongodb://localhost:27017/ecommerce', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -64,14 +64,14 @@ const seedDB = async () => {
     await SupplierProduct.deleteMany({});
 
     console.log('------------------------------------\nSeeding stores');
-    const seedStores = range(0, 2).map((value, index) => ({
+    const seedStores = range(0, 2000).map((value, index) => ({
         name: faker.company.companyName(),
         address: faker.address.streetAddress(true),
         schema: 1
     }));
     const stores = await Store.insertMany(seedStores);
     console.log('------------------------------------\nSeeding suppliers');
-    const seedSuppliers = range(0, 2).map((value, index) => ({
+    const seedSuppliers = range(0, 2000).map((value, index) => ({
         name: faker.company.companyName(),
         schema: 1
     }));
@@ -80,7 +80,7 @@ const seedDB = async () => {
     console.log('------------------------------------\nSeeding products');
 
     const seedProducts = await Promise.all(
-        range(1, 20).map(async (value, index) => ({
+        range(1, 20000).map(async (value, index) => ({
             name: faker.commerce.productName(),
             price: parseFloat(faker.commerce.price()) * 100,
             category: faker.commerce.department(),
@@ -96,7 +96,6 @@ const seedDB = async () => {
     products.forEach(product => {
         const storeIndex = random(0, stores.length - 1);
         const supplierIndex = random(0, suppliers.length - 1);
-        console.log({ supplierIndex });
         seedStoreProducts.push({
             schema: 1,
             productId: product._id,
@@ -104,13 +103,14 @@ const seedDB = async () => {
             store: stores[storeIndex],
             storeId: stores[storeIndex]._id
         });
-        // seedSupplierProducts.push({
-        //     schema: 1,
-        //     productId: product._id,
-        //     product,
-        //     supplier: suppliers[supplierIndex],
-        //     supplierId: suppliers[supplierIndex]._id
-        // });
+        const supplier = suppliers[supplierIndex]
+        seedSupplierProducts.push({
+            schema: 1,
+            productId: product._id,
+            product,
+            supplier: supplier,
+            supplierId: supplier._id
+        });
     });
 
     console.log(
@@ -121,28 +121,28 @@ const seedDB = async () => {
 
     const seedOrders = [];
     console.log('------------------------------------\nSeeding orders');
-    range(0, 25).forEach(orderIndex => {
-        const order = new Order();
-        console.log({ order });
-        order.purchasedProducts = [];
+    await Promise.all(range(0, 25000).map(async orderIndex => {        
+        const order = {};
+        const purchasedProducts = [];
         const numberOfProducts = random(1, 6);
 
         let total = 0;
         for (let i = 0; i < numberOfProducts; i++) {
             const product = products[random(0, products.length - 1)];
             total += product.price;
-            order.purchasedProducts.push(product);
+            purchasedProducts.push(product);
         }
-
         order.totalPrice = total;
         order.schema = 1;
+        order.purchasedProducts = purchasedProducts;
         seedOrders.push(order);
-    });
+    }));
+    
     try {
         const res = await Order.insertMany(seedOrders);
         console.log({ res });
     } catch (e) {
-        console.log({ e });
+        console.log({ e: e });
     }
 };
 

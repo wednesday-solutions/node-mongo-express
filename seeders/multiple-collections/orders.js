@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const { schema: Product } = require('./products');
 const schema = new mongoose.Schema({
-    purchasedProducts: { type: [Product], default: [] },
+    purchasedProducts: {
+        type: []
+    },
     totalPrice: {
         type: Number,
         required: true

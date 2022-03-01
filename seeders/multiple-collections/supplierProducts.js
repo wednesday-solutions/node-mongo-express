@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         required: true
     },
-    store: Supplier,
+    supplier: Supplier,
     product: Product,
     schema: {
         type: Number,
@@ -18,5 +18,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const SupplierProduct = mongoose.model('supplierproducts', schema);
+const SupplierProduct = mongoose.model('supplierProducts', schema);
 module.exports = { model: SupplierProduct, schema };
