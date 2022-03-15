@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-const { schema: Store } = require('./store');
+const { schema: Supplier } = require('./suppliers');
 const { schema: Product } = require('./products');
 const schema = new mongoose.Schema({
     productId: {
         type: mongoose.Types.ObjectId,
         required: true
     },
-    storeId: {
+    supplierId: {
         type: mongoose.Types.ObjectId,
         required: true
     },
-    store: Store,
+    supplier: Supplier,
     product: Product,
     schema: {
         type: Number,
@@ -18,5 +18,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const StoreProduct = mongoose.model('storeProducts', schema);
-module.exports = { model: StoreProduct, schema };
+const SupplierProduct = mongoose.model('supplier_products', schema);
+module.exports = { model: SupplierProduct, schema };
