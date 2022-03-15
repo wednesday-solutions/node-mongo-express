@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  mongodb1:
+    image: mongo
+    container_name: mongodb1
+    command: ["--bind_ip_all", --replSet, rs0]
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./mongodb1/database1:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+  mongodb2:
+    image: mongo
+    container_name: mongodb2
+    command: ["--bind_ip_all", --replSet, rs0]
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./mongodb2/database2:/data/db
+    ports:
+      - 27018:27017
+    restart: unless-stopped
+  mongodb3:
+    image: mongo
+    container_name: mongodb3
+    command: ["--bind_ip_all", --replSet, rs0]
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./mongodb3/database3:/data/db
+    ports:
+      - 27019:27017
+    restart: unless-stopped

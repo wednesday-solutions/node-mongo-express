@@ -42,15 +42,18 @@
         "express": "^4.17.2",
         "helmet": "^5.0.1",
         "husky": "^7.0.4",
-        "mongoose": "^6.1.5",
-        "nodemon": "^2.0.15"
+        "kill-port": "^1.6.1",
+        "mongoose": "6.2.4",
+        "nodemon": "^2.0.15",
+        "save": "^2.4.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.16.7",
         "@babel/core": "^7.16.7",
+        "@babel/eslint-parser": "^7.5.4",
         "@babel/node": "^7.16.7",
         "@babel/preset-env": "^7.16.7",
-        "@babel/eslint-parser": "^7.5.4",
+        "@faker-js/faker": "^6.0.0-alpha.5",
         "babel-eslint": "^10.1.0",
         "chai": "^4.3.4",
         "eslint": "^8.6.0",

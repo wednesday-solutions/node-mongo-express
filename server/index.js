@@ -1,17 +1,15 @@
 import express from 'express';
 import helmet from 'helmet';
-import path from 'path';
+
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import log from '@utils/logger';
-import { mongoConnector } from './middlewares/mongo';
 import { apiSuccess } from '@utils/apiUtils';
 import database from './database';
-
 /**
  * Connect to database
  */
-let db = mongoConnector();
+// let db = mongoConnector();
 
 /**
  * Create express server

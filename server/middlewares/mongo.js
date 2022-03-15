@@ -7,7 +7,7 @@ exports.mongoConnector = () => {
         log.info('Mongo already connected.');
         db = mongoose.connection;
     } else {
-        let mongoDB = 'mongodb://192.168.1.6:27019,192.168.1.6:27018,192.168.1.6:27017/testDB?replicaSet=rs0';
+        let mongoDB = 'mongodb://localhost:60000/ecommerce?readPreference=secondary';
         mongoose.connect(mongoDB);
         db = mongoose.connection;
         db.on('error', err => log.error('error'));

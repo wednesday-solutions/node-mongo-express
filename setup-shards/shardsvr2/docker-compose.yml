@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  shard2svr1:
+    container_name: shard2svr1
+    restart: on-failure
+    image: mongo
+    command: mongod --shardsvr --bind_ip_all --replSet shard2rs --port 27017 --dbpath /data/db
+    ports:
+      - 50004:27017
+    volumes:
+      - shard2svr1:/data/db
+
+  shard2svr2:
+    container_name: shard2svr2
+    image: mongo
+    command: mongod --shardsvr --bind_ip_all --replSet shard2rs --port 27017 --dbpath /data/db
+    ports:
+      - 50005:27017
+    volumes:
+      - shard2svr2:/data/db
+
+  shard2svr3:
+    container_name: shard2svr3
+    image: mongo
+    command: mongod --shardsvr --bind_ip_all --replSet shard2rs --port 27017 --dbpath /data/db
+    ports:
+      - 50006:27017
+    volumes:
+      - shard2svr3:/data/db
+
+volumes:
+  shard2svr1: {}
+  shard2svr2: {}
+  shard2svr3: {}
