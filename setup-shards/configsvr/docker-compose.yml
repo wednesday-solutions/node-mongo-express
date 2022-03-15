@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  cfgsvr1:
+    image: mongo
+    restart: on-failure
+    container_name: cfgsvr1
+    command:
+      [
+        mongod,
+        --configsvr,
+        --bind_ip_all,
+        --replSet,
+        cfgrs,
+        --port,
+        "27017",
+        --dbpath,
+        /data/db,
+      ]
+    volumes:
+      - cfgsvr1:/data/db
+    ports:
+      - 30001:27017
+  cfgsvr2:
+    image: mongo
+    container_name: cfgsvr2
+    command:
+      [
+        mongod,
+        --configsvr,
+        --bind_ip_all,
+        --replSet,
+        cfgrs,
+        --port,
+        "27017",
+        --dbpath,
+        /data/db,
+      ]
+    volumes:
+      - cfgsvr2:/data/db
+    ports:
+      - 30002:27017
+  cfgsvr3:
+    image: mongo
+    container_name: cfgsvr3
+    command:
+      [
+        mongod,
+        --configsvr,
+        --bind_ip_all,
+        --replSet,
+        cfgrs,
+        --port,
+        "27017",
+        --dbpath,
+        /data/db,
+      ]
+    volumes:
+      - cfgsvr3:/data/db
+    ports:
+      - 30003:27017
+volumes:
+  cfgsvr1: {}
+  cfgsvr2: {}
+  cfgsvr3: {}
