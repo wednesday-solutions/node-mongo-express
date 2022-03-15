@@ -2,7 +2,7 @@
 
 # docker compose configsvr
 docker-compose -f configsvr/docker-compose.yml up -d
-#sleep 20
+sleep 20
 # get IP
 ip=`ipconfig getifaddr en0`
 
@@ -27,7 +27,7 @@ mongo mongodb://$ip:30003 < configsvr.txt
 
 # docker compose shardsvr1
 docker-compose -f shardsvr/docker-compose.yml up -d
-#sleep 20
+sleep 20
 
 # create replica sets of shard1rs
 echo "
@@ -57,7 +57,7 @@ echo "ip=$ip" > mongos/.env
 
 # docker compose mongos
 docker-compose -f mongos/docker-compose.yml up -d
-#sleep 20
+sleep 20
 # create shard
 echo "
 sh.addShard(\"shard1rs/$ip:50001,$ip:50002,$ip:50003\")
@@ -71,7 +71,7 @@ mongo mongodb://$ip:60000 < mongos.txt
 #docker compose shardsvr2
 
 docker-compose -f shardsvr2/docker-compose.yml up -d
-#sleep 20
+sleep 20
 echo "
 rs.initiate(
   {
@@ -104,7 +104,7 @@ mongo mongodb://$ip:60000 < mongos.txt
 #docker compose shardsvr3
 
 docker-compose -f shardsvr3/docker-compose.yml up -d
-#sleep 20
+sleep 20
 echo "
 rs.initiate(
   {
@@ -136,7 +136,7 @@ mongo mongodb://$ip:60000 < mongos.txt
 #docker compose shardsvr4
 
 docker-compose -f shardsvr4/docker-compose.yml up -d
-#sleep 20
+sleep 20
 echo "
 rs.initiate(
   {

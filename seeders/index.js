@@ -13,6 +13,7 @@ const os = require("os");
 const totalCPUs = os.cpus().length;
 
 const seedDB = async () => {
+  const divisor = 1
   for (let i = 0; i < 50; i++) {
     // await Store.deleteMany({});
     // await Product.deleteMany({});
@@ -25,7 +26,7 @@ const seedDB = async () => {
     console.log("i----------", i);
     console.log("------------------------------------\nSeeding products");
     const seedProducts = await Promise.all(
-      range(1, 2000).map(async (value, index) => ({
+      range(1, 2000/divisor).map(async (value, index) => ({
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price()) * 100,
         category: faker.commerce.department(),
@@ -36,14 +37,14 @@ const seedDB = async () => {
     );
     const products = await Product.insertMany(seedProducts, { writeConcern: {  w: 0 } } );
     console.log("------------------------------------\nSeeding stores");
-    const seedStores = range(0, 200).map((value, index) => ({
+    const seedStores = range(0, 200/divisor).map((value, index) => ({
       name: faker.company.companyName(),
       address: faker.address.streetAddress(true),
       schema: 1
     }));
     const stores = await Store.insertMany(seedStores, { writeConcern: {  w: 0 } } );
     console.log("------------------------------------\nSeeding suppliers");
-    const seedSuppliers = range(0, 200).map((value, index) => ({
+    const seedSuppliers = range(0, 200/divisor).map((value, index) => ({
       name: faker.company.companyName(),
       schema: 1
     }));
@@ -81,7 +82,7 @@ const seedDB = async () => {
     const seedOrders = [];
     console.log("------------------------------------\nSeeding orders");
     await Promise.all(
-      range(0, 2500).map(async orderIndex => {
+      range(0, 2500/divisor).map(async orderIndex => {
         const order = {};
         const purchasedProducts = [];
         const numberOfProducts = random(1, 6);
