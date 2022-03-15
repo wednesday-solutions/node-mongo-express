@@ -1,6 +1,6 @@
 import express from 'express';
 import Post from '../models/Post';
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 module.exports = app => {
     const router = express.Router();
@@ -26,10 +26,13 @@ module.exports = app => {
         const { _id } = req.params;
 
         Post.aggregate([
-
-            { $match: { _id: new mongoose.Types.ObjectId("61d5aa1a609bca88bd218229") } },
-            
-]).exec()
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(_id)
+                }
+            }
+        ])
+            .exec()
             .then((results, err) => {
                 if (err) {
                     return res.send(err);

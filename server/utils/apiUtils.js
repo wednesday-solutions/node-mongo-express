@@ -1,3 +1,1 @@
-export const apiSuccess = (res, data) => {
-  return res.send({ data }).status(200);
-};
+export const apiSuccess = (res, data) => res.send({ data }).status(200);
