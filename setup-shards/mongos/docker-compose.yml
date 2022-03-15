@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  mongos:
+    restart: on-failure
+    container_name: mongos
+    image: mongo
+    command:
+      [
+        mongos,
+        --configdb,
+        "cfgrs/${ip}:30001,${ip}:30002,${ip}:30003",
+        --bind_ip,
+        0.0.0.0,
+        --port,
+        "27017",
+      ]
+    ports:
+      - 60000:27017
+    volumes:
+      - mongos1:/data/db
+volumes:
+  mongos1: {}
