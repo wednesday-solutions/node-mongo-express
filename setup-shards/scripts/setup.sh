@@ -26,7 +26,7 @@ rs.status()" > configsvr.txt
 mongo mongodb://$ip:30003 < configsvr.txt
 
 # docker compose shardsvr1
-docker-compose -f shardsvr/docker-compose.yml up -d
+docker-compose -f shardsvr1/docker-compose.yml up -d
 sleep 20
 
 # create replica sets of shard1rs
