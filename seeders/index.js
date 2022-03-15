@@ -13,7 +13,7 @@ const os = require("os");
 const totalCPUs = os.cpus().length;
 
 const seedDB = async () => {
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 50; i++) {
     // await Store.deleteMany({});
     // await Product.deleteMany({});
     // await Supplier.deleteMany({});
@@ -21,27 +21,11 @@ const seedDB = async () => {
     // await Order.deleteMany({});
     // await SupplierProduct.deleteMany({});
 
-    console.log("------------------------------------\nSeeding stores");
-    const seedStores = range(0, 20).map((value, index) => ({
-      name: faker.company.companyName(),
-      address: faker.address.streetAddress(true),
-      schema: 1
-    }));
-    const stores = await Store.insertMany(seedStores);
-    console.log("------------------------------------\nSeeding suppliers");
-    const seedSuppliers = range(0, 20).map((value, index) => ({
-      name: faker.company.companyName(),
-      schema: 1
-    }));
-    const suppliers = await Supplier.insertMany(seedSuppliers);
-
-    console.log("------------------------------------\nSeeding products");
 
     console.log("i----------", i);
-
-    // setTimeout()
+    console.log("------------------------------------\nSeeding products");
     const seedProducts = await Promise.all(
-      range(1, 200).map(async (value, index) => ({
+      range(1, 2000).map(async (value, index) => ({
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price()) * 100,
         category: faker.commerce.department(),
@@ -50,7 +34,21 @@ const seedDB = async () => {
         schema: 1
       }))
     );
-    const products = await Product.insertMany(seedProducts);
+    const products = await Product.insertMany(seedProducts, { writeConcern: {  w: 0 } } );
+    console.log("------------------------------------\nSeeding stores");
+    const seedStores = range(0, 200).map((value, index) => ({
+      name: faker.company.companyName(),
+      address: faker.address.streetAddress(true),
+      schema: 1
+    }));
+    const stores = await Store.insertMany(seedStores, { writeConcern: {  w: 0 } } );
+    console.log("------------------------------------\nSeeding suppliers");
+    const seedSuppliers = range(0, 200).map((value, index) => ({
+      name: faker.company.companyName(),
+      schema: 1
+    }));
+    const suppliers = await Supplier.insertMany(seedSuppliers, { writeConcern: {  w: 0 } } );
+
 
     const seedStoreProducts = [];
     const seedSupplierProducts = [];
@@ -77,13 +75,13 @@ const seedDB = async () => {
     console.log(
       "------------------------------------\nSeeding seedStoreProducts and seedSupplierProducts"
     );
-    await StoreProduct.insertMany(seedStoreProducts);
-    await SupplierProduct.insertMany(seedSupplierProducts);
+    await StoreProduct.insertMany(seedStoreProducts, { writeConcern: {  w: 0 } } );
+    await SupplierProduct.insertMany(seedSupplierProducts, { writeConcern: {  w: 0 } } );
 
     const seedOrders = [];
     console.log("------------------------------------\nSeeding orders");
     await Promise.all(
-      range(0, 250).map(async orderIndex => {
+      range(0, 2500).map(async orderIndex => {
         const order = {};
         const purchasedProducts = [];
         const numberOfProducts = random(1, 6);
@@ -102,7 +100,7 @@ const seedDB = async () => {
     );
 
     try {
-      const res = await Order.insertMany(seedOrders);
+      const res = await Order.insertMany(seedOrders, { writeConcern: {  w: 0 } } );
       // console.log({ res });
     } catch (e) {
       console.log({ e: e });
