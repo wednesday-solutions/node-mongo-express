@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { schema: Store } = require('./store');
+const { schema: Store } = require('./stores');
 const { schema: Product } = require('./products');
 const schema = new mongoose.Schema({
     productId: {
@@ -18,5 +18,5 @@ const schema = new mongoose.Schema({
     }
 });
 
-const StoreProduct = mongoose.model('store_products', schema);
-module.exports = { model: StoreProduct, schema };
+const StoreProducts = mongoose.model('store_products', schema);
+module.exports = { StoreProducts, schema };
