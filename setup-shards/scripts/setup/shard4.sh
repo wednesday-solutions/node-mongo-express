@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "shard4------------------------"
+
 echo "
 rs.initiate(
   {
@@ -12,16 +13,13 @@ rs.initiate(
         { _id : 2, host : \"$ip:50012\" }
     ]
   }
-)
+)" > shard4rs.txt
 
-rs.status()" > shard4rs.txt
-
-mongo mongodb://$ip:50010 < shard4rs.txt
+mongosh mongodb://$ip:50010 < shard4rs.txt
 
 
 echo "
 sh.addShard(\"shard4rs/$ip:50010,$ip:50011,$ip:50012\")
-sh.status()
 " > mongos.txt
 
-mongo mongodb://$ip:60000 < mongos.txt
+mongosh mongodb://$ip:60000 < shard4rs.txt

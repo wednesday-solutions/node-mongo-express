@@ -13,16 +13,13 @@ rs.initiate(
         { _id : 2, host : \"$ip:50009\" }
     ]
   }
-)
+)" > shard3rs.txt
 
-rs.status()" > shard3rs.txt
-
-mongo mongodb://$ip:50007 < shard3rs.txt
+mongosh mongodb://$ip:50007 < shard3rs.txt
 
 
 echo "
 sh.addShard(\"shard3rs/$ip:50007,$ip:50008,$ip:50009\")
-sh.status()
 " > mongos.txt
 
-mongo mongodb://$ip:60000 < mongos.txt
+mongosh mongodb://$ip:60000 < mongos.txt
