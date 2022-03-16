@@ -14,6 +14,12 @@ A basic starter for a web app with parceljs, node, express and mongoose
 
 # Shard setup
 
+Run the following script
+
+```
+./setup-shards/scripts/setup/base.sh
+```
+
 Take a look at [this](./setup-shards/README.md) to create shards and replica sets.
 
 ## Seeders
