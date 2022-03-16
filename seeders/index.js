@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 const { default: faker } = require('@faker-js/faker');
+const random = require('lodash/random');
+const range = require('lodash/range');
+const cluster = require('cluster');
+const os = require('os');
 const { Orders } = require('../models/orders');
 const { Products } = require('../models/products');
 const { Stores } = require('../models/stores');
 const { Suppliers } = require('../models/suppliers');
 const { StoreProducts } = require('../models/storeProducts');
 const { SupplierProducts } = require('../models/supplierProducts');
-const random = require('lodash/random');
-const range = require('lodash/range');
-const cluster = require('cluster');
-const os = require('os');
+
 const totalCPUs = os.cpus().length;
 
 const seedDB = async () => {
@@ -80,10 +81,10 @@ const seedDB = async () => {
         console.log(
             '------------------------------------\nSeeding seedStoreProducts and seedSupplierProducts'
         );
-        await StoreProducts.insertMany(seedStoreProducts, {
+        StoreProducts.insertMany(seedStoreProducts, {
             writeConcern: { w: 0 }
         });
-        await SupplierProducts.insertMany(seedSupplierProducts, {
+        SupplierProducts.insertMany(seedSupplierProducts, {
             writeConcern: { w: 0 }
         });
 
@@ -109,17 +110,13 @@ const seedDB = async () => {
         );
 
         try {
-            await Orders.insertMany(seedOrders, {
+            Orders.insertMany(seedOrders, {
                 writeConcern: { w: 0 }
             });
         } catch (e) {
             console.log({ e: e });
         }
     }
-};
-
-const seedAll = async () => {
-    await seedDB();
 };
 
 function seedUsingMongoose() {
@@ -131,7 +128,7 @@ function seedUsingMongoose() {
         })
         .then(() => {
             console.log('connected to mongodb');
-            return seedAll().then(() => {
+            return seedDB().then(() => {
                 mongoose.connection.close();
             });
         })
@@ -156,3 +153,5 @@ if (cluster.isMaster) {
 } else {
     seedUsingMongoose();
 }
+
+module.exports = {};

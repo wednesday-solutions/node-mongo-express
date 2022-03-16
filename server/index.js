@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-
+import responseTime from 'response-time';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { apiSuccess } from '@utils/apiUtils';
@@ -15,7 +15,7 @@ import { list } from '@server/routeLister';
  * Create express server
  */
 const app = express();
-
+app.use(responseTime());
 app.set('port', process.env.PORT || 9000);
 app.use(helmet());
 app.use(cors());

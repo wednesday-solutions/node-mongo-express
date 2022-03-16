@@ -22,4 +22,4 @@ echo "
 sh.addShard(\"shard4rs/$ip:50010,$ip:50011,$ip:50012\")
 " > mongos.txt
 
-mongosh mongodb://$ip:60000 < shard4rs.txt
+mongosh mongodb://$ip:60000 < mongos.txt
