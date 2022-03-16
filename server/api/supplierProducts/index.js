@@ -13,8 +13,11 @@ export default app => {
 
     router.post('/', async (req, res) => {
         try {
-            const order = await createItem(SupplierProducts, req.body);
-            return apiSuccess(res, order);
+            const supplierProduct = await createItem(
+                SupplierProducts,
+                req.body
+            );
+            return apiSuccess(res, supplierProduct);
         } catch (err) {
             return apiFailure(res, err.message);
         }
@@ -29,7 +32,7 @@ export default app => {
     router.get('/:_id', async (req, res, next) => {
         const { _id } = req.params;
         return fetchItem(SupplierProducts, { _id })
-            .then(order => apiSuccess(res, order))
+            .then(supplierProduct => apiSuccess(res, supplierProduct))
             .catch(err => apiFailure(res, err.err));
     });
 
