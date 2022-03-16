@@ -13,8 +13,8 @@ const os = require('os');
 const totalCPUs = os.cpus().length;
 
 const seedDB = async () => {
-    const divisor = 1;
-    for (let i = 0; i < 50; i++) {
+    const divisor = 100;
+    for (let i = 0; i < 5000; i++) {
         // await Store.deleteMany({});
         // await Product.deleteMany({});
         // await Supplier.deleteMany({});
