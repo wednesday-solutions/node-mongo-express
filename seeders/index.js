@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const { default: faker } = require('@faker-js/faker');
-const { model: Order } = require('../models/orders');
-const { model: Product } = require('../models/products');
-const { model: Store } = require('../models/store');
-const { model: Supplier } = require('../models/suppliers');
-const { model: StoreProduct } = require('../models/storeProducts');
-const { model: SupplierProduct } = require('../models/supplierProducts');
+const { Orders } = require('../models/orders');
+const { Products } = require('../models/products');
+const { Stores } = require('../models/stores');
+const { Suppliers } = require('../models/suppliers');
+const { StoreProducts } = require('../models/storeProducts');
+const { SupplierProducts } = require('../models/supplierProducts');
 const random = require('lodash/random');
 const range = require('lodash/range');
 const cluster = require('cluster');
@@ -34,7 +34,7 @@ const seedDB = async () => {
                 schema: 1
             }))
         );
-        const products = await Product.insertMany(seedProducts, {
+        const products = await Products.insertMany(seedProducts, {
             writeConcern: { w: 0 }
         });
         console.log('------------------------------------\nSeeding stores');
@@ -43,7 +43,7 @@ const seedDB = async () => {
             address: faker.address.streetAddress(true),
             schema: 1
         }));
-        const stores = await Store.insertMany(seedStores, {
+        const stores = await Stores.insertMany(seedStores, {
             writeConcern: { w: 0 }
         });
         console.log('------------------------------------\nSeeding suppliers');
@@ -51,7 +51,7 @@ const seedDB = async () => {
             name: faker.company.companyName(),
             schema: 1
         }));
-        const suppliers = await Supplier.insertMany(seedSuppliers, {
+        const suppliers = await Suppliers.insertMany(seedSuppliers, {
             writeConcern: { w: 0 }
         });
 
@@ -80,10 +80,10 @@ const seedDB = async () => {
         console.log(
             '------------------------------------\nSeeding seedStoreProducts and seedSupplierProducts'
         );
-        await StoreProduct.insertMany(seedStoreProducts, {
+        await StoreProducts.insertMany(seedStoreProducts, {
             writeConcern: { w: 0 }
         });
-        await SupplierProduct.insertMany(seedSupplierProducts, {
+        await SupplierProducts.insertMany(seedSupplierProducts, {
             writeConcern: { w: 0 }
         });
 
@@ -109,7 +109,7 @@ const seedDB = async () => {
         );
 
         try {
-            await Order.insertMany(seedOrders, {
+            await Orders.insertMany(seedOrders, {
                 writeConcern: { w: 0 }
             });
         } catch (e) {

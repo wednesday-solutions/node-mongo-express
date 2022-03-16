@@ -14,6 +14,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const Store = mongoose.model('stores', schema);
+const Stores = mongoose.model('stores', schema);
 
-module.exports = { model: Store, schema };
+module.exports = { Stores, schema };

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-exports.mongoConnector = () => {
+import log from '@utils/logger';
+export const mongoConnector = () => {
     let db;
 
     if (mongoose.connection.readyState === 1) {
@@ -16,4 +16,5 @@ exports.mongoConnector = () => {
             log.info('mongo connection successfully connected to ', mongoDB)
         );
     }
+    return db;
 };

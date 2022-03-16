@@ -100,8 +100,9 @@
     },
     "_moduleAliases": {
         "@utils": "./server/utils",
-        "@database": "./server/database",
         "@middlewares": "./server/middlewares",
-        "@server": "./server"
+        "@server": "./server",
+        "@models": "./models",
+        "@api": "./server/api"
     }
 }
