@@ -25,7 +25,6 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // setup database
-console.log({ apis });
 apis(app);
 
 app.get('/', (req, res) => {
@@ -33,5 +32,4 @@ app.get('/', (req, res) => {
 });
 list(app);
 
-// console.log(app._router.stack)
 module.exports = app;
