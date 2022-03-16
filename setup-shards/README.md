@@ -38,12 +38,12 @@ This will provision the following infrastructure
 Use the following command to connect to mongos
 
 ```
-mongo mongodb://`ipconfig getifaddr en0`:60000
+mongosh mongodb://`ipconfig getifaddr en0`:60000
 ```
 
 alternatively run
 
 ```
 ip=`ipconfig getifaddr en0`
-mongo mongodb://$ip:60000
+mongosh mongodb://$ip:60000
 ```

@@ -13,9 +13,7 @@ echo "rs.initiate(
             { _id: 2, host: \"$ip:30003\" }
         ]
     }
-)
-
-rs.status()" > configsvr.txt
+)" > configsvr.txt
 
 # connect and setup replica sets for configsvr
-mongo mongodb://$ip:30003 < configsvr.txt
+mongosh mongodb://$ip:30003 < configsvr.txt

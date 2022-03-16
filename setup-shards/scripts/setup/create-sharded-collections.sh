@@ -27,4 +27,4 @@ sh.shardCollection(\"ecommerce.supplier_products\", { productId: \"hashed\" });
 
 " > setup.txt
 
-mongo mongodb://$ip:60000 < setup.txt
+mongosh mongodb://$ip:60000 < setup.txt
