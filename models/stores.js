@@ -16,4 +16,4 @@ const schema = new mongoose.Schema({
 
 const Stores = mongoose.model('stores', schema);
 
-module.exports = { Stores, schema };
+module.exports = { model: Stores, Stores, schema };
