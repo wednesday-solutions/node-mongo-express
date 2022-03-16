@@ -49,9 +49,10 @@ const apiGeneratorFactory = (app, name, model) => {
                     break;
             }
         } else {
-            customApisMapper[name]?.methods
-                .find(m => m.type === type)
-                ?.handler(router, model);
+            const customApi = customApisMapper[name].methods.find(
+                m => m.type === type
+            );
+            customApi.handler(router, model, customApi.validator);
         }
     });
     app.use(`/${name}`, router);

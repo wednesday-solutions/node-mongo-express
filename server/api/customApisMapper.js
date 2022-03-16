@@ -1,3 +1,4 @@
+import orderValidator from './orders/validator';
 import { createOrder } from '@api/orders';
 export const REQUEST_TYPES = {
     create: 'CREATE',
@@ -9,6 +10,12 @@ export const REQUEST_TYPES = {
 
 export const customApisMapper = {
     orders: {
-        methods: [{ type: REQUEST_TYPES.create, handler: createOrder }]
+        methods: [
+            {
+                type: REQUEST_TYPES.create,
+                handler: createOrder,
+                validator: orderValidator
+            }
+        ]
     }
 };
