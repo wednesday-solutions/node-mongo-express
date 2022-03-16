@@ -7,8 +7,12 @@ import {
 } from '@api/utils';
 import { apiFailure, apiSuccess } from '@utils/apiUtils';
 
-export const generatePostRequest = (router, model) => {
-    router.post('/', async (req, res) => {
+export const generatePostRequest = (router, model, validator) => {
+    const middlewares = [];
+    if (validator) {
+        middlewares.push(validator);
+    }
+    router.post('/', ...middlewares, async (req, res) => {
         try {
             const item = await createItem(model, req.body);
             return apiSuccess(res, item);
