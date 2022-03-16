@@ -7,7 +7,6 @@ export default app => {
         .readdirSync(__dirname)
         .filter(file => !fs.lstatSync(path + file).isFile());
     foldersArray.forEach(f => {
-        const o = require(`./${f}`);
-        o.default(app);
+        require(`./${f}`).default(app);
     });
 };
