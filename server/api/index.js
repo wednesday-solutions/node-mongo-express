@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
+import kebab from 'lodash/kebabCase';
 import {
     generatePostRequest,
     generateDeleteRequest,
@@ -55,5 +56,5 @@ const apiGeneratorFactory = (app, name, model) => {
             customApi.handler(router, model, customApi.validator);
         }
     });
-    app.use(`/${name}`, router);
+    app.use(`/${kebab(name)}`, router);
 };
