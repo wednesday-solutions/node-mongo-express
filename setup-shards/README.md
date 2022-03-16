@@ -1,11 +1,5 @@
 # Setup shards
 
-Run the following script
-
-```
-./scripts/setup.sh
-```
-
 This will provision the following infrastructure
 
 -   config server
