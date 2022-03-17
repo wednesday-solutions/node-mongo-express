@@ -21,6 +21,7 @@ sh.shardCollection(\"ecommerce.suppliers\", { name: \"hashed\" });
 sh.shardCollection(\"ecommerce.stores\", { name: \"hashed\" });
 sh.shardCollection(\"ecommerce.products\", { name: \"hashed\" });
 sh.shardCollection(\"ecommerce.orders\", { _id: \"hashed\" });
+sh.shardCollection(\"ecommerce.referenced_orders\", { _id: \"hashed\" });
 sh.shardCollection(\"ecommerce.store_products\", { productId: \"hashed\" });
 sh.shardCollection(\"ecommerce.supplier_products\", { productId: \"hashed\" });
 
