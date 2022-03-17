@@ -53,7 +53,9 @@ const apiGeneratorFactory = (app, name, model) => {
             const customApi = customApisMapper[name].methods.find(
                 m => m.type === type
             );
-            customApi.handler(router, model, customApi.validator);
+            if (customApi.handler) {
+                customApi.handler(router, model, customApi.validator);
+            }
         }
     });
     app.use(`/${kebab(name)}`, router);

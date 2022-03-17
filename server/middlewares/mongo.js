@@ -8,7 +8,7 @@ export const mongoConnector = () => {
         db = mongoose.connection;
     } else {
         let mongoDB =
-            'mongodb://localhost:27017/ecommerce?readPreference=secondary';
+            'mongodb://localhost:60000/ecommerce?readPreference=secondary';
         mongoose.connect(mongoDB);
         db = mongoose.connection;
         db.on('error', err => log.error('error'));
