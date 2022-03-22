@@ -1,0 +1,6 @@
+export const SCOPE_TYPE = {
+    USER: 'USER',
+    ADMIN: 'ADMIN',
+    SUPER_ADMIN: 'SUPER_ADMIN',
+    INTERNAL_SERVICE: 'INTERNAL_SERVICE'
+};
