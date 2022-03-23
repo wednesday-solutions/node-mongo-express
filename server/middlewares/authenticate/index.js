@@ -1,15 +1,14 @@
-import { isLocalEnv } from '@utils';
+import { isLocalEnv, isTestEnv } from '@utils';
 import jwt from 'jsonwebtoken';
-require('dotenv').config();
 
 const authenticateToken = (req, res, next) => {
-    if (isLocalEnv()) {
+    console.log(isTestEnv());
+    if (isLocalEnv() || isTestEnv()) {
         next();
         return;
     }
     let authKey;
     Object.keys(req.headers).forEach(header => {
-        console.log(header);
         if (header.toUpperCase() === 'AUTHORIZATION') {
             authKey = header;
         }

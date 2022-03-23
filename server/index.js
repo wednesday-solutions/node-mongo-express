@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { apiSuccess } from '@utils/apiUtils';
 import apis from '@api';
 import { list } from '@server/routeLister';
+require('dotenv').config();
 /**
  * Connect to database
  */

@@ -1,5 +1,6 @@
 import authenticateToken from '../index';
 import jwt from 'jsonwebtoken';
+import * as utils from '@utils';
 
 jest.mock('jsonwebtoken', () => ({
     verify: (token, accesskey, cb) => {
@@ -19,6 +20,7 @@ describe('authentication tests', () => {
     };
 
     beforeEach(() => {
+        jest.spyOn(utils, 'isTestEnv').mockReturnValue(false);
         process.env = { ...OLD_ENV, ...keys };
     });
     afterAll(() => {
