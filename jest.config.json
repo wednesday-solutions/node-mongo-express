@@ -21,5 +21,12 @@
             "functions": 82,
             "lines": 82
         }
-    }
+    },
+    "coveragePathIgnorePatterns": [
+        "<rootDir>/node_modules/",
+        "<rootDir>/utils/mockData.js",
+        "<rootDir>/lib/testServer.js",
+        "<rootDir>/server/utils",
+        "<rootDir>/server/services"
+    ]
 }

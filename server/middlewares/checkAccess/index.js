@@ -1,5 +1,5 @@
 import includes from 'lodash/includes';
-import { paths } from '@config/paths';
+import { paths } from 'config/paths';
 
 const checkAccess = (req, res, next) => {
     const scope = req.user.role;

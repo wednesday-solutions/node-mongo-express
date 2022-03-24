@@ -3,9 +3,13 @@ import helmet from 'helmet';
 import responseTime from 'response-time';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { apiSuccess } from '@utils/apiUtils';
-import apis from '@api';
-import { list } from '@server/routeLister';
+import { apiSuccess } from './utils/apiUtils';
+import apis from 'api';
+import { list } from 'server/routeLister';
+import { isTestEnv } from 'utils';
+import { initQueues } from 'utils/queue';
+import indexRouter from './routes';
+
 require('dotenv').config();
 /**
  * Connect to database
@@ -28,6 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // setup database
 apis(app);
 
+app.use('/', indexRouter);
+
+if (!isTestEnv()) {
+    initQueues();
+}
 app.get('/', (req, res) => {
     apiSuccess(res, 'node-parcel-express-mongo server at your service🖖');
 });

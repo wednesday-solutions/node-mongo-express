@@ -1,8 +1,8 @@
 import orderValidator from './orders/validator';
-import { createOrder } from '@api/orders';
-import { fetchAllReferencedOrders } from '@api/referencedOrders';
-import { fetchAllUnshardedOrders } from '@api/unshardedOrders';
-import { fetchAllUnshardedReferencedOrders } from '@api/unshardedReferencedOrders';
+import { createOrder } from 'api/orders';
+import { fetchAllReferencedOrders } from 'api/referencedOrders';
+import { fetchAllUnshardedOrders } from 'api/unshardedOrders';
+import { fetchAllUnshardedReferencedOrders } from 'api/unshardedReferencedOrders';
 
 export const REQUEST_TYPES = {
     create: 'CREATE',

@@ -1,4 +1,4 @@
-import { SCOPE_TYPE } from '@utils/constants';
+import { SCOPE_TYPE } from 'utils/constants';
 
 export const paths = [
     {

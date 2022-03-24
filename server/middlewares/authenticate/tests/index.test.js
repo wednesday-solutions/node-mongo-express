@@ -1,6 +1,6 @@
 import authenticateToken from '../index';
 import jwt from 'jsonwebtoken';
-import * as utils from '@utils';
+import * as utils from 'utils';
 
 jest.mock('jsonwebtoken', () => ({
     verify: (token, accesskey, cb) => {

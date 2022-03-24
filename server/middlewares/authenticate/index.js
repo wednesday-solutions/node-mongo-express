@@ -1,8 +1,7 @@
-import { isLocalEnv, isTestEnv } from '@utils';
+import { isLocalEnv, isTestEnv } from 'utils';
 import jwt from 'jsonwebtoken';
 
 const authenticateToken = (req, res, next) => {
-    console.log(isTestEnv());
     if (isLocalEnv() || isTestEnv()) {
         next();
         return;

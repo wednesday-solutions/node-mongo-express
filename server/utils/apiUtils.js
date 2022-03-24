@@ -1,4 +1,4 @@
-import log from '@utils/logger';
+import log from './logger';
 export const apiSuccess = (res, data) => {
     log.info('apiSuccess', { data });
     return res.send({ data }).status(200);

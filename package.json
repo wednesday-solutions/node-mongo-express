@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest --coverage",
         "start": "nodemon --exec babel-node app.js | bunyan -o short",
+        "start:local": "export ENVIRONMENT_NAME=local && nodemon --exec babel-node app.js | bunyan -o short",
         "postinstall": "link-module-alias",
         "preinstall": "command -v link-module-alias && link-module-alias clean || true",
         "format": "prettier-standard './**/**/*.js'",
@@ -42,6 +43,7 @@
     "homepage": "https://github.com/wednesday-solutions/parcel-node-express-mongo#readme",
     "dependencies": {
         "body-parser": "^1.19.1",
+        "bull": "^4.8.1",
         "bunyan": "^1.8.15",
         "core-js": "^3.20.2",
         "cors": "^2.8.5",
@@ -102,11 +104,11 @@
         }
     },
     "_moduleAliases": {
-        "@utils": "./server/utils",
-        "@middlewares": "./server/middlewares",
-        "@server": "./server",
-        "@models": "./models",
-        "@api": "./server/api",
-        "@config": "./config"
+        "utils": "./server/utils",
+        "middlewares": "./server/middlewares",
+        "server": "./server",
+        "models": "./models",
+        "api": "./server/api",
+        "config": "./config"
     }
 }
