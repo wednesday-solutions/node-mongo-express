@@ -58,6 +58,7 @@
         "lodash": "^4.17.21",
         "mongoose": "6.2.4",
         "nodemon": "^2.0.15",
+        "opossum": "^6.3.0",
         "response-time": "^2.3.2",
         "save": "^2.4.0"
     },

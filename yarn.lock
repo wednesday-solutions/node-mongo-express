@@ -5959,6 +5959,11 @@ onetime@^5.1.0, onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
+opossum@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/opossum/-/opossum-6.3.0.tgz#c4d21a8f5ec4acced62ecaab1c07652c202b1a22"
+  integrity sha512-youR7pMTpgnbPJEPruM8Ku1WKUXnjmsK99GC5fkGFrOK8jduY1hvMiooUa3QZg6Xdso03skr37q6Evpt9PZ2cA==
+
 optionator@^0.8.1, optionator@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
