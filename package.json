@@ -35,7 +35,7 @@
     "author": "Wednesday Solutions",
     "license": "MIT",
     "engines": {
-        "node": "16.x"
+        "node": "14.17.x"
     },
     "bugs": {
         "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
@@ -103,10 +103,11 @@
         }
     },
     "_moduleAliases": {
-        "@utils": "./server/utils",
-        "@middlewares": "./server/middlewares",
-        "@server": "./server",
-        "@models": "./models",
-        "@api": "./server/api"
+        "utils": "./server/utils",
+        "middlewares": "./server/middlewares",
+        "server": "./server",
+        "models": "./models",
+        "api": "./server/api",
+        "config": "./config"
     }
 }
