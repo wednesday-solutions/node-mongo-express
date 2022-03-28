@@ -4,8 +4,8 @@ import {
     fetchItems,
     createItem,
     updateItem
-} from '@api/utils';
-import { apiFailure, apiSuccess } from '@utils/apiUtils';
+} from 'api/utils';
+import { apiFailure, apiSuccess } from 'utils/apiUtils';
 
 export const generatePostRequest = (router, model, validator) => {
     const middlewares = [];

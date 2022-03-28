@@ -8,10 +8,10 @@ import {
     generatePatchRequest,
     generateFetchAllRequest,
     generateFetchOneRequest
-} from '@api/requestGenerators';
-import { mongoConnector } from '@middlewares/mongo';
+} from 'api/requestGenerators';
+import { mongoConnector } from 'middlewares/mongo';
 
-import { customApisMapper, REQUEST_TYPES } from '@api/customApisMapper';
+import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
 
 mongoConnector();
 export default app => {
