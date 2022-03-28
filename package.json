@@ -35,24 +35,30 @@
     "author": "Wednesday Solutions",
     "license": "MIT",
     "engines": {
-        "node": "16.x"
+        "node": "14.17.x"
     },
     "bugs": {
         "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
     },
     "homepage": "https://github.com/wednesday-solutions/parcel-node-express-mongo#readme",
     "dependencies": {
+        "auth0": "^2.40.0",
         "body-parser": "^1.19.1",
         "bunyan": "^1.8.15",
         "core-js": "^3.20.2",
         "cors": "^2.8.5",
         "dotenv": "^16.0.0",
         "express": "^4.17.2",
+        "express-jwt": "^6.1.1",
+        "express-jwt-authz": "^2.4.1",
         "express-validator": "^6.14.0",
         "helmet": "^5.0.1",
         "husky": "^7.0.4",
+        "jwks-rsa": "^2.0.5",
         "kill-port": "^1.6.1",
+        "lodash": "^4.17.21",
         "mongoose": "6.2.4",
+        "node-fetch": "2",
         "nodemon": "^2.0.15",
         "response-time": "^2.3.2",
         "save": "^2.4.0",
@@ -103,10 +109,11 @@
         }
     },
     "_moduleAliases": {
-        "@utils": "./server/utils",
-        "@middlewares": "./server/middlewares",
-        "@server": "./server",
-        "@models": "./models",
-        "@api": "./server/api"
+        "utils": "./server/utils",
+        "middlewares": "./server/middlewares",
+        "server": "./server",
+        "models": "./models",
+        "api": "./server/api",
+        "config": "./config"
     }
 }

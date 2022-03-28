@@ -3,9 +3,9 @@ import helmet from 'helmet';
 import responseTime from 'response-time';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { apiSuccess } from '@utils/apiUtils';
-import apis from '@api';
-import { list } from '@server/routeLister';
+import { apiSuccess } from 'utils/apiUtils';
+import apis from 'api';
+import { list } from 'server/routeLister';
 /**
  * Connect to database
  */

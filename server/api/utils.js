@@ -1,4 +1,4 @@
-import log from '@utils/logger';
+import log from 'utils/logger';
 export const createItem = async (model, args) => {
     try {
         return model.create(args);
@@ -44,6 +44,15 @@ export const updateItem = async (model, where, args) => {
 export const deleteItem = async (model, where) => {
     try {
         return model.deleteOne(where);
+    } catch (err) {
+        log.info({ err });
+        throw err;
+    }
+};
+
+export const createUser = async (model, args) => {
+    try {
+        return model.create(args);
     } catch (err) {
         log.info({ err });
         throw err;
