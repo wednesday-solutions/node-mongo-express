@@ -3,6 +3,8 @@ import { createOrder } from 'api/orders';
 import { fetchAllReferencedOrders } from 'api/referencedOrders';
 import { fetchAllUnshardedOrders } from 'api/unshardedOrders';
 import { fetchAllUnshardedReferencedOrders } from 'api/unshardedReferencedOrders';
+import userValidator from './users/validator';
+import { createUser } from 'api/users';
 
 export const REQUEST_TYPES = {
     create: 'CREATE',
@@ -49,6 +51,15 @@ export const customApisMapper = {
             {
                 type: REQUEST_TYPES.fetchAll,
                 handler: fetchAllUnshardedReferencedOrders
+            }
+        ]
+    },
+    users: {
+        methods: [
+            {
+                type: REQUEST_TYPES.create,
+                handler: createUser,
+                validator: userValidator
             }
         ]
     }

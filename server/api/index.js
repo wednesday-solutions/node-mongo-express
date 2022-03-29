@@ -12,9 +12,16 @@ import {
 import { mongoConnector } from 'middlewares/mongo';
 
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
+import customRoutes from './routes/custom';
 
 mongoConnector();
 export default app => {
+    autoGenerateApisFromModels(app);
+    // Custom api
+    app.use('/', customRoutes);
+};
+
+const autoGenerateApisFromModels = app => {
     const modelsFolderPath = path.join(__dirname, '../../models/');
     const fileArray = fs
         .readdirSync(modelsFolderPath)
@@ -26,7 +33,6 @@ export default app => {
         apiGeneratorFactory(app, name, model);
     });
 };
-
 const apiGeneratorFactory = (app, name, model) => {
     const router = express.Router();
     Object.values(REQUEST_TYPES).forEach(type => {

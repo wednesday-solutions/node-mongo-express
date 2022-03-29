@@ -49,3 +49,12 @@ export const deleteItem = async (model, where) => {
         throw err;
     }
 };
+
+export const createUser = async (model, args) => {
+    try {
+        return model.create(args);
+    } catch (err) {
+        log.info({ err });
+        throw err;
+    }
+};
