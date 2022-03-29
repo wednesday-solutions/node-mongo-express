@@ -3,9 +3,13 @@ import {
     fetchItem,
     fetchItems,
     createItem,
-    updateItem
-} from '@api/utils';
-import { apiFailure, apiSuccess } from '@utils/apiUtils';
+    updateItem,
+    createUser
+} from 'api/utils';
+import { validationResult } from 'express-validator';
+import { apiFailure, apiSuccess } from 'utils/apiUtils';
+import { clientCredentialsGrant, managementClient } from 'utils/auth0';
+import config from 'config';
 
 export const generatePostRequest = (router, model, validator) => {
     const middlewares = [];
@@ -52,5 +56,33 @@ export const generateDeleteRequest = (router, model) => {
         return deleteItem(model, { _id })
             .then(items => apiSuccess(res, items))
             .catch(err => apiFailure(res, err.err));
+    });
+};
+
+export const generateCreateUserRequest = (router, model, validator) => {
+    const middlewares = [];
+    if (validator) {
+        middlewares.push(validator);
+    }
+    router.post('/', ...middlewares, async (req, res, next) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                throw { message: errors.errors[0].msg };
+            }
+            const { email, password } = req.body;
+            const auth = await clientCredentialsGrant;
+            const mgmtAuth0 = await managementClient(auth);
+            const authUser = await mgmtAuth0.createUser({
+                connection: config.connection,
+                email: email,
+                password: password
+            });
+            req.body.authId = authUser.user_id;
+            const user = await createUser(model, req.body);
+            return apiSuccess(res, user);
+        } catch (err) {
+            return apiFailure(res, err.message);
+        }
     });
 };

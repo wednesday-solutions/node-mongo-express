@@ -1,4 +1,4 @@
-import { apiFailure, apiSuccess } from '@utils/apiUtils';
+import { apiFailure, apiSuccess } from 'utils/apiUtils';
 
 export const fetchAllReferencedOrders = (app, model, validator) => {
     app.use('/', async (req, res, next) => {

@@ -1,4 +1,4 @@
-import { apiFailure, apiSuccess } from '@utils/apiUtils';
+import { apiFailure, apiSuccess } from 'utils/apiUtils';
 
 export const fetchAllUnshardedReferencedOrders = (app, model, name) => {
     app.use('/', async (req, res, next) => {
