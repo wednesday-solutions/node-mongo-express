@@ -8,7 +8,7 @@ export const QUEUE_NAMES = {
 };
 // 2
 const CRON_EXPRESSIONS = {
-    MIDNIGHT: '* * * * *'
+    MIDNIGHT: '0 0  * * *'
 };
 
 export const QUEUE_PROCESSORS = {
