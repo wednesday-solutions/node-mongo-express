@@ -35,7 +35,7 @@
     "author": "Wednesday Solutions",
     "license": "MIT",
     "engines": {
-        "node": "14.17.x"
+        "node": "14.x"
     },
     "bugs": {
         "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
