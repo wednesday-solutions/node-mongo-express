@@ -44,6 +44,7 @@
     "dependencies": {
         "auth0": "^2.40.0",
         "body-parser": "^1.19.1",
+        "bull": "^4.8.1",
         "bunyan": "^1.8.15",
         "core-js": "^3.20.2",
         "cors": "^2.8.5",
@@ -57,9 +58,11 @@
         "jwks-rsa": "^2.0.5",
         "kill-port": "^1.6.1",
         "lodash": "^4.17.21",
+        "moment": "^2.29.1",
         "mongoose": "6.2.4",
         "node-fetch": "2",
         "nodemon": "^2.0.15",
+        "opossum": "^6.3.0",
         "response-time": "^2.3.2",
         "save": "^2.4.0",
         "slack-notify": "^2.0.2"

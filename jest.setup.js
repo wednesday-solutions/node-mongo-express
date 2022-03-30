@@ -1,5 +1,5 @@
 beforeEach(() => {
-    process.env = { ...process.env, ...DB_ENV, ENVIRONMENT_NAME: 'test' };
+    process.env = { ...process.env, ENVIRONMENT_NAME: 'test' };
 });
 afterEach(() => {
     jest.clearAllMocks();
