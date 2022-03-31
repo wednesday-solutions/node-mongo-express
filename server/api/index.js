@@ -13,8 +13,12 @@ import { mongoConnector } from 'middlewares/mongo';
 
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
 import customRoutes from './routes/custom';
+import { isTestEnv } from 'utils';
 
-mongoConnector();
+if (!isTestEnv()) {
+    mongoConnector();
+}
+
 export default app => {
     autoGenerateApisFromModels(app);
     // Custom api

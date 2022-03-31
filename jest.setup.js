@@ -1,5 +1,7 @@
-beforeEach(() => {
-    process.env = { ...process.env, ...DB_ENV, ENVIRONMENT_NAME: 'test' };
+process.env.ENVIRONMENT_NAME = 'test';
+
+beforeEach(async () => {
+    process.env = { ...process.env, ENVIRONMENT_NAME: 'test' };
 });
 afterEach(() => {
     jest.clearAllMocks();
@@ -7,16 +9,16 @@ afterEach(() => {
     jest.resetModules();
 });
 
-jest.doMock('ioredis', () =>
-    jest.fn().mockImplementation(() => ({
-        publish: () => ({}),
-        set: msg =>
-            JSON.stringify({
-                msg
-            }),
-        get: msg =>
-            JSON.stringify({
-                msg
-            })
-    }))
-);
+// jest.doMock('ioredis', () =>
+//     jest.fn().mockImplementation(() => ({
+//         publish: () => ({}),
+//         set: msg =>
+//             JSON.stringify({
+//                 msg
+//             }),
+//         get: msg =>
+//             JSON.stringify({
+//                 msg
+//             })
+//     }))
+// );
