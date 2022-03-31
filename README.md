@@ -4,7 +4,8 @@ A basic starter for a web app with parceljs, node, express and mongoose
 
 ## Pre-start
 
-    - npm
+    - yarn
+    - docker
 
 ## Features
 
@@ -31,17 +32,11 @@ node seeders/index.js
 ```
 
 ## How to start
-
-    - git clone `https://github.com/pandaling/parcel-node-express-mongo.git`
-    - cd `parcel-node-express-mongo`
-    - npm install
-    - npm run server
+    - cd `parcel-node-mongo-express`
+    - yarn
+    - ./setup-shards/scripts/setup/base.sh
+    - yarn start 
     - open browser to `localhost:9000` (port default to 9000)
-
-## Mongo DB
-
-    - test api with postman
-    - eg: 'localhost:9000/user/create'
 
 ## Philosophy
 
