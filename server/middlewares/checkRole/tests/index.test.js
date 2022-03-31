@@ -1,5 +1,3 @@
-import checkRole from '../index';
-
 describe('checkRole tests', () => {
     const req = {
         route: {
@@ -11,6 +9,11 @@ describe('checkRole tests', () => {
         }
     };
     const next = jest.fn();
+    let checkRole;
+    beforeAll(() => {
+        process.env.API_AUDIENCE = 'https://express-demo';
+        checkRole = require('../index');
+    });
 
     it('should ensure it return 403 when the user doesnot have right role to access the route', async () => {
         const roles = ['USER'];

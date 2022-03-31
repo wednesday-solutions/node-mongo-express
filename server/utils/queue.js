@@ -30,6 +30,7 @@ export const QUEUE_PROCESSORS = {
 };
 // 3
 export const initQueues = () => {
+    console.log('init queues');
     Object.keys(QUEUE_PROCESSORS).forEach(queueName => {
         // 4
         queues[queueName] = getQueue(queueName);
