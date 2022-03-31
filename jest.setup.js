@@ -1,6 +1,4 @@
-process.env.ENVIRONMENT_NAME = 'test';
-
-beforeEach(async () => {
+beforeEach(() => {
     process.env = { ...process.env, ENVIRONMENT_NAME: 'test' };
 });
 afterEach(() => {

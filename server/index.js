@@ -6,6 +6,9 @@ import bodyParser from 'body-parser';
 import { apiSuccess } from 'utils/apiUtils';
 import apis from 'api';
 import { list } from 'server/routeLister';
+import { isTestEnv } from 'utils';
+import { initQueues } from 'utils/queue';
+
 /**
  * Connect to database
  */
@@ -26,6 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // setup database
 apis(app);
+
+if (!isTestEnv()) {
+    initQueues();
+}
 
 app.get('/', (req, res) => {
     apiSuccess(res, 'node-parcel-express-mongo server at your service🖖');
