@@ -7,7 +7,7 @@ describe('checkRole tests', () => {
         },
         method: 'PUT',
         user: {
-            'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
+            'https://node-express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
         }
     };
     const next = jest.fn();
