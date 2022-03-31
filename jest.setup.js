@@ -9,16 +9,16 @@ afterEach(() => {
     jest.resetModules();
 });
 
-// jest.doMock('ioredis', () =>
-//     jest.fn().mockImplementation(() => ({
-//         publish: () => ({}),
-//         set: msg =>
-//             JSON.stringify({
-//                 msg
-//             }),
-//         get: msg =>
-//             JSON.stringify({
-//                 msg
-//             })
-//     }))
-// );
+jest.doMock('ioredis', () =>
+    jest.fn().mockImplementation(() => ({
+        publish: () => ({}),
+        set: msg =>
+            JSON.stringify({
+                msg
+            }),
+        get: msg =>
+            JSON.stringify({
+                msg
+            })
+    }))
+);
