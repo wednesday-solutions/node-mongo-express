@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path: 'env.example'});
+dotenv.config({path: '.env.example'});
 
 beforeEach(() => {
     process.env = { ...process.env, ENVIRONMENT_NAME: 'test' };
