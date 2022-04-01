@@ -6,7 +6,6 @@ import loginValidator from './validator';
 
 const login = async (req, res) => {
     try {
-        console.log('I am inside login');
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             throw { message: errors.errors[0].msg };
@@ -20,7 +19,6 @@ const login = async (req, res) => {
             grant_type: config().frontendGrantType,
             audience: config().audience
         };
-        console.log('apy;load', payload);
         const response = await fetch(`https://${config().domain}/oauth/token`, {
             method: 'post',
             body: JSON.stringify(payload),
@@ -28,8 +26,7 @@ const login = async (req, res) => {
         });
         const user = await response.json();
         return apiSuccess(res, user);
-    } catch (error) {
-        console.log('error', error);
+    } catch (err) {
         return apiFailure(res, err.message);
     }
 };

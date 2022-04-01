@@ -1,0 +1,28 @@
+name: Parcel Node Mongo Express CI
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    build_and_test:
+        name: Build & Test
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [14.17.x]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup environment
+              uses: actions/setup-node@v2
+              with:
+                  cache: 'yarn'
+                  node-version: ${{ matrix.node-version }}
+            - name: Install dependencies
+              run: yarn install
+            - name: Lint
+              run: yarn lint
+            - name: Test
+              run: yarn test
+            - name: Build
+              run: yarn build:local

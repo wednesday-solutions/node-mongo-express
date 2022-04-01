@@ -14,12 +14,14 @@ const checkRole = roles => (req, res, next) => {
             req.route.path === route.path &&
             req.method.toUpperCase() === route.method.toUpperCase()
         ) {
-            isAllowed = route.scopes.every(
-                element => roles.indexOf(element) !== -1
-            );
+            route.scopes.forEach(ele => {
+                if (roles.includes(ele)) {
+                    isAllowed = true;
+                    return;
+                }
+            });
         }
     });
-    console.log('isAllowed', isAllowed);
     if (!isAllowed) {
         return res.json(403, { errors: ['Access denied!'] });
     }

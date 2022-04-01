@@ -21,6 +21,5 @@
             "functions": 82,
             "lines": 82
         }
-    },
-    "testTimeout": 20000
+    }
 }

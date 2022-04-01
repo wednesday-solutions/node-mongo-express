@@ -1,0 +1,35 @@
+name: Jest Coverage Report with Annotations (CI)
+on:
+    pull_request:
+        branches:
+            - main
+jobs:
+    coverage_report:
+        name: Jest Coverage Report
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [14.17.x]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup environment
+              uses: actions/setup-node@v2
+              with:
+                  cache: 'yarn'
+                  node-version: ${{ matrix.node-version }}
+            - name: Get Threshold
+              id: threshold
+              uses: notiz-dev/github-action-json-property@release
+              with:
+                  path: 'jest.config.json'
+                  prop_path: 'coverageThreshold.global.statements'
+
+            - name: Install dependencies
+              run: yarn
+
+            - name: Test and generate coverage report
+              uses: artiomtr/jest-coverage-report-action@v2.0-rc.4
+              with:
+                  threshold: ${{steps.threshold.outputs.prop}}
+                  package-manager: yarn
+                  custom-title: Jest Coverage Report

@@ -5,5 +5,20 @@ export const mockData = {
         lastName: 'Doe',
         email: 'doe@wednesday.is',
         authId: 'auth0|6241b09d4bd9006f9a45cf'
+    },
+    MOCK_USER_LOGIN: {
+        data: {
+            access_token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXV',
+            scope: 'read:current_user',
+            expires_in: 864009,
+            token_type: 'Bearer'
+        }
+    },
+    MOCK_ROLE: {
+        data: {
+            id: 'rol_XeIAH73iey2dLBNn',
+            name: 'STORE_ADMIN',
+            description: 'Can access endpoints related to users'
+        }
     }
 };
