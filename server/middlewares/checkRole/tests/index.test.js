@@ -11,7 +11,7 @@ describe('checkRole tests', () => {
     const next = jest.fn();
     let checkRole;
     beforeAll(() => {
-        process.env.API_AUDIENCE = 'https://express-demo';
+        process.env.API_AUDIENCE = 'https://node-express-demo';
         checkRole = require('../index');
     });
 
