@@ -5,10 +5,18 @@ import { assignRoles, assignRoleValidator } from 'api/assignRoles';
 import { cronJob, cronJobValidator } from 'api/cronJob';
 import checkJwt from 'middlewares/Authenticate';
 import checkRole from 'middlewares/checkRole';
+import limiter from 'middlewares/rateLimiter';
 
 const router = express.Router();
 
-router.post('/login', loginValidator, login);
+const rateLimiter = limiter({
+    windowMs: 0.5 * 60 * 1000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+router.post('/login', loginValidator, rateLimiter, login);
 router.post('/roles', checkJwt, checkRole(['ADMIN']), roleValidator, roles);
 router.put(
     '/assign-roles',
