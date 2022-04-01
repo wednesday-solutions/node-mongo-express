@@ -10,7 +10,7 @@ const roles = async (req, res) => {
             throw { message: errors.errors[0].msg };
         }
         const { name, description } = req.body;
-        const auth = await clientCredentialsGrant;
+        const auth = await clientCredentialsGrant();
         const mgmtAuth0 = await managementClient(auth);
         const role = await mgmtAuth0.createRole({
             name,

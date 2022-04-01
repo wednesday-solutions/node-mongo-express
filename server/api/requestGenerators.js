@@ -62,19 +62,25 @@ export const generateDeleteRequest = (router, model) => {
 export const generateCreateUserRequest = (router, model, validator) => {
     const middlewares = [];
     if (validator) {
-        middlewares.push(validator);
+        middlewares.push(validator, (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return apiFailure(
+                    res,
+                    errors.errors.map(e => e.msg).join('\n'),
+                    400
+                );
+            }
+            next();
+        });
     }
     router.post('/', ...middlewares, async (req, res, next) => {
         try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                throw { message: errors.errors[0].msg };
-            }
             const { email, password } = req.body;
-            const auth = await clientCredentialsGrant;
+            const auth = await clientCredentialsGrant();
             const mgmtAuth0 = await managementClient(auth);
             const authUser = await mgmtAuth0.createUser({
-                connection: config.connection,
+                connection: config().connection,
                 email: email,
                 password: password
             });

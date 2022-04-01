@@ -6,5 +6,5 @@ export const apiSuccess = (res, data) => {
 
 export const apiFailure = (res, error, status = 500) => {
     log.info('apiFailure', { error });
-    return res.send({ error }).status(status);
+    return res.status(status).send({ error });
 };

@@ -14,19 +14,19 @@ const login = async (req, res) => {
         const payload = {
             username: username,
             password: password,
-            client_id: config.frontendClientId,
-            realm: config.connection,
-            grant_type: config.frontendGrantType,
-            audience: config.audience
+            client_id: config().frontendClientId,
+            realm: config().connection,
+            grant_type: config().frontendGrantType,
+            audience: config().audience
         };
-        const response = await fetch(`https://${config.domain}/oauth/token`, {
+        const response = await fetch(`https://${config().domain}/oauth/token`, {
             method: 'post',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json' }
         });
         const user = await response.json();
         return apiSuccess(res, user);
-    } catch (error) {
+    } catch (err) {
         return apiFailure(res, err.message);
     }
 };

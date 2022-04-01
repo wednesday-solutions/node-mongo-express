@@ -5,8 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest --coverage",
-        "mocha": "./node_modules/.bin/mocha --require @babel/register --watch test/api.test.js",
-        "start": "nodemon --exec babel-node app.js | bunyan -o short",
+        "start": "export ENVIRONMENT_NAME=local && nodemon --exec babel-node app.js | bunyan -o short",
         "postinstall": "link-module-alias",
         "preinstall": "command -v link-module-alias && link-module-alias clean || true",
         "format": "prettier-standard './**/**/*.js'",
@@ -74,6 +73,7 @@
         "@babel/node": "^7.16.7",
         "@babel/preset-env": "^7.16.7",
         "@faker-js/faker": "^6.0.0-alpha.5",
+        "@types/jest": "^27.4.1",
         "babel-eslint": "^10.1.0",
         "eslint": "^8.6.0",
         "eslint-config-prettier": "^4.1.0",
@@ -87,10 +87,11 @@
         "jest": "^27.4.7",
         "link-module-alias": "^1.2.0",
         "mockgoose": "^8.0.4",
+        "mockingoose": "^2.15.2",
         "pre-commit": "1.2.2",
         "prettier": "^2.5.1",
         "prettier-standard": "^16.4.1",
-        "supertest": "^6.1.6"
+        "supertest": "^6.2.2"
     },
     "precommit": "lint:staged",
     "lint-staged": {

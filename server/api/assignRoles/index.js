@@ -10,7 +10,7 @@ const assignRoles = async (req, res) => {
             throw { message: errors.errors[0].msg };
         }
         const { authId, role } = req.body;
-        const auth = await clientCredentialsGrant;
+        const auth = await clientCredentialsGrant();
         const mgmtAuth0 = await managementClient(auth);
         const rolesArr = await mgmtAuth0.getRole();
         const roleInfo = rolesArr.filter(rol => role.includes(rol.name));
