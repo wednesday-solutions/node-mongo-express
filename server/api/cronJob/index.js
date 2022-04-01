@@ -13,7 +13,6 @@ const cronJob = async (req, res, next) => {
         const data = await scheduleJob(scheduleIn, message, queueName);
         return apiSuccess(res, data);
     } catch (err) {
-        console.log('I am inside try block');
         return apiFailure(res, err.message);
     }
 };

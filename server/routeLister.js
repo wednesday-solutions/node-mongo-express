@@ -1,4 +1,9 @@
+import { isTestEnv } from 'utils';
+
 export function list(app) {
+    if (isTestEnv()) {
+        return;
+    }
     const path = require('path');
 
     const defaultOptions = {
