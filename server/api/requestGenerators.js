@@ -6,16 +6,16 @@ import {
     updateItem,
     createUser
 } from 'api/utils';
-import { validationResult } from 'express-validator';
-import { apiFailure, apiSuccess } from 'utils/apiUtils';
+import {
+    apiFailure,
+    apiSuccess,
+    createValidatorMiddlewares
+} from 'utils/apiUtils';
 import { clientCredentialsGrant, managementClient } from 'utils/auth0';
 import config from 'config';
 
 export const generatePostRequest = (router, model, validator) => {
-    const middlewares = [];
-    if (validator) {
-        middlewares.push(validator);
-    }
+    const middlewares = createValidatorMiddlewares(validator);
     router.post('/', ...middlewares, async (req, res) => {
         try {
             const item = await createItem(model, req.body);
@@ -46,7 +46,7 @@ export const generateFetchOneRequest = (router, model) => {
         const { _id } = req.params;
         return fetchItem(model, { _id })
             .then(item => apiSuccess(res, item))
-            .catch(err => apiFailure(res, err.err));
+            .catch(err => apiFailure(res, err.message));
     });
 };
 
@@ -55,25 +55,12 @@ export const generateDeleteRequest = (router, model) => {
         const { _id } = req.params;
         return deleteItem(model, { _id })
             .then(items => apiSuccess(res, items))
-            .catch(err => apiFailure(res, err.err));
+            .catch(err => apiFailure(res, err.message));
     });
 };
 
 export const generateCreateUserRequest = (router, model, validator) => {
-    const middlewares = [];
-    if (validator) {
-        middlewares.push(validator, (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return apiFailure(
-                    res,
-                    errors.errors.map(e => e.msg).join('\n'),
-                    400
-                );
-            }
-            next();
-        });
-    }
+    const middlewares = createValidatorMiddlewares(validator);
     router.post('/', ...middlewares, async (req, res, next) => {
         try {
             const { email, password } = req.body;
