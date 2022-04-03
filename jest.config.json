@@ -21,5 +21,6 @@
             "functions": 82,
             "lines": 82
         }
-    }
+    },
+    "coveragePathIgnorePatterns": ["<rootDir>/server/routeLister"]
 }
