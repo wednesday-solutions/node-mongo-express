@@ -17,7 +17,14 @@ const rateLimiter = limiter({
 });
 
 router.post('/login', loginValidator, rateLimiter, login);
-router.post('/roles', checkJwt, checkRole(['ADMIN']), roleValidator, roles);
+router.post(
+    '/roles',
+    rateLimiter,
+    checkJwt,
+    checkRole(['ADMIN']),
+    roleValidator,
+    roles
+);
 router.put(
     '/assign-roles',
     checkJwt,
