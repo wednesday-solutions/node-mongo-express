@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 import log from 'utils/logger';
+
+export const MONGO_URI =
+    'mongodb://localhost:60000/ecommerce?readPreference=secondary';
+
 export const mongoConnector = () => {
     let db;
 
@@ -7,13 +11,11 @@ export const mongoConnector = () => {
         log.info('Mongo already connected.');
         db = mongoose.connection;
     } else {
-        let mongoDB =
-            'mongodb://localhost:60000/ecommerce?readPreference=secondary';
-        mongoose.connect(mongoDB);
+        mongoose.connect(MONGO_URI);
         db = mongoose.connection;
         db.on('error', err => log.error('error'));
         db.once('open', () =>
-            log.info('mongo connection successfully connected to ', mongoDB)
+            log.info('mongo connection successfully connected to ', MONGO_URI)
         );
     }
     return db;

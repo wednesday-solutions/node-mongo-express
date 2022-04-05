@@ -48,7 +48,7 @@ describe('User tests', () => {
             .set('Accept', 'application/json')
             .send({});
         expect(res.statusCode).toBe(400);
-        expect(res.body.error).toContain('must be present');
+        expect(JSON.stringify(res.body.error)).toContain('must be present');
     });
 
     it('should  call the create user  and throw error', async () => {

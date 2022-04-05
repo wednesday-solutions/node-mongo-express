@@ -15,6 +15,7 @@ import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
 import customRoutes from './routes/custom';
 import { isTestEnv } from 'utils';
 
+/* istanbul ignore next */
 if (!isTestEnv()) {
     mongoConnector();
 }
