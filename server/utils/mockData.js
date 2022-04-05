@@ -20,5 +20,14 @@ export const mockData = {
             name: 'STORE_ADMIN',
             description: 'Can access endpoints related to users'
         }
+    },
+    MOCK_UNSHARDED_REFERENCED_ORDERS: {
+        data: [
+            {
+                _id: '624ae6bcae38f95bb8e0ea74',
+                purchasedProducts: [],
+                totalPrice: 100
+            }
+        ]
     }
 };

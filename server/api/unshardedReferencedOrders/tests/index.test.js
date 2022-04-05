@@ -1,57 +1,42 @@
 import supertest from 'supertest';
-import express from 'express';
-import http from 'http';
-import { fetchAllUnshardedReferencedOrders } from '..';
+import app from 'server';
+import { mockData } from 'utils/mockData';
+import kebabCase from 'lodash/kebabCase';
 
-const CUSTOM_ROUTE = '/custom-route';
-
-function createAppWithRouter(router) {
-    const app = express();
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
-    app.use(CUSTOM_ROUTE, router);
-    const server = http.createServer(app);
-    server.listen(4321, () => {});
-    return server;
-}
+const { MOCK_UNSHARDED_REFERENCED_ORDERS: mockUnshardedReferencedOrders } =
+    mockData;
 
 describe('fetchAllUnshardedReferencedOrders tests', () => {
-    let app;
-    let router;
-    let model;
-
-    afterEach(() => {
-        app.close();
-    });
+    let MODEL_NAME;
+    let ENDPOINT;
+    let mockingoose;
 
     beforeAll(() => {
-        router = express.Router();
-        model = {};
-        model.find = jest.fn().mockReturnValue(model);
-        model.select = jest.fn().mockReturnValue(model);
-        model.populate = jest.fn().mockReturnValue(model);
-        model.skip = jest.fn().mockReturnValue(model);
-        model.limit = jest.fn().mockReturnValue([{ item: 'parcel-mongo' }]);
+        MODEL_NAME = 'unsharded_referenced_orders';
+        ENDPOINT = `/${kebabCase(MODEL_NAME)}`;
+    });
+
+    beforeEach(() => {
+        mockingoose = require('mockingoose');
     });
     it('should fetch all unsharded referenced orders', async () => {
-        fetchAllUnshardedReferencedOrders(router, model);
-        app = createAppWithRouter(router);
+        mockingoose(MODEL_NAME).toReturn(
+            mockUnshardedReferencedOrders.data,
+            'find'
+        );
         const res = await supertest(app)
-            .get(CUSTOM_ROUTE)
+            .get(ENDPOINT)
             .set('Accept', 'application/json');
 
         expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual(mockUnshardedReferencedOrders);
     });
 
     it('should fail to fetch if something goes wrong', async () => {
         const error = new Error('unable to fetch unsharded referenced orders');
-        model.find = jest.fn(() => {
-            throw error;
-        });
-        fetchAllUnshardedReferencedOrders(router, model, {});
-        app = createAppWithRouter(router);
+        mockingoose(MODEL_NAME).toReturn(error, 'find');
         const res = await supertest(app)
-            .get(CUSTOM_ROUTE)
+            .get(ENDPOINT)
             .set('Accept', 'application/json');
 
         expect(res.statusCode).toBe(500);
