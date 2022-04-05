@@ -12,14 +12,14 @@ export const apiFailure = (res, error, status = 500) => {
 
 export const createValidatorMiddlewares = validator => {
     const middlewares = [];
-    const checkValidtion = (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return apiFailure(res, errors.array(), 400);
-        }
-        return next();
-    };
     if (validator) {
+        const checkValidtion = (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return apiFailure(res, errors.array(), 400);
+            }
+            return next();
+        };
         middlewares.push(validator, checkValidtion);
     }
     return middlewares;
