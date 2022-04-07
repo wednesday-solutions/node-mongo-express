@@ -7,10 +7,15 @@ export const createItem = async (model, args) => {
         throw err;
     }
 };
+
+// no page & no limit
+// have page & have limit
+// have limit > 100
+
 export const fetchItems = async (model, query) => {
     try {
         if (!query.limit || query.limit > 100) {
-            query.limit = query.limit || 100;
+            query.limit = 100;
         }
         query.page = query.page || 0;
         return model

@@ -65,5 +65,14 @@ export const mockData = {
         ],
         totalPrice: 43000,
         createdAt: '2022-04-06'
+    },
+    MOCK_UNSHARDED_REFERENCED_ORDERS: {
+        data: [
+            {
+                _id: '624ae6bcae38f95bb8e0ea74',
+                purchasedProducts: [],
+                totalPrice: 100
+            }
+        ]
     }
 };

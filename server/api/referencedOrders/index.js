@@ -1,7 +1,7 @@
 import { apiFailure, apiSuccess } from 'utils/apiUtils';
 
-export const fetchAllReferencedOrders = (app, model, validator) => {
-    app.use('/', async (req, res, next) => {
+export const fetchAllReferencedOrders = (router, model, validator) => {
+    router.use('/', async (req, res, next) => {
         try {
             const items = await model
                 .find()

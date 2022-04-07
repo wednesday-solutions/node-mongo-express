@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // setup database
 apis(app);
-
+/* istanbul ignore next */
 if (!isTestEnv()) {
     initQueues();
 }
