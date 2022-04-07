@@ -1,6 +1,7 @@
 const { default: faker } = require('@faker-js/faker');
 const random = require('lodash/random');
 const range = require('lodash/range');
+const moment = require('moment');
 const { runInClusterMode, connectToMongo, createProduct } = require('./utils');
 const { Orders } = require('../models/orders');
 const { Products } = require('../models/products');
@@ -8,11 +9,12 @@ const { Stores } = require('../models/stores');
 const { Suppliers } = require('../models/suppliers');
 const { StoreProducts } = require('../models/storeProducts');
 const { SupplierProducts } = require('../models/supplierProducts');
+const OCT_10_1994 = 782980686236;
 
 const seed = async () => {
     connectToMongo().then(async () => {
         const divisor = 100;
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < 50; i++) {
             // await Store.deleteMany({});
             // await Product.deleteMany({});
             // await Supplier.deleteMany({});
@@ -93,17 +95,24 @@ const seed = async () => {
                     const order = {};
                     const purchasedProducts = [];
                     const numberOfProducts = random(1, 6);
+                    products.forEach(product => {
+                        let qty = Math.floor(Math.random() * 3);
+                        product['quantity'] = qty ? qty : 1;
+                    });
 
                     let total = 0;
                     for (let i = 0; i < numberOfProducts; i++) {
                         const product =
                             products[random(0, products.length - 1)];
-                        total += product.price;
+                        total += product.price * product.quantity;
                         purchasedProducts.push(product);
                     }
                     order.totalPrice = total;
                     order.schema = 1;
                     order.purchasedProducts = purchasedProducts;
+                    order.createdAt = moment(
+                        OCT_10_1994 + 86400000 * orderIndex
+                    ).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
                     seedOrders.push(order);
                 })
             );

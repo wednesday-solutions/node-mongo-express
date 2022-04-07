@@ -13,9 +13,8 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
-    totalSales: {
-        type: Number,
-        required: true
+    quantity: {
+        type: Number
     },
     quantityAverage: {
         type: Number,

@@ -117,6 +117,8 @@
         "server": "./server",
         "models": "./models",
         "api": "./server/api",
-        "config": "./config"
+        "config": "./config",
+        "services": "./server/services",
+        "daos": "./server/daos"
     }
 }

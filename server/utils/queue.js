@@ -1,14 +1,15 @@
 import Bull from 'bull';
 import moment from 'moment';
+import { aggregateCheck } from 'api/cronJob/aggregateJob';
 const queues = {};
 // 1
 export const QUEUE_NAMES = {
     SCHEDULE_JOB: 'scheduleJob',
-    MIDNIGHT_CRON: 'midnightCron'
+    AGGREGATE_CHECK: 'aggregateCheck'
 };
 // 2
 const CRON_EXPRESSIONS = {
-    MIDNIGHT: '0 0  * * *'
+    MIDNIGHT: '0 0 * * *'
 };
 
 export const QUEUE_PROCESSORS = {
@@ -21,10 +22,9 @@ export const QUEUE_PROCESSORS = {
         );
         done();
     },
-    [QUEUE_NAMES.MIDNIGHT_CRON]: (job, done) => {
-        console.log(
-            `${moment()}::The MIDNIGHT_CRON is being executed at 12:00am`
-        );
+    [QUEUE_NAMES.AGGREGATE_CHECK]: (job, done) => {
+        console.log('Aggegate job is getting executed.');
+        aggregateCheck();
         done();
     }
 };
@@ -37,7 +37,7 @@ export const initQueues = () => {
         // 5
         queues[queueName].process(QUEUE_PROCESSORS[queueName]);
     });
-    queues[QUEUE_NAMES.MIDNIGHT_CRON].add(
+    queues[QUEUE_NAMES.AGGREGATE_CHECK].add(
         {},
         { repeat: { cron: CRON_EXPRESSIONS.MIDNIGHT } }
     );
