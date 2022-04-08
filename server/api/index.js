@@ -45,7 +45,9 @@ const apiGeneratorFactory = (app, name, model) => {
             // auto generate api
             switch (type) {
                 case REQUEST_TYPES.create:
-                    generatePostRequest(router, model);
+                    if (name !== 'orders') {
+                        generatePostRequest(router, model);
+                    }
                     break;
                 case REQUEST_TYPES.update:
                     generatePatchRequest(router, model);

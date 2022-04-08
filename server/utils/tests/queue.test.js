@@ -1,6 +1,7 @@
 import { getQueue, initQueues, QUEUE_PROCESSORS } from 'utils/queue';
 import moment from 'moment';
 import * as queue from 'utils/queue';
+import * as cronJob from 'api/cronJob/aggregateJob';
 
 describe('Queue tests', () => {
     it('getQueues should create a queue if not present', async () => {
@@ -28,6 +29,7 @@ describe('Queue tests', () => {
                 message: job.message
             })
         }));
+        jest.spyOn(cronJob, 'aggregateCheck').mockImplementation(() => {});
         jest.spyOn(console, 'log');
         await initQueues();
         expect(console.log.mock.calls[0][0]).toBe('init queues');
@@ -41,6 +43,7 @@ describe('Queue tests', () => {
         it('should console the job id if a job is getting executed', () => {
             jest.resetModules();
             jest.spyOn(console, 'log');
+            jest.spyOn(cronJob, 'aggregateCheck').mockImplementation(() => {});
             initQueues();
             expect(console.log.mock.calls.length).toBe(5);
             expect(console.log.mock.calls[1][0]).toBe(

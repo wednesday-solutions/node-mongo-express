@@ -7284,7 +7284,7 @@ superagent@^5.1.1:
     readable-stream "^3.6.0"
     semver "^7.3.2"
 
-superagent@^7.1.0:
+superagent@^7.0.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/superagent/-/superagent-7.1.2.tgz#71393141edd086ccf2544a29a4a609e46b7911f3"
   integrity sha512-o9/fP6dww7a4xmEF5a484o2rG34UUGo8ztDlv7vbCWuqPhpndMi0f7eXxdlryk5U12Kzy46nh8eNpLAJ93Alsg==

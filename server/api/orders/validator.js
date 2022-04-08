@@ -3,6 +3,8 @@ export default checkSchema({
     totalPrice: {
         in: ['body'],
         errorMessage: 'totalPrice must be present',
-        toFloat: true
+        isFloat: {
+            errorMessage: 'totalPrice should be a number'
+        }
     }
 });
