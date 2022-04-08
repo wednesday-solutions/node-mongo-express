@@ -15,7 +15,6 @@ function createProduct(dontCreate) {
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price()) * 100,
         category: faker.commerce.department(),
-        //totalSales: 0,
         quantityAverage: 0,
         schema: 1
     };
