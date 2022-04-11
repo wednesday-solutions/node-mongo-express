@@ -75,7 +75,7 @@ describe('utils tests', () => {
                     throw error;
                 })
             };
-            expect(() => fetchItems(model)).rejects.toThrow(error);
+            expect(() => fetchItems(model, {})).rejects.toThrow(error);
         });
     });
 
