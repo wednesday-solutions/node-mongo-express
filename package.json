@@ -15,8 +15,7 @@
         "lint:js": "npm run lint:eslint -- . ",
         "lint:staged": "lint-staged",
         "prettify": "prettier --write",
-        "precommit": "lint:staged",
-        "swagger:generate": "node node_modules/.bin/swagger-jsdoc -d swaggerDefinitions.js"
+        "precommit": "lint:staged"
     },
     "repository": {
         "type": "git",
@@ -69,7 +68,6 @@
         "response-time": "^2.3.2",
         "save": "^2.4.0",
         "slack-notify": "^2.0.2",
-        "swagger-jsdoc": "5",
         "swagger-ui-express": "^4.3.0"
     },
     "devDependencies": {

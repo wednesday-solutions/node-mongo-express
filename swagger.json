@@ -1,24 +1,30 @@
 {
-  "info": {
-    "title": "API",
-    "version": "2.0.0"
-  },
-  "host": "http://localhost:9000",
-  "basePath": "/",
-  "swagger": "2.0",
-  "paths": {
-    "/login": {
-      "post": {
-        "descriptions": "Login user",
-        "responses": {
-          "200": "user successfully loggedin"
+    "info": {
+        "title": "Parcel Node Mongo Express Documentation",
+        "version": "1.0.0"
+    },
+    "host": "http://localhost:9000",
+    "basePath": "/",
+    "swagger": "2.0",
+    "tags": ["auth"],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": ["auth"],
+                "descriptions": "Login user",
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
         }
-      }
-    }
-  },
-  "definitions": {},
-  "responses": {},
-  "parameters": {},
-  "securityDefinitions": {},
-  "tags": []
+    },
+    "definitions": {},
+    "responses": {},
+    "parameters": {},
+    "securityDefinitions": {}
 }
