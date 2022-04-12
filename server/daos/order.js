@@ -48,7 +48,6 @@ export const totalAmtForDate = async date => {
 
 export const earliestCreatedDate = async () => {
     try {
-        console.log('I GOT IT THIS FAR');
         const order = await Orders.findOne().sort({ createdAt: 1 }).limit(1);
 
         return order.createdAt.toISOString().split('T')[0];

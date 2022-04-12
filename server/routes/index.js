@@ -4,7 +4,7 @@ import { roles, roleValidator } from 'api/roles';
 import { assignRoles, assignRoleValidator } from 'api/assignRoles';
 import { cronJob, cronJobValidator } from 'api/cronJob';
 import { createOrder, orderValidator } from 'api/orders';
-import checkJwt from 'middlewares/Authenticate';
+import checkJwt from 'middlewares/authenticate';
 import checkRole from 'middlewares/checkRole';
 import limiter from 'middlewares/rateLimiter';
 
