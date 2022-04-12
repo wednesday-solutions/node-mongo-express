@@ -43,7 +43,7 @@ export const DEFAULT_DEFINITIONS = {
  * @param {CustomSwagger} customSwagger
  */
 export const registerSwagger = app => {
-    const SWAGGER_DOCS_PATH = '/docs/swagger.json';
+    const SWAGGER_DOCS_PATH = '/api-docs/swagger.json';
     const options = {
         swaggerOptions: {
             url: SWAGGER_DOCS_PATH
@@ -51,9 +51,9 @@ export const registerSwagger = app => {
     };
     const swaggerDocument = generateSwaggerDoc();
     appendToSwaggerDoc(swaggerDocument, customSwaggerDoc);
-    app.get(SWAGGER_DOCS_PATH, (_, res) => res.send(swaggerDocument));
+    app.get(SWAGGER_DOCS_PATH, (_, res) => res.json(swaggerDocument));
     app.use(
-        '/docs',
+        '/api-docs',
         swaggerUi.serveFiles(null, options),
         swaggerUi.setup(null, options)
     );
@@ -61,7 +61,7 @@ export const registerSwagger = app => {
 
 export const generateSwaggerDoc = () => {
     const swaggerDocument = {
-        openapi: '3.0.0',
+        swagger: '2.0',
         info: {
             title: 'Parcel Node Mongo Express Documentation',
             version: Pack.version
