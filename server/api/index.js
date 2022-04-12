@@ -12,7 +12,7 @@ import {
 import { mongoConnector } from 'middlewares/mongo';
 
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
-import customRoutes from './routes/custom';
+import customRoutes from '../routes';
 import { isTestEnv } from 'utils';
 
 /* istanbul ignore next */

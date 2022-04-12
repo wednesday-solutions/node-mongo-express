@@ -54,7 +54,7 @@ describe('Order daos tests', () => {
                 await totalAmtForDate(date);
             }).rejects.toThrow(mockError);
         });
-        it('should return total amount as 0 for the day', async () => {
+        it('should return total amount as 0 for the day as no order is placed on that day', async () => {
             mockingoose(model).toReturn([], 'aggregate');
             const res = await totalAmtForDate(date);
             expect(res).toBe(0);
@@ -88,7 +88,7 @@ describe('Order daos tests', () => {
                 await totalByDateForCategory(date, category);
             }).rejects.toThrow(mockError);
         });
-        it('should return total amt as 0 for the day for a category', async () => {
+        it('should return total amt as 0 for the day for a category as no order is placed for that category on that day', async () => {
             mockingoose(model).toReturn([], 'aggregate');
             const res = await totalByDateForCategory(date, category);
             expect(res).toBe(0);
@@ -109,7 +109,7 @@ describe('Order daos tests', () => {
             }).rejects.toThrow(mockError);
         });
 
-        it('should return the total count of order as 0 for the day', async () => {
+        it('should return the total count of order as 0 for the day as no order is placed on that date', async () => {
             mockingoose(model).toReturn([], 'aggregate');
             const res = await countByDate(date);
             expect(res).toBe(0);
@@ -130,7 +130,7 @@ describe('Order daos tests', () => {
             }).rejects.toThrow(mockError);
         });
 
-        it('should return count for the day for a category as 0', async () => {
+        it('should return count for the day for a category as 0 as no order was placed for that category on that day', async () => {
             mockingoose(model).toReturn([], 'aggregate');
             const res = await countByDateForCategory(date, category);
             expect(res).toBe(0);
