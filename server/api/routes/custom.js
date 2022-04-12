@@ -16,7 +16,14 @@ const rateLimiter = limiter({
     standardHeaders: true,
     legacyHeaders: false
 });
-
+/**
+ * @openapi
+ * /login:
+ *   post:
+ *     descriptions: Login user
+ *     responses:
+ *       200: user successfully loggedin
+ */
 router.post('/login', loginValidator, rateLimiter, login);
 router.post(
     '/roles',

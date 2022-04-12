@@ -1,0 +1,24 @@
+{
+  "info": {
+    "title": "API",
+    "version": "2.0.0"
+  },
+  "host": "http://localhost:9000",
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {
+    "/login": {
+      "post": {
+        "descriptions": "Login user",
+        "responses": {
+          "200": "user successfully loggedin"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

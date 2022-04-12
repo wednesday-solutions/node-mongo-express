@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import kebab from 'lodash/kebabCase';
@@ -10,10 +9,10 @@ import {
     generateFetchOneRequest
 } from 'api/requestGenerators';
 import { mongoConnector } from 'middlewares/mongo';
-
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
 import customRoutes from './routes/custom';
-import { isTestEnv } from 'utils';
+import { getModelFiles, isTestEnv } from 'utils';
+import { registerSwagger } from 'utils/swagUtils';
 
 /* istanbul ignore next */
 if (!isTestEnv()) {
@@ -24,13 +23,12 @@ export default app => {
     autoGenerateApisFromModels(app);
     // Custom api
     app.use('/', customRoutes);
+    registerSwagger(app);
 };
 
 const autoGenerateApisFromModels = app => {
     const modelsFolderPath = path.join(__dirname, '../../models/');
-    const fileArray = fs
-        .readdirSync(modelsFolderPath)
-        .filter(file => fs.lstatSync(modelsFolderPath + file).isFile());
+    const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
         const { model } = require(modelsFolderPath + f);
         const name = f.split('.')[0];
@@ -38,6 +36,7 @@ const autoGenerateApisFromModels = app => {
         apiGeneratorFactory(app, name, model);
     });
 };
+
 const apiGeneratorFactory = (app, name, model) => {
     const router = express.Router();
     Object.values(REQUEST_TYPES).forEach(type => {
