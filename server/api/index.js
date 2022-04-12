@@ -10,7 +10,7 @@ import {
 } from 'api/requestGenerators';
 import { mongoConnector } from 'middlewares/mongo';
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
-import customRoutes from './routes/custom';
+import customRoutes from 'server/routes/index';
 import { getModelFiles, isTestEnv } from 'utils';
 import { registerSwagger } from 'utils/swagUtils';
 

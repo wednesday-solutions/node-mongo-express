@@ -204,11 +204,9 @@ export const appendSwagDefs = (name, model, swaggerDefs) => {
             $ref: '#/definitions/products'
         };
     }
-    if (!swaggerDefs[name]) {
-        swaggerDefs[name] = {
-            type: 'object',
-            ...modelSchema,
-            title: undefined
-        };
-    }
+    swaggerDefs[name] = {
+        type: 'object',
+        ...modelSchema,
+        title: undefined
+    };
 };
