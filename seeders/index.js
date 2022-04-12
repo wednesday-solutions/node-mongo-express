@@ -14,7 +14,7 @@ const OCT_10_1994 = 782980686236;
 const seed = async () => {
     connectToMongo().then(async () => {
         const divisor = 100;
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 5000; i++) {
             // await Store.deleteMany({});
             // await Product.deleteMany({});
             // await Supplier.deleteMany({});
