@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest --coverage",
         "start": "export ENVIRONMENT_NAME=local && nodemon --exec babel-node app.js | bunyan -o short",
+        "start:sharded": "export MONGO_PORT=60000 && yarn start",
         "postinstall": "link-module-alias",
         "preinstall": "command -v link-module-alias && link-module-alias clean || true",
         "format": "prettier-standard './**/**/*.js'",
