@@ -28,6 +28,7 @@ app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // setup database
 apis(app);
 /* istanbul ignore next */
