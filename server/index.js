@@ -8,6 +8,7 @@ import apis from 'api';
 import { list } from 'server/routeLister';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
+import injectRequestId from 'middlewares/injectRequestId';
 
 /**
  * Connect to database
@@ -22,11 +23,11 @@ app.use(responseTime());
 app.set('port', process.env.PORT || 9000);
 app.use(helmet());
 app.use(cors());
+app.use(injectRequestId());
 app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
-
 // setup database
 apis(app);
 /* istanbul ignore next */
