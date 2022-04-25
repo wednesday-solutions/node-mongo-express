@@ -27,7 +27,9 @@ describe('User tests', () => {
     });
 
     it('should call the create user api', async () => {
-        jest.spyOn(daos, 'createUser').mockResolvedValueOnce(mockUser);
+        jest.spyOn(daos, 'createUser').mockResolvedValueOnce({
+            _doc: mockUser
+        });
         const res = await supertest(app)
             .post('/users')
             .set('Accept', 'application/json')
@@ -42,7 +44,6 @@ describe('User tests', () => {
     });
 
     it('should  call the create user api and throw error', async () => {
-        jest.spyOn(daos, 'createUser').mockResolvedValueOnce(mockUser);
         const res = await supertest(app)
             .post('/users')
             .set('Accept', 'application/json')
