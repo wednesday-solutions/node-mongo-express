@@ -1,0 +1,78 @@
+on:
+    push:
+        branches:
+            - qa
+
+name: Create Beta Release
+
+jobs:
+    build:
+        name: Create Beta Release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Actions Ecosystem Action Get Merged Pull Request
+              uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
+              id: getMergedPR
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - run: |
+                  git fetch --prune --unshallow --tags
+            - name: Get Commit Message
+              run: |
+                  declare -A category=( [fix]="" [chore]="" [revert]="" [build]="" [docs]="" [feat]="" [perf]="" [refactor]="" [style]="" [temp]="" [test]="" [ci]="" [others]="") 
+                  declare -A categoryTitle=( [fix]="<h5>Bug Fixes</h5>" [build]="<h5>Build</h5>" [docs]="<h5>Documentation</h5>" [feat]="<h5>New Features</h5>" [chore]="<h5>Changes to build process or aux tools</h5>" [ci]="<h5>Changes to CI config</h5>" [temp]="<h5>Temporary commit</h5>" [perf]="<h5>Performance Enhancement</h5>" [revert]="<h5>Revert Commits</h5>" [refactor]="<h5>Refactored</h5>" [style]="<h5>Changed Style</h5>" [test]="<h5>Added Tests</h5>" [others]="<h5>Others</h5>") 
+                  msg="#${{ steps.getMergedPR.outputs.number}} ${{ steps.getMergedPR.outputs.title}}"
+                  for i in $(git log --format=%h $(git merge-base HEAD^1 HEAD^2)..HEAD^2)
+                  do
+                    IFS=":" read -r type cmmsg <<< $(git log --format=%B -n 1 $i)
+                    type="${type}" | xargs
+                    text_msg="&nbsp;&nbsp;&nbsp;&nbsp;&#8226; $i - ${cmmsg}<br/>" 
+                    flag=1
+                    for i in "${!category[@]}"
+                    do
+                        if [ "${type}" == "$i" ]
+                        then
+                            category[$i]+="${text_msg}" 
+                            flag=0
+                            break
+                        fi
+                    done 
+                        if [ $flag -eq 1 ]
+                        then
+                            category[others]+="${text_msg}"
+                        fi
+                    done
+                    for i in "${!category[@]}" 
+                    do
+                        if [ ! -z "${category[$i]}" ] && [ "others" != "$i" ]
+                            then
+                            msg+="${categoryTitle[$i]}${category[$i]}"
+                        fi
+                    done
+                    # if [ ! -z "${category[others]}" ]
+                    # then 
+                    #     msg+="${categoryTitle[others]}${category[others]}"
+                    # fi
+                    echo "COMMIT_MESSAGE=${msg}" >> $GITHUB_ENV
+            - name: Bump version and push tag
+              run: |
+                  cd "$GITHUB_WORKSPACE"
+                  git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+                  git config user.name "$GITHUB_ACTOR"
+                  npm version patch
+                  git push && git push --tags
+            - name: get-npm-version
+              id: package-version
+              uses: martinbeentjes/npm-get-version-action@master
+            - name: Create Beta Release
+              uses: actions/create-release@latest
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ steps.package-version.outputs.current-version}}-Beta
+                  release_name: v${{ steps.package-version.outputs.current-version}}-Beta
+                  body: ${{ env.COMMIT_MESSAGE }}
+                  draft: false
+                  prerelease: false
