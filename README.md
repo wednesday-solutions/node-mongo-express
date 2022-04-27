@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/wednesday-solutions/react-floki/blob/master/react_floki_github.svg" width="480" height="520" />
+<img align="left" src="https://github.com/wednesday-solutions/parcel-node-mongo-express/blob/main/parcel_node_mongo_express_github.svg" width="480" height="520" />
 
 <div>
   <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=serverless" align="left" style="margin-left: 0;">
