@@ -1,6 +1,6 @@
 {
     "name": "parcel-node-express-mongo",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "A basic starter web app with parceljs, node, express and mongoose",
     "main": "index.js",
     "scripts": {
