@@ -36,9 +36,9 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
   <span>We’re always looking for people who value their work, so come and join us. <a href="https://www.wednesday.is/hiring">We are hiring!</a></span>
 </div>
 
-# parcel-node-express-mongo
+<!-- # parcel-node-express-mongo
 
-A basic starter for a web app with parceljs, node, express and mongoose
+A basic starter for a web app with parceljs, node, express and mongoose -->
 
 ## Pre-start
 
