@@ -1,6 +1,6 @@
 {
     "name": "parcel-node-express-mongo",
-    "version": "1.0.0",
+    "version": "8.0.0",
     "description": "A basic starter web app with parceljs, node, express and mongoose",
     "main": "index.js",
     "scripts": {
@@ -88,6 +88,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
+        "git-commit-msg-linter": "^4.1.2",
         "jest": "^27.4.7",
         "link-module-alias": "^1.2.0",
         "mockingoose": "^2.15.2",
