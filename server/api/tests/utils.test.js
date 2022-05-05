@@ -6,8 +6,10 @@ import {
     fetchItems,
     updateItem
 } from '../utils';
+import log from 'utils/logger';
 
 describe('utils tests', () => {
+    const spy = jest.spyOn(log, 'info');
     describe('createItem tests', () => {
         it('should createItem successfully create and return item', async () => {
             const model = {
@@ -27,6 +29,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => createItem(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 
@@ -76,6 +79,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => fetchItems(model, {})).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 
@@ -98,6 +102,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => fetchItem(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 
@@ -123,6 +128,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => updateItem(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 
@@ -146,6 +152,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => deleteItem(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 
@@ -168,6 +175,7 @@ describe('utils tests', () => {
                 })
             };
             expect(() => createUser(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
 });

@@ -1,4 +1,3 @@
-import log from 'utils/logger';
 export const createItem = async (model, args) => {
     try {
         return model.create(args);

@@ -27,7 +27,9 @@ describe('User tests', () => {
     });
 
     it('should call the create user api', async () => {
-        jest.spyOn(daos, 'createUser').mockResolvedValueOnce(mockUser);
+        jest.spyOn(daos, 'createUser').mockResolvedValueOnce({
+            _doc: mockUser
+        });
         const res = await supertest(app)
             .post('/users')
             .set('Accept', 'application/json')
@@ -41,7 +43,7 @@ describe('User tests', () => {
         expect(res.body.data).toEqual(mockUser);
     });
 
-    it('should  call the create user api and throw error', async () => {
+    it('should call the create user api and throw error', async () => {
         jest.spyOn(daos, 'createUser').mockResolvedValueOnce(mockUser);
         const res = await supertest(app)
             .post('/users')
@@ -51,7 +53,7 @@ describe('User tests', () => {
         expect(JSON.stringify(res.body.error)).toContain('must be present');
     });
 
-    it('should  call the create user  and throw error', async () => {
+    it('should call the create user and throw error', async () => {
         jest.spyOn(daos, 'createUser').mockRejectedValueOnce(
             new Error('User already exists!')
         );
