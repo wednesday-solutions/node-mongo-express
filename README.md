@@ -51,6 +51,12 @@ A basic starter for a web app with parceljs, node, express and mongoose -->
     - Express
     - Bunyan
 
+## Build and run docker container locally
+ 
+    - docker-compose down
+    - docker-compose build
+    - docker-compose up
+
 # Shard setup
 
 Run the following script
