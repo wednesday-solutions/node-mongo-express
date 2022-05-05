@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import log from 'utils/logger';
 
-export const MONGO_URI =
-    'mongodb://localhost:60000/ecommerce?readPreference=secondary';
+export const MONGO_URI = `mongodb://${process.env.MONGO_DOMAIN}:60000/ecommerce?readPreference=secondary`;
 
 export const mongoConnector = () => {
     let db;
