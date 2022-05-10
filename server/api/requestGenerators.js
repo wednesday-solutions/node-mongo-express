@@ -72,7 +72,9 @@ export const generateCreateUserRequest = (router, model, validator) => {
                 password: password
             });
             req.body.authId = authUser.user_id;
-            const user = await createUser(model, req.body);
+            let user = await createUser(model, req.body);
+            user = user._doc;
+            delete user.authId;
             return apiSuccess(res, user);
         } catch (err) {
             return apiFailure(res, err.message);

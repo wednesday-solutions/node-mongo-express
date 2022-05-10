@@ -65,7 +65,7 @@ describe('Order daos tests', () => {
         it('should return the date of the first order', async () => {
             mockingoose(model).toReturn({}, 'findOne');
             const res = await earliestCreatedDate();
-            expect(res).toBe(moment().format('YYYY-MM-DD'));
+            expect(res).toBe(moment.utc().format('YYYY-MM-DD'));
         });
         it('should throw an error if an error is thrown from db', async () => {
             mockingoose(model).toReturn(mockError, 'findOne');

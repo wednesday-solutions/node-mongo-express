@@ -9,7 +9,6 @@ import {
     getTotalOrderAmtForDate,
     getTotalOrderAmtByDateForCategory
 } from '../orders';
-import log from 'utils/logger';
 
 export const aggregateCheck = async () => {
     try {
