@@ -75,6 +75,10 @@ jobs:
                   author_email: git@wednesday.is
                   message: 'chore: update badges'
                   add: 'badges/'
+            - name: Git pull origin 
+              run: |
+                git pull origin ${{ github.ref }}
+              
             - name: Push changes
               uses: ad-m/github-push-action@master
               with:
