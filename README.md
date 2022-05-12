@@ -72,14 +72,17 @@ Take a look at [this](./setup-shards/README.md) to create shards and replica set
 Run the following command to begin seeding
 
 ```
-node seeders/index.js
+./seeders/seed.sh
 ```
 
 ## How to start
+
     - cd `parcel-node-mongo-express`
     - yarn
     - ./setup-shards/scripts/setup/base.sh
-    - yarn start 
+    - cp .env.example .env.local
+    - ./seeders/seed.sh
+    - yarn start
     - open browser to `localhost:9000` (port default to 9000)
 
 ## Philosophy

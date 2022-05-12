@@ -10,16 +10,15 @@ services:
       - .env.local
     environment:
       - REDIS_DOMAIN=redis
-      - MONGO_DOMAIN=mongo
+      - MONGO_BASE_URI=mongo
     depends_on:
       - mongo
 
   mongo:
     container_name: mongo
     image: mongo
-    command: mongod --port 60000
     ports:
-      - "60000:60000"
+      - "27017:27017"
 
   redis:
     depends_on:

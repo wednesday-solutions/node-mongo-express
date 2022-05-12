@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
+import { getMongoUri } from 'utils/mongoConstants.js';
 import log from 'utils/logger';
-
-export const MONGO_URI = `mongodb://${process.env.MONGO_DOMAIN}:60000/ecommerce?readPreference=secondary`;
 
 export const mongoConnector = () => {
     let db;
@@ -10,11 +9,14 @@ export const mongoConnector = () => {
         log.info('Mongo already connected.');
         db = mongoose.connection;
     } else {
-        mongoose.connect(MONGO_URI);
+        mongoose.connect(getMongoUri());
         db = mongoose.connection;
         db.on('error', err => log.error('error'));
         db.once('open', () =>
-            log.info('mongo connection successfully connected to ', MONGO_URI)
+            log.info(
+                'mongo connection successfully connected to ',
+                getMongoUri()
+            )
         );
     }
     return db;

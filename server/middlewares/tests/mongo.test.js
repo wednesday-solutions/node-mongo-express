@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { mongoConnector, MONGO_URI } from '../mongo';
+import { getMongoUri } from 'utils/mongoConstants';
+import { mongoConnector } from '../mongo';
 
 jest.mock('mongoose', () => ({
     connection: {
@@ -18,7 +19,7 @@ describe('mongooseConnector tests', () => {
         };
 
         await mongoConnector();
-        expect(mongoose.connect).toBeCalledWith(MONGO_URI);
+        expect(mongoose.connect).toBeCalledWith(getMongoUri());
         expect(mongoose.connection.on).toBeCalledWith(
             'error',
             expect.any(Function)

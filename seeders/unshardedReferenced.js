@@ -1,5 +1,5 @@
 const {
-    runInClusterMode,
+    runSeeders,
     connectToMongo,
     createOrder,
     createProduct
@@ -8,8 +8,9 @@ const {
 function seed() {
     connectToMongo()
         .then(async () => {
-            console.log('connected to mongodb');
-            for (let i = 0; i < 5000; i++) {
+            console.log('connected to mongodb::unshardedReferenced');
+            const divisor = process.env.DIVISOR || 100;
+            for (let i = 0; i < 5000 / divisor; i++) {
                 const products = [];
                 for (let j = 0; j < 3; j++) {
                     products.push(await createProduct());
@@ -20,7 +21,6 @@ function seed() {
         .catch(err => {
             console.log('Error is ', err);
         });
-    console.log('done!');
 }
 
-runInClusterMode(seed);
+runSeeders(seed);
