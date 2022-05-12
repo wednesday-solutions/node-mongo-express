@@ -13,8 +13,7 @@
 An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Strategy, mongoDB sharding, models, a REST API Interface, support for Redis, aggregation queries, aggregation caching, circuit-breakers, slack integration, RBAC, rate limited APIs and multi-container queues and schedulers.
   </p>
 
-  ___
-
+---
 
   <p>
     <h4>
@@ -31,14 +30,29 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
     </a>
   </div>
 
-  ___
+---
 
-  <span>We’re always looking for people who value their work, so come and join us. <a href="https://www.wednesday.is/hiring">We are hiring!</a></span>
+<span>We’re always looking for people who value their work, so come and join us. <a href="https://www.wednesday.is/hiring">We are hiring!</a></span>
+
 </div>
 
 <!-- # parcel-node-express-mongo
 
+
 A basic starter for a web app with parceljs, node, express and mongoose -->
+
+---
+
+<div>
+<img src='./badges/badge-statements.svg' height="20"/>
+<img src='./badges/badge-branches.svg' height="20"/>
+</div>
+<div>
+<img src='./badges/badge-lines.svg'  height="20"/>
+<img src='./badges/badge-functions.svg' height="20"/>
+</div>
+
+---
 
 ## Pre-start
 
@@ -52,7 +66,7 @@ A basic starter for a web app with parceljs, node, express and mongoose -->
     - Bunyan
 
 ## Build and run docker container locally
- 
+
     - docker-compose down
     - docker-compose build
     - docker-compose up
