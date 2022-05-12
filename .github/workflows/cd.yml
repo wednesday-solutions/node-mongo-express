@@ -73,7 +73,7 @@ jobs:
               with:
                   author_name: Gitflow
                   author_email: git@wednesday.is
-                  message: 'chore: Update badges'
+                  message: 'chore: update badges'
                   add: 'badges/'
             - name: Push changes
               uses: ad-m/github-push-action@master
