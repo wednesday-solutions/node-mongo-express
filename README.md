@@ -41,6 +41,10 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
 
 A basic starter for a web app with parceljs, node, express and mongoose -->
 
+[![Parcel Node Mongo Express CI](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml)
+
+[![Parcel Node Mongo Express CD](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml)
+
 ---
 
 <div>
