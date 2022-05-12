@@ -14,6 +14,7 @@
         "lint:eslint:fix": "eslint --ignore-path .gitignore --ignore-pattern server/bin --fix",
         "lint:js": "npm run lint:eslint -- . ",
         "lint:staged": "lint-staged",
+        "test:badges": "npm run test  && jest-coverage-badges --output './badges'",
         "prettify": "prettier --write",
         "precommit": "lint:staged"
     },
@@ -90,6 +91,7 @@
         "eslint-plugin-standard": "^4.0.1",
         "git-commit-msg-linter": "^4.1.2",
         "jest": "^27.4.7",
+        "jest-coverage-badges": "^1.1.2",
         "link-module-alias": "^1.2.0",
         "mockingoose": "^2.15.2",
         "pre-commit": "1.2.2",
