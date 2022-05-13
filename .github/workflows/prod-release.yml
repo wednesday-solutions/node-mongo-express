@@ -66,6 +66,9 @@ jobs:
             - name: get-npm-version
               id: package-version
               uses: martinbeentjes/npm-get-version-action@master
+            - name: Git pull origin
+              run: |
+                  git pull origin ${{ github.ref }}
             - name: Create Prod Release
               uses: actions/create-release@latest
               env:
