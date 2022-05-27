@@ -1,4 +1,4 @@
-function getMongoUri(ip, port) {
+function getMongoUri() {
     return `mongodb://${process.env.MONGO_BASE_URI}:${process.env.MONGO_PORT}/ecommerce?readPreference=secondary`;
 }
 module.exports = { getMongoUri };
