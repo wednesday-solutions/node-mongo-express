@@ -11,11 +11,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     supplier: Supplier,
-    product: Product,
-    schema: {
-        type: Number,
-        required: true
-    }
+    product: Product
 });
 
 const SupplierProducts = mongoose.model('supplier_products', schema);

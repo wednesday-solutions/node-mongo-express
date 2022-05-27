@@ -1,3 +1,4 @@
+import config from 'config';
 import jwt from 'express-jwt';
 import jwks from 'jwks-rsa';
 
@@ -6,9 +7,9 @@ const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 25,
-        jwksUri: 'https://dev-b0lcp7we.us.auth0.com/.well-known/jwks.json'
+        jwksUri: `https://${config().domain}/.well-known/jwks.json`
     }),
-    issuer: 'https://dev-b0lcp7we.us.auth0.com/',
+    issuer: `https://${config().domain}/`,
     algorithms: ['RS256']
 });
 

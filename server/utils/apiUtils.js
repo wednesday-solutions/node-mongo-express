@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 export const apiSuccess = (res, data) => {
-    log.info('apiSuccess', { data });
+    log.info('apiSuccess', {});
     return res.send({ data }).status(200);
 };
 

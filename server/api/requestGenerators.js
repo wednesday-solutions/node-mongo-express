@@ -12,11 +12,34 @@ import {
     createValidatorMiddlewares
 } from 'utils/apiUtils';
 import { clientCredentialsGrant, managementClient } from 'utils/auth0';
+import { REQUEST_TYPES } from './customApisMapper';
 import config from 'config';
+import checkJwt from 'middlewares/authenticate';
+import checkRole from 'middlewares/checkRole';
 
-export const generatePostRequest = (router, model, validator) => {
+export const generateRequest = (type, router, model, validator) => {
     const middlewares = createValidatorMiddlewares(validator);
-    router.post('/', ...middlewares, async (req, res) => {
+    middlewares.push(checkJwt, checkRole);
+    switch (type) {
+        case REQUEST_TYPES.create:
+            generatePostRequest({ router, model, middlewares });
+            break;
+        case REQUEST_TYPES.update:
+            generatePatchRequest({ router, model, middlewares });
+            break;
+        case REQUEST_TYPES.fetchOne:
+            generateFetchOneRequest({ router, model, middlewares });
+            break;
+        case REQUEST_TYPES.fetchAll:
+            generateFetchAllRequest({ router, model, middlewares });
+            break;
+        case REQUEST_TYPES.remove:
+            generateDeleteRequest({ router, model, middlewares });
+            break;
+    }
+};
+export const generatePostRequest = ({ router, model, middlewares }) => {
+    router.post('/', checkJwt, checkRole, ...middlewares, async (req, res) => {
         try {
             const item = await createItem(model, req.body);
             return apiSuccess(res, item);
@@ -25,8 +48,8 @@ export const generatePostRequest = (router, model, validator) => {
         }
     });
 };
-export const generatePatchRequest = (router, model) => {
-    router.patch('/:_id', (req, res, next) => {
+export const generatePatchRequest = ({ router, model, middlewares }) => {
+    router.patch('/:_id', ...middlewares, (req, res, next) => {
         const { _id } = req.params;
         return updateItem(model, { _id }, req.body)
             .then(items => apiSuccess(res, items))
@@ -34,15 +57,19 @@ export const generatePatchRequest = (router, model) => {
     });
 };
 
-export const generateFetchAllRequest = (router, model) => {
-    router.get('/', async (req, res, next) =>
+export const generateFetchAllRequest = ({
+    router,
+    model,
+    middlewares = []
+}) => {
+    router.get('/', ...middlewares, async (req, res, next) =>
         fetchItems(model, req.query)
             .then(items => apiSuccess(res, items))
             .catch(err => apiFailure(res, err.message))
     );
 };
-export const generateFetchOneRequest = (router, model) => {
-    router.get('/:_id', async (req, res, next) => {
+export const generateFetchOneRequest = ({ router, model, middlewares }) => {
+    router.get('/:_id', ...middlewares, async (req, res, next) => {
         const { _id } = req.params;
         return fetchItem(model, { _id })
             .then(item => apiSuccess(res, item))
@@ -50,8 +77,8 @@ export const generateFetchOneRequest = (router, model) => {
     });
 };
 
-export const generateDeleteRequest = (router, model) => {
-    router.delete('/:_id', (req, res, next) => {
+export const generateDeleteRequest = ({ router, model, middlewares }) => {
+    router.delete('/:_id', ...middlewares, (req, res, next) => {
         const { _id } = req.params;
         return deleteItem(model, { _id })
             .then(items => apiSuccess(res, items))
@@ -59,7 +86,7 @@ export const generateDeleteRequest = (router, model) => {
     });
 };
 
-export const generateCreateUserRequest = (router, model, validator) => {
+export const generateCreateUserRequest = ({ router, model, validator }) => {
     const middlewares = createValidatorMiddlewares(validator);
     router.post('/', ...middlewares, async (req, res, next) => {
         try {

@@ -15,14 +15,6 @@ const schema = mongoose.Schema({
     },
     quantity: {
         type: Number
-    },
-    quantityAverage: {
-        type: Number,
-        required: true
-    },
-    schema: {
-        type: Number,
-        required: true
     }
 });
 

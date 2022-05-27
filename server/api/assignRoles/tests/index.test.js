@@ -1,13 +1,22 @@
 import supertest from 'supertest';
 import app from 'server';
 
+jest.mock('middlewares/checkRole', () => {
+    const mockFunc = (req, res, next) => {
+        req.route = { path: '/assign-roles/' };
+        next();
+    };
+
+    return mockFunc;
+});
+
 jest.mock('express-jwt', () => {
     const mockFunc = (req, res, next) => {
         if (!req.headers['authorization']) {
             return res.status(401).json({});
         }
         req['user'] = {
-            'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
+            'https://express-demo/roles': ['SUPER_ADMIN']
         };
         next();
     };
@@ -48,7 +57,7 @@ describe('assignRoles tests ', () => {
             })
             .send({
                 authId: 'auth0|623e8f868ffd8b007',
-                role: ['ADMIN', 'SUPER_ADMIN']
+                role: ['SUPER_ADMIN']
             });
         expect(res.body.data.message).toBe('Role updated successfully');
     });

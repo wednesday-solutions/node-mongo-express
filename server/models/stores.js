@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { schema: userSchema } = require('models/users');
 const schema = new mongoose.Schema({
     name: {
         type: String,
@@ -8,10 +9,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    schema: {
-        type: Number,
-        required: true
-    }
+    admin: [userSchema]
 });
 
 const Stores = mongoose.model('stores', schema);

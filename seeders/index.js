@@ -3,12 +3,12 @@ const random = require('lodash/random');
 const range = require('lodash/range');
 const moment = require('moment');
 const { runSeeders, connectToMongo, createProduct } = require('./utils');
-const { Orders } = require('../models/orders');
-const { Products } = require('../models/products');
-const { Stores } = require('../models/stores');
-const { Suppliers } = require('../models/suppliers');
-const { StoreProducts } = require('../models/storeProducts');
-const { SupplierProducts } = require('../models/supplierProducts');
+const { Orders } = require('models/orders');
+const { Products } = require('models/products');
+const { Stores } = require('models/stores');
+const { Suppliers } = require('models/suppliers');
+const { StoreProducts } = require('models/storeProducts');
+const { SupplierProducts } = require('models/supplierProducts');
 
 const OCT_10_1994 = 782980686236;
 
@@ -16,7 +16,7 @@ const seed = async () => {
     console.log('connected to mongodb::index');
     await Promise.all([
         connectToMongo().then(async () => {
-            const divisor = process.env.DIVISOR || 100;
+            const divisor = process.env.DIVISOR || 10;
             for (let i = 0; i < 5000 / divisor; i++) {
                 console.log(
                     '------------------------------------\nSeeding products'
@@ -35,8 +35,7 @@ const seed = async () => {
                 const seedStores = range(0, 200 / divisor).map(
                     (value, index) => ({
                         name: faker.company.companyName(),
-                        address: faker.address.streetAddress(true),
-                        schema: 1
+                        address: faker.address.streetAddress(true)
                     })
                 );
                 const stores = await Stores.insertMany(seedStores, {
@@ -47,8 +46,7 @@ const seed = async () => {
                 );
                 const seedSuppliers = range(0, 200 / divisor).map(
                     (value, index) => ({
-                        name: faker.company.companyName(),
-                        schema: 1
+                        name: faker.company.companyName()
                     })
                 );
                 const suppliers = await Suppliers.insertMany(seedSuppliers, {
@@ -61,7 +59,6 @@ const seed = async () => {
                     const storeIndex = random(0, stores.length - 1);
                     const supplierIndex = random(0, suppliers.length - 1);
                     seedStoreProducts.push({
-                        schema: 1,
                         productId: product._id,
                         product,
                         store: stores[storeIndex],
@@ -69,7 +66,6 @@ const seed = async () => {
                     });
                     const supplier = suppliers[supplierIndex];
                     seedSupplierProducts.push({
-                        schema: 1,
                         productId: product._id,
                         product,
                         supplier: supplier,
@@ -109,7 +105,6 @@ const seed = async () => {
                             purchasedProducts.push(product);
                         }
                         order.totalPrice = total;
-                        order.schema = 1;
                         order.purchasedProducts = purchasedProducts;
                         order.createdAt = moment(
                             OCT_10_1994 + 86400000 * orderIndex

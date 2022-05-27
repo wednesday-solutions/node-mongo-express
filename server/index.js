@@ -9,6 +9,7 @@ import { list } from 'server/routeLister';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
 import injectRequestId from 'middlewares/injectRequestId';
+import { middleware } from 'express-http-context';
 
 /**
  * Connect to database
@@ -28,6 +29,9 @@ app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// used for getting and setting request-scoped context anywhere
+app.use(middleware);
 
 // setup database
 apis(app);

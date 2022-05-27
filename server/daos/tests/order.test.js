@@ -34,8 +34,10 @@ describe('Order daos tests', () => {
             expect(res).toBe(mockOrderDetails);
         });
 
-        it('should throw an error if an error is thrown from db', async () => {
-            jest.spyOn(Orders, 'create').mockRejectedValueOnce(mockError);
+        it('should throw an error from catch block', async () => {
+            jest.spyOn(Orders, 'create').mockImplementationOnce(() => {
+                throw mockError;
+            });
             expect(async () => {
                 await createNewOrder(mockOrder);
             }).rejects.toThrow(mockError);

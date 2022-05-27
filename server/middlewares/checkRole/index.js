@@ -1,31 +1,48 @@
 import config from 'config';
 import { paths } from 'config/paths';
+import { apiFailure } from 'utils/apiUtils';
+import { SCOPE_TYPE } from 'utils/constants';
+import message from 'utils/i18n/message';
 
-const checkRole = roles => (req, res, next) => {
-    let roleArr = req.user[`${config().apiAudience}/roles`];
-    const containsAll = roles.every(element => roleArr.indexOf(element) !== -1);
-    if (!containsAll) {
-        return res.json(403, { errors: ['Insufficient Scope'] });
-    }
-    let isAllowed = false;
-
-    paths.map(route => {
-        if (
-            req.route.path === route.path &&
-            req.method.toUpperCase() === route.method.toUpperCase()
+const checkRole = async (req, res, next) => {
+    try {
+        const roleArr = req.user[`${config().apiAudience}/roles`];
+        let isAllowed = false;
+        let authMiddleware;
+        const routePath = req.baseUrl + req.route.path;
+        paths.map(route => {
+            if (
+                routePath === route.path &&
+                req.method.toUpperCase() === route.method.toUpperCase()
+            ) {
+                route.scopes.forEach(ele => {
+                    if (roleArr.includes(ele)) {
+                        isAllowed = true;
+                        if (route.authMiddleware) {
+                            authMiddleware = route.authMiddleware;
+                        }
+                        return;
+                    }
+                });
+            }
+        });
+        if (!isAllowed) {
+            return apiFailure(res, message.ACCESS_DENIED, 403);
+        } else if (
+            authMiddleware &&
+            !roleArr.includes(SCOPE_TYPE.SUPER_ADMIN)
         ) {
-            route.scopes.forEach(ele => {
-                if (roles.includes(ele)) {
-                    isAllowed = true;
-                    return;
-                }
-            });
+            const isResourceOwner = await authMiddleware(req, res, next);
+            if (!isResourceOwner) {
+                return apiFailure(res, message.ACCESS_DENIED, 403);
+            }
+            next();
+        } else {
+            next();
         }
-    });
-    if (!isAllowed) {
-        return res.json(403, { errors: ['Access denied!'] });
+    } catch (error) {
+        return apiFailure(res, error.message, 400);
     }
-    next();
 };
 
 module.exports = checkRole;

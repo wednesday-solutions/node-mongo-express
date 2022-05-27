@@ -1,6 +1,8 @@
 #!/bin/bash
 export DIVISOR=$1
-set -a . .env.local set +a
+set -o allexport
+source .env.local
+set +o allexport
 
 node seeders/index.js false &
 node seeders/referenced.js false &
