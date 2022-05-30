@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
 });
 
 const UnshardedReferencedOrders = mongoose.model(
-    'unsharded_referenced_orders',
+    'unshardedReferencedOrders',
     schema
 );
 
