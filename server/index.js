@@ -12,11 +12,6 @@ import injectRequestId from 'middlewares/injectRequestId';
 import { middleware } from 'express-http-context';
 
 /**
- * Connect to database
- */
-// let db = mongoConnector();
-
-/**
  * Create express server
  */
 const app = express();

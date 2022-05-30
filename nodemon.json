@@ -1,0 +1,10 @@
+{
+    "exec": "export ENVIRONMENT_NAME=local && yarn start",
+    "watch": ["server/*"],
+    "ignore": ["**/__tests__/**", "*.test.js"],
+    "events": {
+        "restart": "kill-port 9000",
+        "crash": "kill-port 9000 && yarn start"
+    },
+    "delay": "250"
+}

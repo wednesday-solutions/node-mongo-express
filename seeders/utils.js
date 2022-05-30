@@ -5,7 +5,7 @@ const os = require('os');
 const { Products } = require('models/products');
 const { ReferencedOrders } = require('models/referencedOrders');
 const { UnshardedOrders } = require('models/unshardedOrders');
-
+const dotenv = require('dotenv');
 const {
     UnshardedReferencedOrders
 } = require('models/unshardedReferencedOrders');
@@ -55,7 +55,9 @@ function createOrder(products, dontCreate, referenced) {
     return model.create(order);
 }
 function connectToMongo() {
-    console.log('connecting to mongo');
+    const envName = process.env.ENVIRONMENT_NAME || 'local';
+    console.log('connecting to mongo', envName);
+    dotenv.config({ path: `.env.${envName}` });
     return mongoose.connect(getMongoUri());
 }
 async function runSeeders(func) {
