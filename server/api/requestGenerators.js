@@ -39,7 +39,7 @@ export const generateRequest = (type, router, model, validator) => {
     }
 };
 export const generatePostRequest = ({ router, model, middlewares }) => {
-    router.post('/', checkJwt, checkRole, ...middlewares, async (req, res) => {
+    router.post('/', ...middlewares, async (req, res) => {
         try {
             const item = await createItem(model, req.body);
             return apiSuccess(res, item);

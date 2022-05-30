@@ -66,8 +66,7 @@ describe('custom tests', () => {
             const configObj = {
                 condition: { 'admin.email': requestorEmail },
                 ownerKey: 'admin',
-                findAllKey: '_id',
-                findAllValue: null, // will be added in the middleware
+                findAll: { key: '_id', value: null },
                 resourceOwnershipPath: '_id'
             };
             const setSpy = jest.spyOn(httpContext.default, 'set');

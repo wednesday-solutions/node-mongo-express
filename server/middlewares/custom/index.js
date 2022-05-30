@@ -23,13 +23,13 @@ module.exports = {
             return false;
         }
         // Block to set thecondition for findAll api
-        if (configObj.findAllKey) {
-            configObj.findAllValue = _.get(
+        if (configObj.findAll) {
+            configObj.findAll.value = _.get(
                 resource,
                 configObj.resourceOwnershipPath
             );
             configObj.findAllCond = {
-                [configObj.findAllKey]: configObj.findAllValue
+                [configObj.findAll.key]: configObj.findAll.value
             };
             set('condition', configObj.findAllCond);
         }
