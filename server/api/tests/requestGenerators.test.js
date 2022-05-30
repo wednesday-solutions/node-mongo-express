@@ -18,18 +18,14 @@ jest.mock('auth0', () => ({
     })
 }));
 
-jest.mock('express-jwt', () => {
-    const mockFunc = (req, res, next) => {
-        if (!req.headers['authorization']) {
-            return res.status(401).json({});
-        }
-        req['user'] = {
-            'https://express-demo/roles': ['SUPER_ADMIN']
-        };
-        next();
+jest.mock('express-jwt', () => secret => (req, res, next) => {
+    if (!req?.headers['authorization']) {
+        return res.status(401).json({});
+    }
+    req['user'] = {
+        'https://express-demo/roles': ['SUPER_ADMIN']
     };
-
-    return jest.fn(() => mockFunc);
+    next(null, {});
 });
 
 describe('requestGenerators tests', () => {

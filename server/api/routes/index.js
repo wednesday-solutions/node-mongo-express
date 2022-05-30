@@ -26,6 +26,5 @@ router.put(
     assignRoles
 );
 router.post('/cron-job', cronJobValidator, cronJob);
-// router.post('/orders', orderValidator, createOrder);
 
 module.exports = router;

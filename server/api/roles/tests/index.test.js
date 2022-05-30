@@ -12,15 +12,11 @@ jest.mock('middlewares/checkRole', () => {
     return mockFunc;
 });
 
-jest.mock('express-jwt', () => {
-    const mockFunc = (req, res, next) => {
-        req['user'] = {
-            'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
-        };
-        next();
+jest.mock('express-jwt', () => secret => (req, res, next) => {
+    req['user'] = {
+        'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
     };
-
-    return jest.fn(() => mockFunc);
+    next(null, {});
 });
 
 jest.mock('auth0', () => ({
