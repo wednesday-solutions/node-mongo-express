@@ -4,7 +4,7 @@
     "ignore": ["**/__tests__/**", "*.test.js"],
     "events": {
         "restart": "kill-port 9000",
-        "crash": "kill-port 9000 && npm run local"
+        "crash": "kill-port 9000 && yarn start"
     },
     "delay": "250"
 }
