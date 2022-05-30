@@ -21,7 +21,6 @@ export const createOrder = async (req, res) => {
         updateOrderDetailInRedis(order);
         return apiSuccess(res, order);
     } catch (err) {
-        console.log('inside createorder');
         return apiFailure(res, err.message, 400);
     }
 };
