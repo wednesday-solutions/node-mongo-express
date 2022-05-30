@@ -11,7 +11,9 @@ export const mongoConnector = () => {
     } else {
         mongoose.connect(getMongoUri());
         db = mongoose.connection;
-        db.on('error', err => log.error('error'));
+        db.on('error', err => {
+            log.error('error', err);
+        });
         db.once('open', () =>
             log.info(
                 'mongo connection successfully connected to ',

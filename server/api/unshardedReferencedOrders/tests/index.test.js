@@ -12,7 +12,7 @@ describe('fetchAllUnshardedReferencedOrders tests', () => {
     let mockingoose;
 
     beforeAll(() => {
-        MODEL_NAME = 'unsharded_referenced_orders';
+        MODEL_NAME = 'unshardedReferencedOrders';
         ENDPOINT = `/${kebabCase(MODEL_NAME)}`;
     });
 

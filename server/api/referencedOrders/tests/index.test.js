@@ -11,7 +11,7 @@ describe('fetchAllReferencedOrders tests', () => {
     let mockingoose;
 
     beforeAll(() => {
-        MODEL_NAME = 'referenced_orders';
+        MODEL_NAME = 'referencedOrders';
         ENDPOINT = `/${kebabCase(MODEL_NAME)}`;
     });
 
