@@ -8,6 +8,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const UnshardedOrders = mongoose.model('unsharded_orders', schema);
+const UnshardedOrders = mongoose.model('unshardedOrders', schema);
 
 module.exports = { model: UnshardedOrders, UnshardedOrders, schema };
