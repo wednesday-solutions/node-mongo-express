@@ -4,7 +4,7 @@ import kebab from 'lodash/kebabCase';
 import { generateRequest } from 'api/requestGenerators';
 import { mongoConnector } from 'middlewares/mongo';
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
-import customRoutes from 'server/routes/index';
+import customRoutes from 'server/api/routes';
 import { getModelFiles, isTestEnv } from 'utils';
 import { registerSwagger } from 'utils/swagUtils';
 

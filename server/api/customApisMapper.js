@@ -19,7 +19,7 @@ export const customApisMapper = {
             {
                 type: REQUEST_TYPES.create,
                 handler: (router, model, validator) => {
-                    router.use('/', validator, async (req, res, next) =>
+                    router.post('/', validator, async (req, res, next) =>
                         createOrder(req, res)
                     );
                 },

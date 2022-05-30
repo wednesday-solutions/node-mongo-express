@@ -9,7 +9,9 @@ const checkRole = async (req, res, next) => {
         const roleArr = req.user[`${config().apiAudience}/roles`];
         let isAllowed = false;
         let authMiddleware;
+        console.log({ p: req.route.path });
         const routePath = req.baseUrl + req.route.path;
+        console.log({ routePath });
         paths.map(route => {
             if (
                 routePath === route.path &&
