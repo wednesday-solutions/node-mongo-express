@@ -1,7 +1,5 @@
 function getMongoOptions() {
-    return process.env.MONGO_PORT === '27017'
-        ? ''
-        : '?readPreference=secondary';
+    return '?readPreference=secondary';
 }
 function getMongoUri() {
     return `mongodb://${process.env.MONGO_BASE_URI}:${process.env.MONGO_PORT}/${
