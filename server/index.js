@@ -11,11 +11,6 @@ import { initQueues } from 'utils/queue';
 import injectRequestId from 'middlewares/injectRequestId';
 
 /**
- * Connect to database
- */
-// let db = mongoConnector();
-
-/**
  * Create express server
  */
 const app = express();

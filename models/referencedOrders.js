@@ -7,6 +7,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-const ReferencedOrders = mongoose.model('referenced_orders', schema);
+const ReferencedOrders = mongoose.model('referencedOrders', schema);
 
 module.exports = { model: ReferencedOrders, ReferencedOrders, schema };
