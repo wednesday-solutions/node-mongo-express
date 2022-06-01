@@ -1,7 +1,7 @@
-import checkRole from '../index';
-import * as utils from 'utils/apiUtils';
 import message from 'utils/i18n/message';
-import * as custom from 'middlewares/custom';
+import * as utils from 'utils/apiUtils';
+import { checkRole } from '../index';
+import * as custom from '../ownershipBasedAccessControl';
 describe('checkRole tests', () => {
     let req;
     let next;
@@ -47,7 +47,7 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        mockFunction(custom.default, 'checkOwnership', false);
+        mockFunction(custom, 'ownershipBasedAccessControl', false);
         await checkRole(req, res, next);
         expect(apiFailureMock).toBeCalledWith(res, message.ACCESS_DENIED, 403);
     });
@@ -59,7 +59,7 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        mockFunction(custom.default, 'checkOwnership', true);
+        mockFunction(custom, 'ownershipBasedAccessControl', true);
         await checkRole(req, res, next);
         expect(next).toBeCalled();
     });
@@ -78,11 +78,12 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        jest.spyOn(custom.default, 'checkOwnership').mockImplementationOnce(
-            () => {
-                throw mockError;
-            }
-        );
+        jest.spyOn(
+            custom,
+            'ownershipBasedAccessControl'
+        ).mockImplementationOnce(() => {
+            throw mockError;
+        });
 
         expect(async () => {
             await checkRole(req, res, next);

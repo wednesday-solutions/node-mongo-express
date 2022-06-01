@@ -1,5 +1,3 @@
 import rateLimit from 'express-rate-limit';
 
-const rateLimiter = options => rateLimit(options);
-
-module.exports = rateLimiter;
+export const rateLimiter = options => rateLimit(options);

@@ -1,10 +1,12 @@
 import config from 'config';
-import { paths } from 'config/paths';
+import jwt from 'express-jwt';
+import jwks from 'jwks-rsa';
 import { apiFailure } from 'utils/apiUtils';
 import { SCOPE_TYPE } from 'utils/constants';
 import message from 'utils/i18n/message';
 
-const checkRole = async (req, res, next) => {
+import { paths } from './paths';
+export const checkRole = async (req, res, next) => {
     try {
         const roleArr = req.user[`${config().apiAudience}/roles`];
         let isAllowed = false;
@@ -46,4 +48,20 @@ const checkRole = async (req, res, next) => {
     }
 };
 
-module.exports = checkRole;
+export const checkJwt = (req, res, next) =>
+    jwt({
+        secret: jwks.expressJwtSecret({
+            cache: true,
+            rateLimit: true,
+            jwksRequestsPerMinute: 25,
+            jwksUri: `https://${config().domain}/.well-known/jwks.json`
+        }),
+        issuer: `https://${config().domain}/`,
+        algorithms: ['RS256']
+    })(req, res, (err, data) => {
+        if (err) {
+            res.send({ errors: [err] });
+            return next(err)
+        }
+        return checkRole(req, res, next);
+    });

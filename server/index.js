@@ -5,10 +5,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { apiSuccess } from 'utils/apiUtils';
 import apis from 'api';
-import { list } from 'server/routeLister';
+import { list } from 'utils/routeLister';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
-import injectRequestId from 'middlewares/injectRequestId';
+import { injectRequestId } from 'middlewares/injectRequestId';
 import { middleware } from 'express-http-context';
 
 /**
@@ -41,4 +41,4 @@ app.get('/', (req, res) => {
 });
 list(app);
 
-module.exports = app;
+export default app;
