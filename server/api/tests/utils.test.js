@@ -2,6 +2,7 @@ import {
     createItem,
     createUser,
     deleteItem,
+    fetchAllPurchasedProducts,
     fetchItem,
     fetchItems,
     updateItem
@@ -175,6 +176,62 @@ describe('utils tests', () => {
                 })
             };
             expect(() => createUser(model)).rejects.toThrow(error);
+            expect(spy).toHaveBeenCalledWith({ err: error });
+        });
+    });
+    describe('fetchAllPurchasedProducts tests', () => {
+        let items;
+        let model;
+
+        beforeAll(() => {
+            items = [
+                {
+                    name: 'Product 1'
+                },
+                {
+                    name: 'Product 2'
+                }
+            ];
+        });
+
+        beforeEach(() => {
+            model = {};
+            model.find = jest.fn().mockReturnValue(model);
+            model.select = jest.fn().mockReturnValue(model);
+            model.populate = jest.fn().mockReturnValue(model);
+            model.skip = jest.fn().mockReturnValue(model);
+            model.limit = jest.fn().mockResolvedValue(items);
+        });
+
+        it('should fetch all purchased products with no limit and page passed', async () => {
+            const resItems = await fetchAllPurchasedProducts(model, {});
+            expect(model.find).toBeCalled();
+            expect(model.select).toBeCalledWith('purchasedProducts');
+            expect(model.populate).toBeCalledWith('purchasedProducts');
+            expect(resItems).toEqual(items);
+        });
+
+        it('should fetch all purchased products with correct page and limit parameters', async () => {
+            const resItems = await fetchAllPurchasedProducts(model, {
+                limit: 1,
+                page: 1
+            });
+            expect(model.find).toBeCalled();
+            expect(model.select).toBeCalledWith('purchasedProducts');
+            expect(model.populate).toBeCalledWith('purchasedProducts');
+            expect(model.skip).toBeCalledWith(1);
+            expect(model.limit).toBeCalledWith(1);
+            expect(resItems).toEqual(items);
+        });
+
+        it('should throw error when fetchAllPurchasedProducts fail to fetch and return items', async () => {
+            const error = new Error('unable to fetch items');
+            const model = {
+                find: jest.fn(() => {
+                    throw error;
+                })
+            };
+            expect(() => fetchItems(model, {})).rejects.toThrow(error);
             expect(spy).toHaveBeenCalledWith({ err: error });
         });
     });
