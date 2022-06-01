@@ -3,6 +3,10 @@ import { login, loginValidator } from 'api/login';
 import { roles, roleValidator } from 'api/roles';
 import { assignRoles, assignRoleValidator } from 'api/assignRoles';
 import { cronJob, cronJobValidator } from 'api/cronJob';
+import {
+    aggregatedOrderAmountValidator,
+    fetchAggregatedOrderAmount
+} from 'api/aggregate/orders';
 import checkJwt from 'middlewares/authenticate';
 import checkRole from 'middlewares/checkRole';
 import limiter from 'middlewares/rateLimiter';
@@ -26,5 +30,13 @@ router.put(
     assignRoles
 );
 router.post('/cron-job', cronJobValidator, cronJob);
+
+router.get(
+    '/aggregate/order-amount',
+    checkJwt,
+    checkRole,
+    aggregatedOrderAmountValidator,
+    fetchAggregatedOrderAmount
+);
 
 module.exports = router;
