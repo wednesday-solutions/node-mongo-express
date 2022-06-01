@@ -1,12 +1,17 @@
 import message from 'utils/i18n/message';
 import * as utils from 'utils/apiUtils';
 import { checkRole } from '../index';
-import * as custom from '../ownershipBasedAccessControl';
+import { ownershipBasedAccessControl } from '../ownershipBasedAccessControl';
+jest.mock('../ownershipBasedAccessControl', () => ({
+    ownershipBasedAccessControl: jest.fn()
+}));
+
 describe('checkRole tests', () => {
     let req;
     let next;
     let res;
     let apiFailureMock;
+    let mocks;
     beforeEach(() => {
         process.env.API_AUDIENCE = 'https://node-express-demo';
         req = {
@@ -30,6 +35,9 @@ describe('checkRole tests', () => {
         apiFailureMock = jest
             .spyOn(utils, 'apiFailure')
             .mockImplementationOnce((res, errMsg, status) => {});
+        mocks = {
+            ownershipBasedAccessControl
+        };
     });
 
     const mockFunction = (object, methodName, returnValue) =>
@@ -47,7 +55,7 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        mockFunction(custom, 'ownershipBasedAccessControl', false);
+        mockFunction(mocks, 'ownershipBasedAccessControl', false);
         await checkRole(req, res, next);
         expect(apiFailureMock).toBeCalledWith(res, message.ACCESS_DENIED, 403);
     });
@@ -59,7 +67,7 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        mockFunction(custom, 'ownershipBasedAccessControl', true);
+        mockFunction(mocks, 'ownershipBasedAccessControl', true);
         await checkRole(req, res, next);
         expect(next).toBeCalled();
     });
@@ -78,12 +86,11 @@ describe('checkRole tests', () => {
         req.baseUrl = '/stores';
         req.route.path = '/:_id';
         req.method = 'GET';
-        jest.spyOn(
-            custom,
-            'ownershipBasedAccessControl'
-        ).mockImplementationOnce(() => {
-            throw mockError;
-        });
+        jest.spyOn(mocks, 'ownershipBasedAccessControl').mockImplementationOnce(
+            () => {
+                throw mockError;
+            }
+        );
 
         expect(async () => {
             await checkRole(req, res, next);

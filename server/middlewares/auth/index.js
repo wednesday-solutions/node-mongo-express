@@ -4,8 +4,8 @@ import jwks from 'jwks-rsa';
 import { apiFailure } from 'utils/apiUtils';
 import { SCOPE_TYPE } from 'utils/constants';
 import message from 'utils/i18n/message';
-
 import { paths } from './paths';
+
 export const checkRole = async (req, res, next) => {
     try {
         const roleArr = req.user[`${config().apiAudience}/roles`];
@@ -61,7 +61,7 @@ export const checkJwt = (req, res, next) =>
     })(req, res, (err, data) => {
         if (err) {
             res.send({ errors: [err] });
-            return next(err)
+            return next(err);
         }
         return checkRole(req, res, next);
     });
