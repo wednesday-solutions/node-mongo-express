@@ -230,7 +230,14 @@
                             "name": "Aggregate orders amount",
                             "request": {
                                 "method": "GET",
-                                "header": []
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:9000/aggregate/order-amount",
+                                    "protocol": "http",
+                                    "host": ["localhost"],
+                                    "port": "9000",
+                                    "path": ["aggregate/order-amount"]
+                                }
                             },
                             "response": []
                         }
@@ -353,32 +360,6 @@
                     "response": []
                 }
             ]
-        }
-    ],
-    "auth": {
-        "type": "bearer",
-        "bearer": [
-            {
-                "key": "token",
-                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktQRzEwdjFKM29jZjQ1WUVmRm9VWSJ9.eyJodHRwczovL2V4cHJlc3MtZGVtby9yb2xlcyI6WyJTVVBFUl9BRE1JTiJdLCJpc3MiOiJodHRwczovL2Rldi1iMGxjcDd3ZS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjI5NjE5OGZkYjA0MWYwMDY4NDEzYTkxIiwiYXVkIjoiaHR0cHM6Ly9kZXYtYjBsY3A3d2UudXMuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE2NTQwMDY4NTUsImV4cCI6MTY1NDg3MDg2NCwiYXpwIjoiYmNzcEwxeU5IQTJjR3hKRDBJMDhqeWtqd1lCY3hCR3kiLCJzY29wZSI6InJlYWQ6Y3VycmVudF91c2VyIHVwZGF0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgZGVsZXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGNyZWF0ZTpjdXJyZW50X3VzZXJfZGV2aWNlX2NyZWRlbnRpYWxzIGRlbGV0ZTpjdXJyZW50X3VzZXJfZGV2aWNlX2NyZWRlbnRpYWxzIHVwZGF0ZTpjdXJyZW50X3VzZXJfaWRlbnRpdGllcyIsImd0eSI6InBhc3N3b3JkIn0.ZjaOvA572lEutqgFyJqckzPCAKjsk3a2yH5p3gHlmKX_WqCqkRjuHlYw103x0ByN0tgYOT-Va9P2g93fQa-4BuaxUrFqa2GI08VnUWII8ibOMnOPbtdysDOR8zZvJH7SzBQBjHL7Gxm9pUXPPE3rYx5hrkcW77aO4KPsBVuK_ON6QerpnM5rCAqcaHgA5F3f8F7ZCwjdZ5K_1iy40ctJ1B__j58szhCm9xE1IGz_lDyJAxf1E8xXX4ghTgbGvimZsQz4LWaPbx7uhbZP9L-GR-5TPEMGTfkTEwh7WNlD9MfnlxUcj3mIUJxD05WmrhO_TrANkSf8Z5uCDXH0GpBWMQ",
-                "type": "string"
-            }
-        ]
-    },
-    "event": [
-        {
-            "listen": "prerequest",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
-        },
-        {
-            "listen": "test",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
         }
     ]
 }
