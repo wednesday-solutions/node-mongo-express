@@ -36,7 +36,7 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
 
 </div>
 
-<!-- # parcel-node-express-mongo
+<!-- # parcel-node-mongo-express
 
 
 A basic starter for a web app with parceljs, node, express and mongoose -->
