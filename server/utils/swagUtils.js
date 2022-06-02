@@ -7,6 +7,18 @@ import { REQUEST_TYPES } from 'api/customApisMapper';
 import Pack from '../../package.json';
 import { getModelFiles } from '.';
 import customSwaggerDoc from '../../swagger.json';
+import { getStacks } from './routeLister';
+
+const SWAGGER_DOCUMENT = {
+    swagger: '2.0',
+    info: {
+        title: 'Parcel Node Mongo Express Documentation',
+        version: Pack.version
+    },
+    tags: [],
+    paths: {},
+    definitions: {}
+};
 
 export const REQUEST_METHODS = {
     [REQUEST_TYPES.create]: 'post',
@@ -49,9 +61,9 @@ export const registerSwagger = app => {
             url: SWAGGER_DOCS_PATH
         }
     };
-    const swaggerDocument = generateSwaggerDoc();
-    appendToSwaggerDoc(swaggerDocument, customSwaggerDoc);
-    app.get(SWAGGER_DOCS_PATH, (_, res) => res.json(swaggerDocument));
+    populateModelsSwagger(app);
+    appendToSwaggerDoc(SWAGGER_DOCUMENT, customSwaggerDoc);
+    app.get(SWAGGER_DOCS_PATH, (_, res) => res.json(SWAGGER_DOCUMENT));
     app.use(
         '/api-docs',
         swaggerUi.serveFiles(null, options),
@@ -59,25 +71,20 @@ export const registerSwagger = app => {
     );
 };
 
-export const generateSwaggerDoc = () => {
-    const swaggerDocument = {
-        swagger: '2.0',
-        info: {
-            title: 'Parcel Node Mongo Express Documentation',
-            version: Pack.version
-        },
-        tags: [],
-        paths: {},
-        definitions: {}
-    };
-    const modelsFolderPath = path.join(__dirname, '../../models/');
+export const populateModelsSwagger = app => {
+    const modelsFolderPath = path.join(__dirname, '../database/models/');
     const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
         const { model } = require(modelsFolderPath + f);
         const name = f.split('.')[0];
+        const registeredMethodTypes = getModelMethods(app, name);
 
-        const { swaggerPaths, swaggerDefs } = swagGeneratorFactory(name, model);
-        appendToSwaggerDoc(swaggerDocument, {
+        const { swaggerPaths, swaggerDefs } = swagGeneratorFactory(
+            name,
+            model,
+            registeredMethodTypes
+        );
+        appendToSwaggerDoc({
             paths: swaggerPaths,
             definitions: swaggerDefs,
             tags: {
@@ -86,47 +93,65 @@ export const generateSwaggerDoc = () => {
             }
         });
     });
-    return swaggerDocument;
 };
+
+export const getModelMethods = (app, modelName) =>
+    getStacks(app)
+        .filter(stack => {
+            if (!stack.route) return false;
+            if (stack.routerPath === `/${kebabCase(modelName)}/`) {
+                return true;
+            }
+            return false;
+        })
+        .map(stack => {
+            const method = Object.keys(stack.route.methods)[0];
+            switch (method) {
+                case 'get':
+                    if (stack.route.path === '/:_id')
+                        return REQUEST_TYPES.fetchOne;
+                    return REQUEST_TYPES.fetchAll;
+                case 'post':
+                    return REQUEST_TYPES.create;
+                case 'patch':
+                    return REQUEST_TYPES.update;
+                case 'delete':
+                    return REQUEST_TYPES.remove;
+            }
+        });
 
 /**
  *
- * @param {any} swaggerDocument
  * @param {CustomSwagger} swaggerData
  */
-export const appendToSwaggerDoc = (swaggerDocument, swaggerData) => {
+export const appendToSwaggerDoc = swaggerData => {
     const { paths, definitions, tags } = swaggerData;
     if (Array.isArray(tags)) {
-        swaggerDocument.tags.push(...tags);
+        SWAGGER_DOCUMENT.tags.push(...tags);
     } else {
-        swaggerDocument.tags.push(tags);
+        SWAGGER_DOCUMENT.tags.push(tags);
     }
-    swaggerDocument.paths = {
-        ...swaggerDocument.paths,
+    SWAGGER_DOCUMENT.paths = {
+        ...SWAGGER_DOCUMENT.paths,
         ...paths
     };
-    swaggerDocument.definitions = {
-        ...swaggerDocument.definitions,
+    SWAGGER_DOCUMENT.definitions = {
+        ...SWAGGER_DOCUMENT.definitions,
         ...definitions
     };
 };
 
-export const swagGeneratorFactory = (name, model) => {
+export const swagGeneratorFactory = (name, model, types) => {
     const swaggerPaths = {};
     const swaggerDefs = {
         ...DEFAULT_DEFINITIONS
     };
     appendSwagDefs(name, model, swaggerDefs);
-    Object.values(REQUEST_TYPES).forEach(type =>
-        appendSwagPaths(type, name, swaggerPaths)
-    );
+    types.forEach(type => appendSwagPaths(type, name, swaggerPaths));
     return { swaggerPaths, swaggerDefs };
 };
 
 export const appendSwagPaths = (type, name, swaggerPaths) => {
-    if (type === REQUEST_TYPES.create && name === 'orders') {
-        return;
-    }
     const routeName = `/${kebabCase(name)}`;
     const method = REQUEST_METHODS[type];
     const lowerType = type.toLowerCase();
@@ -198,12 +223,6 @@ export const appendSwagPaths = (type, name, swaggerPaths) => {
 
 export const appendSwagDefs = (name, model, swaggerDefs) => {
     const modelSchema = m2s(model);
-    // modify model schema properties here
-    if (modelSchema.properties.purchasedProducts) {
-        modelSchema.properties.purchasedProducts = {
-            $ref: '#/definitions/products'
-        };
-    }
     swaggerDefs[name] = {
         type: 'object',
         ...modelSchema,
