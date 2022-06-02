@@ -64,3 +64,11 @@ export const createUser = async (model, args) => {
         throw err;
     }
 };
+
+export const fetchAllPurchasedProducts = async (model, query) =>
+    model
+        .find()
+        .select('purchasedProducts')
+        .populate('purchasedProducts')
+        .skip(query.page * query.limit)
+        .limit(query.limit);
