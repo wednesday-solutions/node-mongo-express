@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest --coverage",
-        "start": "export ENVIRONMENT_NAME=local && nodemon --exec babel-node app.js | bunyan -o short",
+        "start": "export ENVIRONMENT_NAME=local && nodemon",
         "start:sharded": "export MONGO_PORT=60000 && yarn start",
         "postinstall": "link-module-alias",
         "preinstall": "source /usr/local/opt/nvm/nvm.sh; nvm use; command -v link-module-alias && link-module-alias clean || true",

@@ -14,12 +14,10 @@ import {
 import { clientCredentialsGrant, managementClient } from 'utils/auth0';
 import { REQUEST_TYPES } from './customApisMapper';
 import config from 'config';
-import checkJwt from 'middlewares/authenticate';
-import checkRole from 'middlewares/checkRole';
+import { checkJwt } from 'middlewares/auth';
 
 export const generateRequest = (type, router, model, validator) => {
-    const middlewares = createValidatorMiddlewares(validator);
-    middlewares.push(checkJwt, checkRole);
+    const middlewares = [...createValidatorMiddlewares(validator), checkJwt];
     switch (type) {
         case REQUEST_TYPES.create:
             generatePostRequest({ router, model, middlewares });

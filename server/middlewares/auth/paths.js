@@ -4,7 +4,8 @@ import { StoreProducts } from 'models/storeProducts';
 import { Suppliers } from 'models/suppliers';
 import { SupplierProducts } from 'models/supplierProducts';
 import config from 'config';
-import { authMiddlewareFunc } from 'utils/apiUtils';
+import { authMiddlewareFunc } from './utils';
+
 export const paths = [
     {
         path: '/assign-roles',

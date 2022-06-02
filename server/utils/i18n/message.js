@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     // Common Error Messages
     RESOURCE_NOT_FOUND: 'Resource Not Found',
     ACCESS_DENIED: 'Access Denied',

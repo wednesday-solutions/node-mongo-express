@@ -2,15 +2,6 @@ import supertest from 'supertest';
 import app from 'server';
 import * as daos from 'daos/order';
 
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
-        req.route = { path: '/aggregate/order-amount' };
-        next();
-    };
-
-    return mockFunc;
-});
-
 jest.mock('express-jwt', () => () => (req, res, next) => {
     if (!req?.headers['authorization']) {
         return res.status(401).json({});
