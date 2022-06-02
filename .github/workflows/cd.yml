@@ -1,4 +1,4 @@
-name: Parcel Node Mongo Express CD
+name: Node Mongo Express CD
 
 on:
     push:
@@ -73,8 +73,12 @@ jobs:
               with:
                   author_name: Gitflow
                   author_email: git@wednesday.is
-                  message: 'Update badges'
+                  message: 'chore: update badges'
                   add: 'badges/'
+            - name: Git pull origin
+              run: |
+                  git pull origin ${{ github.ref }}
+
             - name: Push changes
               uses: ad-m/github-push-action@master
               with:

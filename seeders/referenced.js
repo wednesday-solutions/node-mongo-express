@@ -1,25 +1,28 @@
 const {
-    runInClusterMode,
+    runSeeders,
     connectToMongo,
     createOrderWithProductReferenced,
     createProduct
 } = require('./utils');
 
-function seed() {
-    connectToMongo()
-        .then(async () => {
-            for (let i = 0; i < 5000; i++) {
-                const products = [];
-                for (let j = 0; j < 3; j++) {
-                    products.push(await createProduct());
+async function seed() {
+    await Promise.all([
+        connectToMongo()
+            .then(async () => {
+                const divisor = process.env.DIVISOR || 100;
+                console.log('connected to mongodb::referenced');
+                for (let i = 0; i < 5000 / divisor; i++) {
+                    const products = [];
+                    for (let j = 0; j < 3; j++) {
+                        products.push(await createProduct());
+                    }
+                    await createOrderWithProductReferenced(products);
                 }
-                await createOrderWithProductReferenced(products);
-            }
-        })
-        .catch(err => {
-            console.log('Error is ', err);
-        });
-    console.log('done!');
+            })
+            .catch(err => {
+                console.log('Error is ', err);
+            })
+    ]);
 }
 
-runInClusterMode(seed);
+runSeeders(seed);

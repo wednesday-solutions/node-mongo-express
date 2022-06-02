@@ -1,4 +1,4 @@
-import log from 'utils/logger';
+var httpContext = require('express-http-context');
 export const createItem = async (model, args) => {
     try {
         return model.create(args);
@@ -18,8 +18,9 @@ export const fetchItems = async (model, query) => {
             query.limit = 100;
         }
         query.page = query.page || 0;
+        const condition = httpContext.get('condition') || {};
         return model
-            .find()
+            .find(condition)
             .skip(query.page * query.limit)
             .limit(query.limit);
     } catch (err) {
@@ -63,3 +64,11 @@ export const createUser = async (model, args) => {
         throw err;
     }
 };
+
+export const fetchAllPurchasedProducts = async (model, query) =>
+    model
+        .find()
+        .select('purchasedProducts')
+        .populate('purchasedProducts')
+        .skip(query.page * query.limit)
+        .limit(query.limit);

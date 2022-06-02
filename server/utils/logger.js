@@ -1,7 +1,7 @@
 import bunyan from 'bunyan';
 
-module.exports = global.log = bunyan.createLogger({
-    name: 'myapp',
+export default global.log = bunyan.createLogger({
+    name: 'node-mongo-express',
     streams: [
         {
             level: 'info',
