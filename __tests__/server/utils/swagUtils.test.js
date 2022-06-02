@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import app from 'server';
-import { SWAGGER_DOCS_PATH } from '../swagUtils';
+import { SWAGGER_DOCS_PATH } from 'utils/swagUtils';
 
 describe('swagUtils tests', () => {
     it('should reguster swagger ui in express app', async () => {

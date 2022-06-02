@@ -5,7 +5,7 @@ import {
     earliestCreatedDate,
     totalAmtForDate,
     totalByDateForCategory
-} from '../order';
+} from 'daos/order';
 import { Orders } from 'models/orders';
 import { mockData } from 'utils/mockData';
 import moment from 'moment';

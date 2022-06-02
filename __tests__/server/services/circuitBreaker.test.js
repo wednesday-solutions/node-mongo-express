@@ -1,4 +1,4 @@
-import { newCircuitBreaker } from '../circuitBreaker';
+import { newCircuitBreaker } from 'services/circuitBreaker';
 
 describe('newCircuitBreaker tests', () => {
     const fallbackMessage = 'Some fallback message';

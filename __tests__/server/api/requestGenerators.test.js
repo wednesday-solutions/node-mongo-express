@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import * as daoUtils from '../utils';
+import * as daoUtils from 'api/utils';
 import app from 'server';
 jest.mock('middlewares/auth', () => ({
     checkJwt: (req, res, next) => {

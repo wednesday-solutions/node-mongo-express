@@ -3,7 +3,7 @@ import * as orderFns from 'api/orders';
 import * as categoryFns from 'api/products';
 import { redis } from 'services/redis';
 import { REDIS_IMPLEMENTATION_DATE } from 'utils/constants';
-import { aggregateCheck } from '../aggregateJob';
+import { aggregateCheck } from 'api/cronJob/aggregateJob';
 import { mockData } from 'utils/mockData';
 import log from 'utils/logger';
 

@@ -1,11 +1,10 @@
-// import { notifySlack } from '../slackNotify';
 describe('slackNotify tests', () => {
     const sendSpy = jest.fn();
     jest.doMock('slack-notify', () => () => ({
         send: sendSpy
     }));
     it('should call notifySlack function', async () => {
-        const { notifySlack } = require('../slackNotify');
+        const { notifySlack } = require('utils/slackNotify');
 
         let username = 'doe@wednesday.is';
         let message = 'Work done!';

@@ -6,10 +6,10 @@ import {
     getEarliestOrderCreatedDate,
     getTotalOrderAmtForDate,
     getTotalOrderAmtByDateForCategory
-} from '../index';
-import { updateOrderDetailInRedis } from '../updateRedis';
+} from 'api/orders';
+import { updateOrderDetailInRedis } from 'api/orders/updateRedis';
 import * as daos from 'daos/order';
-import * as updateRedis from '../updateRedis';
+import * as updateRedis from 'api/orders/updateRedis';
 import { redis } from 'services/redis';
 import { mockData } from 'utils/mockData';
 const { MOCK_ORDER_DETAILS: mockOrderDetails, MOCK_ORDER: mockOrder } =

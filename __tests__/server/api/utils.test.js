@@ -6,7 +6,7 @@ import {
     fetchItem,
     fetchItems,
     updateItem
-} from '../utils';
+} from 'api/utils';
 import log from 'utils/logger';
 
 describe('utils tests', () => {

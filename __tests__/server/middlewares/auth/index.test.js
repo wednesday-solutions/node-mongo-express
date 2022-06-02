@@ -1,8 +1,8 @@
 import message from 'utils/i18n/message';
 import * as utils from 'utils/apiUtils';
-import { checkRole } from '../index';
-import { ownershipBasedAccessControl } from '../ownershipBasedAccessControl';
-jest.mock('../ownershipBasedAccessControl', () => ({
+import { checkRole } from 'middlewares/auth';
+import { ownershipBasedAccessControl } from 'middlewares/auth/ownershipBasedAccessControl';
+jest.mock('middlewares/auth/ownershipBasedAccessControl', () => ({
     ownershipBasedAccessControl: jest.fn()
 }));
 

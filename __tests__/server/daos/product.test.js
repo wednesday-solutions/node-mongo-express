@@ -1,6 +1,6 @@
 import { redis } from 'services/redis';
 import { mockData } from 'utils/mockData';
-import { getAllCategories } from '../product';
+import { getAllCategories } from 'daos/product';
 
 const { MOCK_CATEGORIES: mockCategories } = mockData;
 describe('Products dao tests', () => {

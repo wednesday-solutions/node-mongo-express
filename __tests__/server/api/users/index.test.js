@@ -1,9 +1,9 @@
 import supertest from 'supertest';
 import * as requests from 'api/requestGenerators';
 import Users from 'models/users';
-import userValidator from '../validator';
+import userValidator from 'api/users/validator';
 import app from 'server';
-import { createUser } from '../index';
+import { createUser } from 'api/users';
 import * as daos from 'api/utils';
 import { mockData } from 'utils/mockData';
 const { MOCK_USER: mockUser } = mockData;

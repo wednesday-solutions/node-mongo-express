@@ -1,4 +1,4 @@
-import { scheduleJob } from '../scheduleJob';
+import { scheduleJob } from 'utils/custom/scheduleJob';
 import { getQueue } from 'utils/queue';
 
 describe('Schedule job tests', () => {

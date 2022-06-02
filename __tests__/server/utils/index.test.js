@@ -1,4 +1,4 @@
-import { getModelFiles, isTestEnv } from '..';
+import { getModelFiles, isTestEnv } from 'utils/index';
 
 describe('isTestEnv tests', () => {
     it('should give isTestEnv true if ENVIRONMENT_NAME is test', () => {

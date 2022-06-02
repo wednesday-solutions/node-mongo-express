@@ -1,4 +1,4 @@
-import { getCategories } from '../index';
+import { getCategories } from 'api/products';
 import * as daos from 'daos/product';
 import { mockData } from 'utils/mockData';
 
