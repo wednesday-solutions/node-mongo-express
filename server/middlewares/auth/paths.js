@@ -23,6 +23,11 @@ export const paths = [
         method: 'POST'
     },
     {
+        path: '/aggregate/order-amount',
+        scopes: [SCOPE_TYPE.SUPER_ADMIN],
+        method: 'GET'
+    },
+    {
         path: '/stores',
         scopes: [SCOPE_TYPE.SUPER_ADMIN, SCOPE_TYPE.STORE_ADMIN],
         method: 'GET',
