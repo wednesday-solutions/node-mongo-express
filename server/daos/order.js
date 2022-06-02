@@ -3,8 +3,7 @@ import { Orders } from 'models/orders';
 
 export const createNewOrder = async orderData => {
     try {
-        const order = await Orders.create(orderData);
-        return order;
+        return Orders.create(orderData);
     } catch (error) {
         throw error;
     }

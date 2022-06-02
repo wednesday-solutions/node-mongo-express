@@ -16,9 +16,7 @@ function createProduct(dontCreate) {
     const product = {
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price()) * 100,
-        category: faker.commerce.department(),
-        quantityAverage: 0,
-        schema: 1
+        category: faker.commerce.department()
     };
     if (dontCreate) {
         return product;

@@ -3,15 +3,11 @@ import app from 'server';
 import { mockData } from 'utils/mockData';
 const { MOCK_ROLE: mockRole } = mockData;
 
-jest.mock('express-jwt', () => {
-    const mockFunc = (req, res, next) => {
-        req['user'] = {
-            'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
-        };
-        next();
+jest.mock('express-jwt', () => secret => (req, res, next) => {
+    req['user'] = {
+        'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']
     };
-
-    return jest.fn(() => mockFunc);
+    next(null, {});
 });
 
 jest.mock('auth0', () => ({
@@ -23,8 +19,6 @@ jest.mock('auth0', () => ({
     })
 }));
 describe('roles endpoint tests', () => {
-    // beforeEach(() => jest.resetAllMocks());
-
     it('should throw an error when correct parameters are not passed', async () => {
         const res = await supertest(app)
             .post('/roles')

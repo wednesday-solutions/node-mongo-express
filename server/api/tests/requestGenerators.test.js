@@ -1,6 +1,11 @@
 import supertest from 'supertest';
 import * as daoUtils from '../utils';
 import app from 'server';
+jest.mock('middlewares/auth', () => ({
+    checkJwt: (req, res, next) => {
+        next();
+    }
+}));
 
 jest.mock('auth0', () => ({
     AuthenticationClient: () => ({
@@ -10,6 +15,16 @@ jest.mock('auth0', () => ({
         createUser: () => ({})
     })
 }));
+
+jest.mock('express-jwt', () => secret => (req, res, next) => {
+    if (!req?.headers['authorization']) {
+        return res.status(401).json({});
+    }
+    req['user'] = {
+        'https://express-demo/roles': ['SUPER_ADMIN']
+    };
+    next(null, {});
+});
 
 describe('requestGenerators tests', () => {
     let ENDPOINT;
@@ -28,7 +43,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .post(ENDPOINT)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send(reqBody);
             expect(res.statusCode).toBe(200);
             expect(createSpy).toBeCalled();
@@ -43,7 +61,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .post(ENDPOINT)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({});
             expect(res.statusCode).toBe(500);
             expect(res.body.error).toEqual(error.message);
@@ -57,7 +78,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .patch(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({ name: 'Jane Doe' });
             expect(res.statusCode).toBe(200);
             expect(res.body).toEqual({ data: returnItem });
@@ -69,7 +93,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .patch(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({});
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
@@ -83,7 +110,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .get(ENDPOINT)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({});
             expect(res.statusCode).toBe(200);
             expect(res.body).toEqual({ data: returnItems });
@@ -95,7 +125,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .get(ENDPOINT)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({});
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
@@ -109,7 +142,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .get(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({ name: 'shikamaru' });
             expect(res.statusCode).toBe(200);
             expect(res.body).toEqual({ data: returnItem });
@@ -121,7 +157,10 @@ describe('requestGenerators tests', () => {
 
             const res = await supertest(app)
                 .get(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json')
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
                 .send({});
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
@@ -133,9 +172,10 @@ describe('requestGenerators tests', () => {
             const deleteRes = 'item delete sucess';
             jest.spyOn(daoUtils, 'deleteItem').mockResolvedValue(deleteRes);
 
-            const res = await supertest(app)
-                .delete(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json');
+            const res = await supertest(app).delete(`${ENDPOINT}/7`).set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            });
             expect(res.statusCode).toBe(200);
             expect(res.body).toEqual({ data: deleteRes });
         });
@@ -144,9 +184,10 @@ describe('requestGenerators tests', () => {
             const error = new Error('delete failed');
             jest.spyOn(daoUtils, 'deleteItem').mockRejectedValue(error);
 
-            const res = await supertest(app)
-                .delete(`${ENDPOINT}/7`)
-                .set('Accept', 'application/json');
+            const res = await supertest(app).delete(`${ENDPOINT}/7`).set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            });
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
         });

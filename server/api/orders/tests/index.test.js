@@ -156,13 +156,27 @@ describe('Order  tests', () => {
         });
 
         it('should ensure it return validation error when proper parameter are not passed', async () => {
+            const res = await supertest(app).post('/orders').send({}).set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            });
+            expect(res.status).toBe(400);
+        });
+        it('should return error from catch block', async () => {
+            const mockError = new Error({ message: 'test' });
+            jest.spyOn(
+                updateRedis,
+                'updateOrderDetailInRedis'
+            ).mockImplementation(() => {});
+            jest.spyOn(daos, 'createNewOrder').mockImplementationOnce(() => {
+                throw mockError;
+            });
+
             const res = await supertest(app)
                 .post('/orders')
-                .send({})
+                .send(mockOrder)
                 .set('Accept', 'application/json');
-            expect(res.error.text).toEqual(
-                '{"error":"totalPrice should be a number"}'
-            );
+            expect(res.error.text).toBe('{"error":"[object Object]"}');
         });
     });
 });

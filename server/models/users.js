@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const constants = require('utils/constants');
 
 const schema = new mongoose.Schema({
     firstName: {
@@ -15,6 +16,10 @@ const schema = new mongoose.Schema({
     },
     authId: {
         type: String
+    },
+    role: {
+        type: String,
+        enum: Object.values(constants.SCOPE_TYPE)
     }
 });
 

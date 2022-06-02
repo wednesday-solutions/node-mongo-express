@@ -15,6 +15,7 @@ export const REQUEST_METHODS = {
     [REQUEST_TYPES.fetchAll]: 'get',
     [REQUEST_TYPES.remove]: 'delete'
 };
+export const SWAGGER_DOCS_PATH = '/api-docs/swagger.json';
 
 export const DEFAULT_DEFINITIONS = {
     deleteResponse: {
@@ -43,7 +44,6 @@ export const DEFAULT_DEFINITIONS = {
  * @param {CustomSwagger} customSwagger
  */
 export const registerSwagger = app => {
-    const SWAGGER_DOCS_PATH = '/api-docs/swagger.json';
     const options = {
         swaggerOptions: {
             url: SWAGGER_DOCS_PATH
@@ -70,7 +70,7 @@ export const generateSwaggerDoc = () => {
         paths: {},
         definitions: {}
     };
-    const modelsFolderPath = path.join(__dirname, '../../models/');
+    const modelsFolderPath = path.join(__dirname, '../../server/models/');
     const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
         const { model } = require(modelsFolderPath + f);

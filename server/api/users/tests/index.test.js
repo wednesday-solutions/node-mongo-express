@@ -23,7 +23,11 @@ describe('User tests', () => {
             .spyOn(requests, 'generateCreateUserRequest')
             .mockImplementationOnce(() => jest.fn());
         createUser(app, Users.Users, userValidator);
-        expect(spy).toHaveBeenCalledWith(app, Users.Users, userValidator);
+        expect(spy).toHaveBeenCalledWith({
+            router: app,
+            model: Users.Users,
+            validator: userValidator
+        });
     });
 
     it('should call the create user api', async () => {
@@ -32,12 +36,16 @@ describe('User tests', () => {
         });
         const res = await supertest(app)
             .post('/users')
-            .set('Accept', 'application/json')
+            .set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            })
             .send({
                 firstName: 'Jhon',
                 lastName: 'Doe',
                 email: 'doe12@wednesday.is',
-                password: 'wednesday@1234567'
+                password: 'wednesday@1234567',
+                role: 'SUPER_ADMIN'
             });
         expect(res.status).toEqual(200);
         expect(res.body.data).toEqual(mockUser);
@@ -47,7 +55,10 @@ describe('User tests', () => {
         jest.spyOn(daos, 'createUser').mockResolvedValueOnce(mockUser);
         const res = await supertest(app)
             .post('/users')
-            .set('Accept', 'application/json')
+            .set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            })
             .send({});
         expect(res.statusCode).toBe(400);
         expect(JSON.stringify(res.body.error)).toContain('must be present');
@@ -59,12 +70,16 @@ describe('User tests', () => {
         );
         const res = await supertest(app)
             .post('/users')
-            .set('Accept', 'application/json')
+            .set({
+                Accept: 'application/json',
+                Authorization: 'Bearer dummy-token'
+            })
             .send({
                 firstName: 'Jhon',
                 lastName: 'Doe',
                 email: 'doe12@wednesday.is',
-                password: 'wednesday@1234567'
+                password: 'wednesday@1234567',
+                role: 'SUPER_ADMIN'
             });
         expect(res.statusCode).toBe(500);
         expect(res.error.text).toEqual('{"error":"User already exists!"}');

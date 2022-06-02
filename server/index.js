@@ -5,14 +5,16 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { apiSuccess } from 'utils/apiUtils';
 import apis from 'api';
-import { list } from 'server/routeLister';
+import { list } from 'utils/routeLister';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
-import injectRequestId from 'middlewares/injectRequestId';
+import { injectRequestId } from 'middlewares/injectRequestId';
+import { middleware } from 'express-http-context';
 
 /**
  * Create express server
  */
+
 const app = express();
 app.use(responseTime());
 app.set('port', process.env.PORT || 9000);
@@ -23,6 +25,9 @@ app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// used for getting and setting request-scoped context anywhere
+app.use(middleware);
 
 // setup database
 apis(app);
@@ -36,4 +41,4 @@ app.get('/', (req, res) => {
 });
 list(app);
 
-module.exports = app;
+export default app;
