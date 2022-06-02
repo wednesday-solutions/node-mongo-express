@@ -137,6 +137,7 @@ Once you've to the server started check out the api documentation at [/api-docs]
     -   [docker-compose](./docker-compose.yml)
     -   [auto generated apis](./server/api/requestGenerators.js)
     -   [sharding of collections](./setup-shards)
+    -   [aggregate caching](./server/api/aggregate/)
 
 ## Philosophy
 
