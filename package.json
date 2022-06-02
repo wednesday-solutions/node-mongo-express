@@ -1,5 +1,5 @@
 {
-    "name": "parcel-node-express-mongo",
+    "name": "parcel-node-mongo-express",
     "version": "10.0.19",
     "description": "A basic starter web app with parceljs, node, express and mongoose",
     "main": "index.js",
@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/wednesday-solutions/parcel-node-express-mongo.git"
+        "url": "git+https://github.com/wednesday-solutions/parcel-node-mongo-express.git"
     },
     "keywords": [
         "parcel",
@@ -39,9 +39,9 @@
         "node": "14.17.x"
     },
     "bugs": {
-        "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
+        "url": "https://github.com/wednesday-solutions/parcel-node-mongo-express/issues"
     },
-    "homepage": "https://github.com/wednesday-solutions/parcel-node-express-mongo#readme",
+    "homepage": "https://github.com/wednesday-solutions/parcel-node-mongo-express#readme",
     "dependencies": {
         "auth0": "^2.40.0",
         "body-parser": "^1.19.1",
