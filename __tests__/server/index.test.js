@@ -6,7 +6,7 @@ describe('app tests', () => {
         const res = await supertest(app).get('/');
         expect(res.statusCode).toBe(200);
         expect(res.body.data).toContain(
-            'node-parcel-express-mongo server at your service🖖'
+            'node-express-mongo server at your service🖖'
         );
     });
 });

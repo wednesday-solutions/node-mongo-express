@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/wednesday-solutions/parcel-node-mongo-express/blob/main/parcel_node_mongo_express_github.svg" width="480" height="520" />
+<img align="left" src="https://github.com/wednesday-solutions/node-mongo-express/blob/main/parcel_node_mongo_express_github.svg" width="480" height="520" />
 
 <div>
   <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=serverless" align="left" style="margin-left: 0;">
@@ -36,14 +36,14 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
 
 </div>
 
-<!-- # parcel-node-mongo-express
+<!-- # node-mongo-express
 
 
 A basic starter for a web app with parceljs, node, express and mongoose -->
 
-[![Parcel Node Mongo Express CI](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml)
+[![Parcel Node Mongo Express CI](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml)
 
-[![Parcel Node Mongo Express CD](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml)
+[![Parcel Node Mongo Express CD](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml)
 
 ---
 
@@ -105,7 +105,7 @@ Run the following command to begin seeding
 
 ## How to start
 
-    - cd `parcel-node-mongo-express`
+    - cd `node-mongo-express`
     - yarn
     - ./setup-shards/scripts/setup/base.sh
     - cp .env.example .env.local

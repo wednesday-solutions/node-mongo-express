@@ -40,7 +40,7 @@ if (!isTestEnv()) {
 }
 
 app.get('/', (req, res) => {
-    apiSuccess(res, 'node-parcel-express-mongo server at your service🖖');
+    apiSuccess(res, 'node-express-mongo server at your service🖖');
 });
 list(app);
 
