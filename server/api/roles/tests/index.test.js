@@ -3,15 +3,6 @@ import app from 'server';
 import { mockData } from 'utils/mockData';
 const { MOCK_ROLE: mockRole } = mockData;
 
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
-        req.route = { path: '/roles/' };
-        next();
-    };
-
-    return mockFunc;
-});
-
 jest.mock('express-jwt', () => secret => (req, res, next) => {
     req['user'] = {
         'https://express-demo/roles': ['ADMIN', 'SUPER_ADMIN']

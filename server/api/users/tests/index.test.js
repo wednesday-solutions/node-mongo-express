@@ -8,13 +8,6 @@ import * as daos from 'api/utils';
 import { mockData } from 'utils/mockData';
 const { MOCK_USER: mockUser } = mockData;
 
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
-        next();
-    };
-
-    return mockFunc;
-});
 jest.mock('auth0', () => ({
     AuthenticationClient: () => ({
         clientCredentialsGrant: () => ({ access_token: 'access' })

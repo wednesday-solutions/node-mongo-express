@@ -9,7 +9,7 @@ describe('rateLimiter test', () => {
             legacyHeaders: false
         };
         const limiter = require('express-rate-limit');
-        const rateLimiter = require('../index');
+        const { rateLimiter } = require('../index');
         rateLimiter(options);
         expect(limiter).toBeCalledWith(expect.objectContaining(options));
     });

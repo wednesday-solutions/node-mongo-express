@@ -15,15 +15,6 @@ import { mockData } from 'utils/mockData';
 const { MOCK_ORDER_DETAILS: mockOrderDetails, MOCK_ORDER: mockOrder } =
     mockData;
 
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
-        req.route = { path: '/assign-roles/' };
-        next();
-    };
-
-    return mockFunc;
-});
-
 describe('Order  tests', () => {
     const date = '1994-10-24';
     const amt = 25000;

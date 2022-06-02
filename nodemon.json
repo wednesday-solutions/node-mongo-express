@@ -1,5 +1,5 @@
 {
-    "exec": "export ENVIRONMENT_NAME=local && yarn start",
+    "exec": "babel-node app.js | bunyan -o short",
     "watch": ["server/*"],
     "ignore": ["**/__tests__/**", "*.test.js"],
     "events": {

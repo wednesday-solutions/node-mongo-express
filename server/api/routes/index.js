@@ -3,9 +3,8 @@ import { login, loginValidator } from 'api/login';
 import { roles, roleValidator } from 'api/roles';
 import { assignRoles, assignRoleValidator } from 'api/assignRoles';
 import { cronJob, cronJobValidator } from 'api/cronJob';
-import checkJwt from 'middlewares/authenticate';
-import checkRole from 'middlewares/checkRole';
-import limiter from 'middlewares/rateLimiter';
+import { checkJwt } from 'middlewares/auth';
+import { rateLimiter as limiter } from 'middlewares/rateLimiter';
 
 const router = express.Router();
 
@@ -17,14 +16,8 @@ const rateLimiter = limiter({
 });
 
 router.post('/login', loginValidator, rateLimiter, login);
-router.post('/roles', rateLimiter, checkJwt, checkRole, roleValidator, roles);
-router.put(
-    '/assign-roles',
-    checkJwt,
-    checkRole,
-    assignRoleValidator,
-    assignRoles
-);
+router.post('/roles', rateLimiter, checkJwt, roleValidator, roles);
+router.put('/assign-roles', checkJwt, assignRoleValidator, assignRoles);
 router.post('/cron-job', cronJobValidator, cronJob);
 
 module.exports = router;

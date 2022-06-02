@@ -1,6 +1,4 @@
 import { validationResult } from 'express-validator';
-import { checkOwnership } from 'middlewares/custom';
-import config from 'config';
 
 export const apiSuccess = (res, data) => {
     log.info('apiSuccess', {});
@@ -26,10 +24,3 @@ export const createValidatorMiddlewares = validator => {
     }
     return middlewares;
 };
-
-export const authMiddlewareFunc = async (req, model, configObj) =>
-    await checkOwnership(
-        req.user[`${config().apiAudience}/email`],
-        model,
-        configObj
-    );

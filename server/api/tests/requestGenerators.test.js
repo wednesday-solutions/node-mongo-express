@@ -1,13 +1,11 @@
 import supertest from 'supertest';
 import * as daoUtils from '../utils';
 import app from 'server';
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
+jest.mock('middlewares/auth', () => ({
+    checkJwt: (req, res, next) => {
         next();
-    };
-
-    return mockFunc;
-});
+    }
+}));
 
 jest.mock('auth0', () => ({
     AuthenticationClient: () => ({

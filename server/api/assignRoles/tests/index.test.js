@@ -1,15 +1,6 @@
 import supertest from 'supertest';
 import app from 'server';
 
-jest.mock('middlewares/checkRole', () => {
-    const mockFunc = (req, res, next) => {
-        req.route = { path: '/assign-roles/' };
-        next();
-    };
-
-    return mockFunc;
-});
-
 jest.mock('express-jwt', () => secret => (req, res, next) => {
     if (!req?.headers['authorization']) {
         return res.status(401).json({});
