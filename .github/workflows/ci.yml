@@ -1,4 +1,4 @@
-name: Parcel Node Mongo Express CI
+name: Node Mongo Express CI
 
 on:
     pull_request:
