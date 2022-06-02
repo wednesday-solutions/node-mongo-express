@@ -1,6 +1,6 @@
 import http from 'http';
 import log from 'utils/logger';
-import app from './server';
+import app from './index';
 /**
  * Start Express server
  */
