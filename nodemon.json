@@ -1,6 +1,6 @@
 {
     "exec": "babel-node app.js | bunyan -o short",
-    "watch": ["server/*"],
+    "watch": ["server/*", "app.js"],
     "ignore": ["**/__tests__/**", "*.test.js"],
     "events": {
         "restart": "kill-port 9000",
