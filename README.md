@@ -117,6 +117,27 @@ Run the following command to begin seeding
 
 Once you've to the server started check out the api documentation at [/api-docs](http://localhost:9000/api-docs)
 
+## Navigating the code base
+
+-   The entry point of the application is the [server/index.js](./server/index.js)
+-   The server/app.js imports the APIs from [server/api/index.js](./server/api/index.js)
+-   All the different APIs in the [server/api](./server/api) are registered [here](./server/api/index.js)
+-   MongoDB is used to store data & mongoose is used as the ORM
+    -   [mongo](./server/database/mongo.js)
+    -   [models](./server/database/models/)
+-   The template has support for the following middlewares
+    -   [auth](./server/middlewares/auth/)
+    -   [injectRequestId](./server/middlewares/injectRequestId)
+    -   [rateLimiter](./server/middlewares/rateLimiter)
+-   The template has inbuilt support for
+    -   [redis](./server/services/redis.js)
+    -   [circuitBreakers](./server/services/circuitBreaker.js)
+    -   [slack alerts](./server/utils/slackNotify.js)
+    -   [docker](./Dockerfile)
+    -   [docker-compose](./docker-compose.yml)
+    -   [auto generated apis](./server/api/requestGenerators.js)
+    -   [sharding of collections](./setup-shards)
+
 ## Philosophy
 
 When using NoSQLs you are optimising for read performance. We're doing this by denormalising data. There are multiple copies of the same data. For example

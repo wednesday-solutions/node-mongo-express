@@ -2,7 +2,7 @@ import path from 'path';
 import express from 'express';
 import kebab from 'lodash/kebabCase';
 import { generateRequest } from 'api/requestGenerators';
-import { mongoConnector } from 'middlewares/mongo';
+import { mongoConnector } from '../database/mongo';
 import { customApisMapper, REQUEST_TYPES } from 'api/customApisMapper';
 import customRoutes from 'server/api/routes';
 import { getModelFiles, isTestEnv } from 'utils';
@@ -21,7 +21,10 @@ export default app => {
 };
 
 const autoGenerateApisFromModels = app => {
-    const modelsFolderPath = path.join(__dirname, '../../server/models/');
+    const modelsFolderPath = path.join(
+        __dirname,
+        '../../server/database/models/'
+    );
     const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
         const { model } = require(modelsFolderPath + f);

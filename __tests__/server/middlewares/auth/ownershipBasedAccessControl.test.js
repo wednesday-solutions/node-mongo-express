@@ -1,6 +1,6 @@
 import * as httpContext from 'express-http-context';
-import { Stores } from 'models/stores';
-import { Users } from 'models/users';
+import { Stores } from 'database/models/stores';
+import { Users } from 'database/models/users';
 import message from 'utils/i18n/message';
 import { ownershipBasedAccessControl } from 'middlewares/auth/ownershipBasedAccessControl';
 

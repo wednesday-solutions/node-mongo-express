@@ -70,7 +70,10 @@ export const generateSwaggerDoc = () => {
         paths: {},
         definitions: {}
     };
-    const modelsFolderPath = path.join(__dirname, '../../server/models/');
+    const modelsFolderPath = path.join(
+        __dirname,
+        '../../server/database/models/'
+    );
     const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
         const { model } = require(modelsFolderPath + f);
