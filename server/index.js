@@ -9,7 +9,7 @@ import { list } from 'utils/routeLister';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
 import { injectRequestId } from 'middlewares/injectRequestId';
-import { middleware } from 'express-http-context';
+import { middleware as contextMiddleware } from 'express-http-context';
 
 /**
  * Create express server
@@ -21,13 +21,14 @@ app.set('port', process.env.PORT || 9000);
 app.use(helmet());
 app.use(cors());
 app.use(injectRequestId());
+
 app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // used for getting and setting request-scoped context anywhere
-app.use(middleware);
+app.use(contextMiddleware);
 
 // setup database
 apis(app);
