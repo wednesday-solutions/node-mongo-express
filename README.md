@@ -164,10 +164,10 @@ NoSQLs are also good for handling large volumes of data. This is supported due t
 
 These are the shard keys that we use
 
--   Order
-    -   \_id
+-   \_id
+    -   Order
 -   name
-    -   Products:
+    -   Products
     -   Suppliers
     -   Stores
         <br/>We got really good distribution across shards(24-26%) per shard after seeding 4 million records. It's possible to get a hot shard due to this but we're yet to see that.
