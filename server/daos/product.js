@@ -1,4 +1,4 @@
-import { Products } from 'models/products';
+import { Products } from 'database/models/products';
 import { redis } from 'services/redis';
 
 export const getAllCategories = async () => {

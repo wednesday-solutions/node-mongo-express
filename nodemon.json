@@ -1,5 +1,5 @@
 {
-    "exec": "babel-node server/app.js | bunyan -o short",
+    "exec": "babel-node server/index.js | bunyan -o short",
     "watch": ["server/*"],
     "ignore": ["**/__tests__/**", "*.test.js"],
     "events": {

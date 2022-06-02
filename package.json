@@ -111,10 +111,10 @@
         "utils": "./server/utils",
         "middlewares": "./server/middlewares",
         "server": "./server",
-        "models": "./server/models",
         "api": "./server/api",
         "config": "./config",
         "services": "./server/services",
+        "database": "./server/database",
         "daos": "./server/daos"
     }
 }

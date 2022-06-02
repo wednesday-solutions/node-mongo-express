@@ -1,8 +1,8 @@
 import { SCOPE_TYPE } from 'utils/constants';
-import { Stores } from 'models/stores';
-import { StoreProducts } from 'models/storeProducts';
-import { Suppliers } from 'models/suppliers';
-import { SupplierProducts } from 'models/supplierProducts';
+import { Stores } from 'database/models/stores';
+import { StoreProducts } from 'database/models/storeProducts';
+import { Suppliers } from 'database/models/suppliers';
+import { SupplierProducts } from 'database/models/supplierProducts';
 import config from 'config';
 import { authMiddlewareFunc } from './utils';
 

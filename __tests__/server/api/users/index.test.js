@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import * as requests from 'api/requestGenerators';
-import Users from 'models/users';
+import Users from 'database/models/users';
 import userValidator from 'api/users/validator';
 import app from 'server';
 import { createUser } from 'api/users';

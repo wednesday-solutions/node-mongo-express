@@ -3,12 +3,12 @@ const random = require('lodash/random');
 const range = require('lodash/range');
 const moment = require('moment');
 const { runSeeders, connectToMongo, createProduct } = require('./utils');
-const { Orders } = require('models/orders');
-const { Products } = require('models/products');
-const { Stores } = require('models/stores');
-const { Suppliers } = require('models/suppliers');
-const { StoreProducts } = require('models/storeProducts');
-const { SupplierProducts } = require('models/supplierProducts');
+const { Orders } = require('database/models/orders');
+const { Products } = require('database/models/products');
+const { Stores } = require('database/models/stores');
+const { Suppliers } = require('database/models/suppliers');
+const { StoreProducts } = require('database/models/storeProducts');
+const { SupplierProducts } = require('database/models/supplierProducts');
 
 const OCT_10_1994 = 782980686236;
 

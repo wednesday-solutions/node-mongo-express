@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { getMongoUri } from 'utils/mongoConstants';
-import { mongoConnector } from 'middlewares/mongo';
+import { mongoConnector } from 'database/mongo';
 
 jest.mock('mongoose', () => ({
     connection: {

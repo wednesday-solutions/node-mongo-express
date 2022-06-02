@@ -1,3 +1,4 @@
+import http from 'http';
 import express from 'express';
 import helmet from 'helmet';
 import responseTime from 'response-time';
@@ -6,6 +7,7 @@ import bodyParser from 'body-parser';
 import { apiSuccess } from 'utils/apiUtils';
 import apis from 'api';
 import { list } from 'utils/routeLister';
+import log from 'utils/logger';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
 import { injectRequestId } from 'middlewares/injectRequestId';
@@ -41,5 +43,12 @@ app.get('/', (req, res) => {
     apiSuccess(res, 'node-parcel-express-mongo server at your service🖖');
 });
 list(app);
+
+if (process.env.NODE_ENV !== 'test') {
+    const server = http.createServer(app);
+    server.listen(app.get('port'), () => {
+        log.info('Server is running at port %s', app.get('port'));
+    });
+}
 
 export default app;

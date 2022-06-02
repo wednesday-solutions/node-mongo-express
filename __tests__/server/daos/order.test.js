@@ -6,7 +6,7 @@ import {
     totalAmtForDate,
     totalByDateForCategory
 } from 'daos/order';
-import { Orders } from 'models/orders';
+import { Orders } from 'database/models/orders';
 import { mockData } from 'utils/mockData';
 import moment from 'moment';
 const {

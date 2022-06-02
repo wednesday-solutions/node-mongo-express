@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Orders } from 'models/orders';
+import { Orders } from 'database/models/orders';
 
 export const createNewOrder = async orderData => {
     try {
