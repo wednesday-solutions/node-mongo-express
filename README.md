@@ -1,11 +1,9 @@
-<img align="left" src="https://github.com/wednesday-solutions/node-mongo-express/blob/main/parcel_node_mongo_express_github.svg" width="480" height="520" />
-
 <div>
   <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=serverless" align="left" style="margin-left: 0;">
     <img src="https://uploads-ssl.webflow.com/5ee36ce1473112550f1e1739/5f5879492fafecdb3e5b0e75_wednesday_logo.svg">
   </a>
   <p>
-    <h1 align="left">Parcel Node Mongo Express
+    <h1 align="left">Node Mongo Express
     </h1>
   </p>
 
@@ -39,11 +37,11 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
 <!-- # node-mongo-express
 
 
-A basic starter for a web app with parceljs, node, express and mongoose -->
+A basic starter for a web app with node, express and mongoose -->
 
-[![Parcel Node Mongo Express CI](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml)
+[![Node Mongo Express CI](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml)
 
-[![Parcel Node Mongo Express CD](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml)
+[![Node Mongo Express CD](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml)
 
 ---
 

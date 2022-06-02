@@ -63,7 +63,7 @@ export const generateSwaggerDoc = () => {
     const swaggerDocument = {
         swagger: '2.0',
         info: {
-            title: 'Parcel Node Mongo Express Documentation',
+            title: 'Node Mongo Express Documentation',
             version: Pack.version
         },
         tags: [],

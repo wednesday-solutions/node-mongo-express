@@ -1,7 +1,7 @@
 {
     "info": {
         "_postman_id": "acff0d4d-8a06-4877-8ae0-97c8943e58d7",
-        "name": "Parcel Node Mongo Collection",
+        "name": "Node Mongo Collection",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
