@@ -1,11 +1,11 @@
-<img align="left" src="https://github.com/wednesday-solutions/parcel-node-mongo-express/blob/main/parcel_node_mongo_express_github.svg" width="480" height="520" />
+<img align="left" src="./node-mongo-express.svg" width="480"  />
 
 <div>
-  <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=serverless" align="left" style="margin-left: 0;">
+  <a href="https://www.wednesday.is?utm_source=gthb&utm_medium=repo&utm_campaign=node-mongo-express" align="left" style="margin-left: 0;">
     <img src="https://uploads-ssl.webflow.com/5ee36ce1473112550f1e1739/5f5879492fafecdb3e5b0e75_wednesday_logo.svg">
   </a>
   <p>
-    <h1 align="left">Parcel Node Mongo Express
+    <h1 align="left">Node Mongo Express
     </h1>
   </p>
 
@@ -36,14 +36,14 @@ An enterprise Mongo-Express REST API built using nodejs showcasing - Testing Str
 
 </div>
 
-<!-- # parcel-node-express-mongo
+<!-- # node-mongo-express
 
 
-A basic starter for a web app with parceljs, node, express and mongoose -->
+A basic starter for a web app with node, express and mongoose -->
 
-[![Parcel Node Mongo Express CI](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/ci.yml)
+[![Node Mongo Express CI](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/ci.yml)
 
-[![Parcel Node Mongo Express CD](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/parcel-node-mongo-express/actions/workflows/cd.yml)
+[![Node Mongo Express CD](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml/badge.svg)](https://github.com/wednesday-solutions/node-mongo-express/actions/workflows/cd.yml)
 
 ---
 
@@ -105,7 +105,7 @@ Run the following command to begin seeding
 
 ## How to start
 
-    - cd `parcel-node-mongo-express`
+    - cd `node-mongo-express`
     - yarn
     - ./setup-shards/scripts/setup/base.sh
     - cp .env.example .env.local
@@ -116,6 +116,28 @@ Run the following command to begin seeding
 ## API Documentation
 
 Once you've to the server started check out the api documentation at [/api-docs](http://localhost:9000/api-docs)
+
+## Navigating the code base
+
+-   The entry point of the application is the [server/index.js](./server/index.js)
+-   The server/app.js imports the APIs from [server/api/index.js](./server/api/index.js)
+-   All the different APIs in the [server/api](./server/api) are registered [here](./server/api/index.js)
+-   MongoDB is used to store data & mongoose is used as the ORM
+    -   [mongo](./server/database/mongo.js)
+    -   [models](./server/database/models/)
+-   The template has support for the following middlewares
+    -   [auth](./server/middlewares/auth/)
+    -   [injectRequestId](./server/middlewares/injectRequestId)
+    -   [rateLimiter](./server/middlewares/rateLimiter)
+-   The template has inbuilt support for
+    -   [redis](./server/services/redis.js)
+    -   [circuitBreakers](./server/services/circuitBreaker.js)
+    -   [slack alerts](./server/utils/slackNotify.js)
+    -   [docker](./Dockerfile)
+    -   [docker-compose](./docker-compose.yml)
+    -   [auto generated apis](./server/api/requestGenerators.js)
+    -   [sharding of collections](./setup-shards)
+    -   [aggregate caching](./server/api/aggregate/)
 
 ## Philosophy
 
@@ -142,10 +164,10 @@ NoSQLs are also good for handling large volumes of data. This is supported due t
 
 These are the shard keys that we use
 
--   Order
-    -   \_id
+-   \_id
+    -   Order
 -   name
-    -   Products:
+    -   Products
     -   Suppliers
     -   Stores
         <br/>We got really good distribution across shards(24-26%) per shard after seeding 4 million records. It's possible to get a hot shard due to this but we're yet to see that.

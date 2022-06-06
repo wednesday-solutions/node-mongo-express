@@ -2,13 +2,13 @@ const { default: faker } = require('@faker-js/faker');
 const mongoose = require('mongoose');
 const cluster = require('cluster');
 const os = require('os');
-const { Products } = require('models/products');
-const { ReferencedOrders } = require('models/referencedOrders');
-const { UnshardedOrders } = require('models/unshardedOrders');
+const { Products } = require('database/models/products');
+const { ReferencedOrders } = require('database/models/referencedOrders');
+const { UnshardedOrders } = require('database/models/unshardedOrders');
 const dotenv = require('dotenv');
 const {
     UnshardedReferencedOrders
-} = require('models/unshardedReferencedOrders');
+} = require('database/models/unshardedReferencedOrders');
 const { getMongoUri } = require('utils/mongoConstants');
 
 const totalCPUs = os.cpus().length;
@@ -16,9 +16,7 @@ function createProduct(dontCreate) {
     const product = {
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price()) * 100,
-        category: faker.commerce.department(),
-        quantityAverage: 0,
-        schema: 1
+        category: faker.commerce.department()
     };
     if (dontCreate) {
         return product;

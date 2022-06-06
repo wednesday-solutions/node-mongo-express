@@ -1,11 +1,11 @@
 {
-    "name": "parcel-node-express-mongo",
-    "version": "10.0.16",
-    "description": "A basic starter web app with parceljs, node, express and mongoose",
+    "name": "node-mongo-express",
+    "version": "10.0.26",
+    "description": "A basic starter web app with node, express and mongoose",
     "main": "index.js",
     "scripts": {
         "test": "jest --coverage",
-        "start": "export ENVIRONMENT_NAME=local && nodemon --exec babel-node app.js | bunyan -o short",
+        "start": "export ENVIRONMENT_NAME=local && nodemon",
         "start:sharded": "export MONGO_PORT=60000 && yarn start",
         "postinstall": "link-module-alias",
         "preinstall": "source /usr/local/opt/nvm/nvm.sh; nvm use; command -v link-module-alias && link-module-alias clean || true",
@@ -21,10 +21,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/wednesday-solutions/parcel-node-express-mongo.git"
+        "url": "git+https://github.com/wednesday-solutions/node-mongo-express.git"
     },
     "keywords": [
-        "parcel",
         "node",
         "express",
         "mongo",
@@ -39,9 +38,9 @@
         "node": "14.17.x"
     },
     "bugs": {
-        "url": "https://github.com/wednesday-solutions/parcel-node-express-mongo/issues"
+        "url": "https://github.com/wednesday-solutions/node-mongo-express/issues"
     },
-    "homepage": "https://github.com/wednesday-solutions/parcel-node-express-mongo#readme",
+    "homepage": "https://github.com/wednesday-solutions/node-mongo-express#readme",
     "dependencies": {
         "auth0": "^2.40.0",
         "body-parser": "^1.19.1",
@@ -50,6 +49,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.0",
         "express": "^4.17.2",
+        "express-http-context": "^1.2.4",
         "express-jwt": "^6.1.1",
         "express-rate-limit": "^6.3.0",
         "express-validator": "^6.14.0",
@@ -110,10 +110,10 @@
         "utils": "./server/utils",
         "middlewares": "./server/middlewares",
         "server": "./server",
-        "models": "./models",
         "api": "./server/api",
         "config": "./config",
         "services": "./server/services",
+        "database": "./server/database",
         "daos": "./server/daos"
     }
 }

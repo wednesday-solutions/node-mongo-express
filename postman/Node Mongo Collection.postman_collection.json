@@ -1,0 +1,384 @@
+{
+    "info": {
+        "_postman_id": "ff282961-d1f7-443a-b1e9-f64f5476251d",
+        "name": "Node Mongo Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "orders",
+            "item": [
+                {
+                    "name": "Create Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"purchasedProducts\": [\n        {\n            \"name\": \"Handcrafted Steel Keyboard\",\n            \"price\": 39000,\n            \"category\": \"Computers\",\n            \"totalSales\": 0,\n            \"quantityAverage\": 0,\n            \"schema\": 1\n        },\n        {\n            \"name\": \"Incredible Granite Soap\",\n            \"price\": 15400,\n            \"category\": \"Garden\",\n            \"totalSales\": 0,\n            \"quantityAverage\": 0,\n            \"schema\": 1\n        }\n    ],\n    \"totalPrice\": 54400\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/orders",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["orders"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Fetch Order by _id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/orders/623222aa81e89a2df3b3bc25",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["orders", "623222aa81e89a2df3b3bc25"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Fetch Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/orders?limit=99&page=1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["orders"],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "99"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Fetch Referenced Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/referenced-orders?limit=99&page=1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["referenced-orders"],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "99"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Fetch Unsharded Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/unsharded-orders?limit=99&page=1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["unsharded-orders"],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "99"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Fetch Unsharded Referenced Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/unsharded-referenced-orders?limit=99&page=1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["unsharded-referenced-orders"],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "99"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"purchasedProducts\": [\n        {\n            \"name\": \"Mac\",\n            \"price\": 39000,\n            \"category\": \"Computers\",\n            \"totalSales\": 0,\n            \"quantityAverage\": 0,\n            \"schema\": 1\n        }\n    ],\n    \"totalPrice\": 54400\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/orders/623222aa81e89a2df3b3bc25",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["orders", "623222aa81e89a2df3b3bc25"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Order",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:9000/orders/623222aa81e89a2df3b3bc25",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["orders", "623222aa81e89a2df3b3bc25"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Ronald\",\n    \"email\": \"john@ronald.com\",\n    \"password\": \"wed@12345678\",\n    \"role\": \"SUPER_ADMIN\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/users",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["users"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "aggregate",
+            "item": [
+                {
+                    "name": "orders",
+                    "item": [
+                        {
+                            "name": "Aggregate orders amount",
+                            "request": {
+                                "method": "GET",
+                                "header": []
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "login",
+            "item": [
+                {
+                    "name": "User login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"user@wednesday.is\",\n    \"password\": \"wed@12345678\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/login",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["login"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "assign-roles",
+            "item": [
+                {
+                    "name": "Assign roles for a user",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"authId\": \"auth0|6296198fdb041f0068413a91\",\n    \"role\": [\"SUPER_ADMIN\"]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/assign-roles",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["assign-roles"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "cron-job",
+            "item": [
+                {
+                    "name": "Schedule a cron job",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n     \"scheduleIn\": 2000,\n     \"message\": \"This message should be consoled at the scheduled time\",\n     \"queueName\": \"scheduleJob\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/cron-job",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["cron-job"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "roles",
+            "item": [
+                {
+                    "name": "Create a role",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"SUPER_ADMIN\",\n    \"description\": \"Will have access to the all data.\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:9000/roles",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "9000",
+                            "path": ["roles"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktQRzEwdjFKM29jZjQ1WUVmRm9VWSJ9.eyJodHRwczovL2V4cHJlc3MtZGVtby9yb2xlcyI6WyJTVVBFUl9BRE1JTiJdLCJpc3MiOiJodHRwczovL2Rldi1iMGxjcDd3ZS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjI5NjE5OGZkYjA0MWYwMDY4NDEzYTkxIiwiYXVkIjoiaHR0cHM6Ly9kZXYtYjBsY3A3d2UudXMuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE2NTQwMDY4NTUsImV4cCI6MTY1NDg3MDg2NCwiYXpwIjoiYmNzcEwxeU5IQTJjR3hKRDBJMDhqeWtqd1lCY3hCR3kiLCJzY29wZSI6InJlYWQ6Y3VycmVudF91c2VyIHVwZGF0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgZGVsZXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGNyZWF0ZTpjdXJyZW50X3VzZXJfZGV2aWNlX2NyZWRlbnRpYWxzIGRlbGV0ZTpjdXJyZW50X3VzZXJfZGV2aWNlX2NyZWRlbnRpYWxzIHVwZGF0ZTpjdXJyZW50X3VzZXJfaWRlbnRpdGllcyIsImd0eSI6InBhc3N3b3JkIn0.ZjaOvA572lEutqgFyJqckzPCAKjsk3a2yH5p3gHlmKX_WqCqkRjuHlYw103x0ByN0tgYOT-Va9P2g93fQa-4BuaxUrFqa2GI08VnUWII8ibOMnOPbtdysDOR8zZvJH7SzBQBjHL7Gxm9pUXPPE3rYx5hrkcW77aO4KPsBVuK_ON6QerpnM5rCAqcaHgA5F3f8F7ZCwjdZ5K_1iy40ctJ1B__j58szhCm9xE1IGz_lDyJAxf1E8xXX4ghTgbGvimZsQz4LWaPbx7uhbZP9L-GR-5TPEMGTfkTEwh7WNlD9MfnlxUcj3mIUJxD05WmrhO_TrANkSf8Z5uCDXH0GpBWMQ",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ]
+}

@@ -45,8 +45,6 @@ export const mockData = {
                 price: 43000,
                 category: 'Garden',
                 quantity: 1,
-                quantityAverage: 0,
-                schema: 1,
                 _id: '624c1ad1527d4e2840408142'
             }
         ],
@@ -58,9 +56,7 @@ export const mockData = {
                 name: 'Generic Cotton Sausages',
                 price: 43000,
                 category: 'Garden',
-                quantity: 1,
-                quantityAverage: 0,
-                schema: 1
+                quantity: 1
             }
         ],
         totalPrice: 43000,
