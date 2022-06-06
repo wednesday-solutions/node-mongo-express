@@ -6,23 +6,312 @@
     "host": "http://localhost:9000",
     "basePath": "/",
     "swagger": "2.0",
-    "tags": ["auth"],
+    "tags": [
+        {
+            "name": "auth",
+            "description": "auth related endpoint"
+        },
+        {
+            "name": "cronJob",
+            "description": "cronJob related end point"
+        },
+        {
+            "name": "roles",
+            "description": "roles related end points"
+        },
+        {
+            "name": "aggregate",
+            "description": "aggregate related end points"
+        }
+    ],
     "paths": {
         "/login": {
             "post": {
                 "tags": ["auth"],
-                "descriptions": "Login user",
+                "summary": "login",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": ["username", "password"],
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Successful login",
+                        "description": "login is success",
                         "schema": {
-                            "type": "object"
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string"
+                                        },
+                                        "scope": {
+                                            "type": "string"
+                                        },
+                                        "expiresIn": {
+                                            "type": "number"
+                                        },
+                                        "tokenType": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "type": "object",
+                        "description": "login is failed",
+                        "schema": {
+                            "type": "object",
+                            "required": ["error"],
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "unable to login"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cron-job": {
+            "post": {
+                "tags": ["cronJob"],
+                "summary": "cron job",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": ["scheduleIn", "message", "queueName"],
+                            "properties": {
+                                "scheduleIn": {
+                                    "type": "number"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "queueName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "cron job is success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "type": "object",
+                        "description": "cron job is failed",
+                        "schema": {
+                            "type": "object",
+                            "required": ["error"],
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "unable to schedule cron job"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "post": {
+                "tags": ["roles"],
+                "summary": "create role",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": ["name", "description"],
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "create role is success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "type": "object",
+                        "description": "create role is failed",
+                        "schema": {
+                            "type": "object",
+                            "required": ["error"],
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "unable to create role"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/assign-roles": {
+            "put": {
+                "tags": ["roles"],
+                "summary": "assign roles",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "required": ["authId", "role"],
+                            "properties": {
+                                "authId": {
+                                    "type": "string"
+                                },
+                                "role": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "assign roles is success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "type": "object",
+                        "description": "assign roles is failed",
+                        "schema": {
+                            "type": "object",
+                            "required": ["error"],
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "unable to assign roles"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/aggregate/order-amount": {
+            "get": {
+                "tags": ["aggregate"],
+                "summary": "aggregate orderAmount",
+                "produces": ["application/json"],
+                "parameters": {},
+                "responses": {
+                    "200": {
+                        "description": "aggregate orderAmount is success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "totalOrderAmount": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "type": "object",
+                        "description": "aggregate orderAmount is failed",
+                        "schema": {
+                            "type": "object",
+                            "required": ["error"],
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "unable to aggregate orderAmount"
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     },
+
     "definitions": {},
     "responses": {},
     "parameters": {},
