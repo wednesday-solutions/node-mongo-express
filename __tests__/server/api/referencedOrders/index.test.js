@@ -4,7 +4,11 @@ import app from 'server';
 import { mockData } from 'utils/mockData';
 
 const { MOCK_UNSHARDED_REFERENCED_ORDERS: mockReferencedOrders } = mockData;
-
+jest.mock('middlewares/auth', () => ({
+    checkJwt: (req, res, next) => {
+        next();
+    }
+}));
 describe('fetchAllReferencedOrders tests', () => {
     let MODEL_NAME;
     let ENDPOINT;

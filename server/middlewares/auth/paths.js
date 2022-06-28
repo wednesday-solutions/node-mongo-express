@@ -28,6 +28,30 @@ export const paths = [
         method: 'GET'
     },
     {
+        path: '/orders',
+        method: 'POST'
+    },
+    {
+        path: '/orders/:_id',
+        method: 'GET'
+    },
+    {
+        path: '/orders',
+        method: 'GET'
+    },
+    {
+        path: '/referenced-orders',
+        method: 'GET'
+    },
+    {
+        path: '/unsharded-orders',
+        method: 'GET'
+    },
+    {
+        path: '/unsharded-referenced-orders',
+        method: 'GET'
+    },
+    {
         path: '/stores',
         scopes: [SCOPE_TYPE.SUPER_ADMIN, SCOPE_TYPE.STORE_ADMIN],
         method: 'GET',

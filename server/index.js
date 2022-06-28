@@ -11,6 +11,7 @@ import log from 'utils/logger';
 import { isTestEnv } from 'utils';
 import { initQueues } from 'utils/queue';
 import { injectRequestId } from 'middlewares/injectRequestId';
+import { checkJwt } from 'middlewares/auth';
 import { middleware as contextMiddleware } from 'express-http-context';
 
 /**
@@ -28,6 +29,7 @@ app.use(express.json());
 // get information from html forms
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(checkJwt);
 
 // used for getting and setting request-scoped context anywhere
 app.use(contextMiddleware);
