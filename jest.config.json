@@ -5,8 +5,10 @@
         "**/server/**",
         "!**/node_modules/**",
         "!**/dist/**",
-        "!**/models/**"
+        "!**/models/**",
+        "__tests__/__load__/libs/**/*.*"
     ],
+    "testRegex": "(/__tests__/.*\\.test)\\.js$",
     "coverageReporters": ["json-summary", "text", "lcov"],
     "testPathIgnorePatterns": ["<rootDir>/dist/"],
     "moduleNameMapper": {

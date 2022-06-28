@@ -5,7 +5,11 @@ import kebabCase from 'lodash/kebabCase';
 
 const { MOCK_UNSHARDED_REFERENCED_ORDERS: mockUnshardedReferencedOrders } =
     mockData;
-
+jest.mock('middlewares/auth', () => ({
+    checkJwt: (req, res, next) => {
+        next();
+    }
+}));
 describe('fetchAllUnshardedReferencedOrders tests', () => {
     let MODEL_NAME;
     let ENDPOINT;

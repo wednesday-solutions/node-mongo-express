@@ -14,7 +14,11 @@ import { redis } from 'services/redis';
 import { mockData } from 'utils/mockData';
 const { MOCK_ORDER_DETAILS: mockOrderDetails, MOCK_ORDER: mockOrder } =
     mockData;
-
+jest.mock('middlewares/auth', () => ({
+    checkJwt: (req, res, next) => {
+        next();
+    }
+}));
 describe('Order  tests', () => {
     const date = '1994-10-24';
     const amt = 25000;

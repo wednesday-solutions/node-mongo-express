@@ -1,5 +1,6 @@
 import config from 'config';
 import jwt from 'express-jwt';
+import { isEmpty } from 'lodash';
 import jwks from 'jwks-rsa';
 import { apiFailure } from 'utils/apiUtils';
 import { SCOPE_TYPE } from 'utils/constants';
@@ -11,22 +12,25 @@ export const checkRole = async (req, res, next) => {
         const roleArr = req.user[`${config().apiAudience}/roles`];
         let isAllowed = false;
         let authMiddleware;
-        const routePath =
-            req.baseUrl + (req.route.path === '/' ? '' : req.route.path);
+        const routePath = getRoutePath(req);
         paths.map(route => {
             if (
                 routePath === route.path &&
                 req.method.toUpperCase() === route.method.toUpperCase()
             ) {
-                route.scopes.forEach(ele => {
-                    if (roleArr.includes(ele)) {
-                        isAllowed = true;
-                        if (route.authMiddleware) {
-                            authMiddleware = route.authMiddleware;
+                if (isEmpty(route.scopes)) {
+                    isAllowed = true;
+                } else {
+                    route.scopes.forEach(ele => {
+                        if (roleArr.includes(ele)) {
+                            isAllowed = true;
+                            if (route.authMiddleware) {
+                                authMiddleware = route.authMiddleware;
+                            }
+                            return;
                         }
-                        return;
-                    }
-                });
+                    });
+                }
             }
         });
         if (!isAllowed) {
@@ -47,21 +51,41 @@ export const checkRole = async (req, res, next) => {
         return apiFailure(res, error.message, 400);
     }
 };
-
-export const checkJwt = (req, res, next) =>
-    jwt({
-        secret: jwks.expressJwtSecret({
-            cache: true,
-            rateLimit: true,
-            jwksRequestsPerMinute: 25,
-            jwksUri: `https://${config().domain}/.well-known/jwks.json`
-        }),
-        issuer: `https://${config().domain}/`,
-        algorithms: ['RS256']
-    })(req, res, (err, data) => {
-        if (err) {
-            res.send({ errors: [err] });
-            return next(err);
+function getRoutePath(req) {
+    const path = req.route?.path || req.path;
+    return req.baseUrl + (path === '/' ? '' : path);
+}
+export const checkJwt = (req, res, next) => {
+    let pathMatchFound = false;
+    const routePath = getRoutePath(req);
+    paths.map(route => {
+        if (
+            routePath === route.path &&
+            req.method.toUpperCase() === route.method.toUpperCase()
+        ) {
+            pathMatchFound = true;
         }
-        return checkRole(req, res, next);
     });
+    // If this is a public API there is no matching entry in the path.js
+    if (!pathMatchFound) {
+        next();
+        return;
+    } else {
+        return jwt({
+            secret: jwks.expressJwtSecret({
+                cache: true,
+                rateLimit: true,
+                jwksRequestsPerMinute: 25,
+                jwksUri: `https://${config().domain}/.well-known/jwks.json`
+            }),
+            issuer: `https://${config().domain}/`,
+            algorithms: ['RS256']
+        })(req, res, (err, data) => {
+            if (err) {
+                res.send({ errors: [err] });
+                return next(err);
+            }
+            return checkRole(req, res, next);
+        });
+    }
+};
