@@ -5,6 +5,7 @@ import jwks from 'jwks-rsa';
 import { apiFailure } from 'utils/apiUtils';
 import { SCOPE_TYPE } from 'utils/constants';
 import message from 'utils/i18n/message';
+import log from 'utils/logger';
 import { paths } from './paths';
 
 export const checkRole = async (req, res, next) => {
@@ -56,6 +57,7 @@ function getRoutePath(req) {
     return req.baseUrl + (path === '/' ? '' : path);
 }
 export const checkJwt = (req, res, next) => {
+    log.info('incoming request::', getRoutePath(req));
     let pathMatchFound = false;
     const routePath = getRoutePath(req);
     paths.map(route => {
