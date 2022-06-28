@@ -11,7 +11,7 @@
         "preinstall": "source /usr/local/opt/nvm/nvm.sh; nvm use; command -v link-module-alias && link-module-alias clean || true",
         "format": "prettier-standard './**/**/*.js'",
         "lint": "npm run lint:js",
-        "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern server/bin",
+        "lint:eslint": "eslint --ignore-path .eslintignore --ignore-pattern server/bin",
         "lint:eslint:fix": "eslint --ignore-path .eslintignore --ignore-pattern server/bin --fix",
         "lint:js": "npm run lint:eslint -- . ",
         "lint:staged": "lint-staged",
