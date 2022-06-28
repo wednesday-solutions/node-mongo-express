@@ -1,6 +1,6 @@
 {
     "name": "node-mongo-express",
-    "version": "10.0.28",
+    "version": "10.0.29",
     "description": "A basic starter web app with node, express and mongoose",
     "main": "index.js",
     "scripts": {
