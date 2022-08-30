@@ -64,5 +64,3 @@ typings/
 
 dist
 
-.env.docker
-.env.development
