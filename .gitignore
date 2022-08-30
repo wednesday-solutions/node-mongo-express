@@ -63,3 +63,6 @@ typings/
 .next
 
 dist
+
+.env.docker
+.env.development
