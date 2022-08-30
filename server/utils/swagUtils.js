@@ -76,7 +76,8 @@ export const generateSwaggerDoc = () => {
     );
     const fileArray = getModelFiles(modelsFolderPath);
     fileArray.forEach(f => {
-        const { model } = require(modelsFolderPath + f);
+        // eslint-disable-next-line prefer-template
+        const { model } = require('server/database/models/' + f);
         const name = f.split('.')[0];
 
         const { swaggerPaths, swaggerDefs } = swagGeneratorFactory(name, model);

@@ -3,6 +3,8 @@ services:
   app:
     build:
       context: .
+      args:
+          ENVIRONMENT_NAME: ${ENVIRONMENT_NAME}
       dockerfile: Dockerfile
     ports:
       - "9000:9000"
