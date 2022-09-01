@@ -32,12 +32,12 @@ export const validateSchema = model => (req, res, next) => {
 };
 
 export const validateReqBody = model => (req, res, next) => {
-    const validKeys = Object.keys(model.schema.obj);
+    const validKeys = model.schema.obj;
     const keys = Object.keys(req.body);
     if (keys.length) {
         let isValid = true;
         for (let i = 0; i < keys.length; i++) {
-            if (!validKeys.includes(keys[i])) {
+            if (!validKeys[keys[i]]) {
                 isValid = false;
                 break;
             }
