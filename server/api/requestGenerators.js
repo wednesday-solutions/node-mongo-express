@@ -14,24 +14,28 @@ import {
 import { clientCredentialsGrant, managementClient } from 'utils/auth0';
 import { REQUEST_TYPES } from './customApisMapper';
 import config from 'config';
-import { checkJwt } from 'middlewares/auth';
+import { validateObjectId, validateReqBody, validateSchema } from 'utils';
 
 export const generateRequest = (type, router, model, validator) => {
-    const middlewares = [...createValidatorMiddlewares(validator), checkJwt];
+    const middlewares = [...createValidatorMiddlewares(validator)];
     switch (type) {
         case REQUEST_TYPES.create:
+            middlewares.push(validateSchema(model));
             generatePostRequest({ router, model, middlewares });
             break;
         case REQUEST_TYPES.update:
+            middlewares.push(validateObjectId, validateReqBody(model));
             generatePatchRequest({ router, model, middlewares });
             break;
         case REQUEST_TYPES.fetchOne:
+            middlewares.push(validateObjectId);
             generateFetchOneRequest({ router, model, middlewares });
             break;
         case REQUEST_TYPES.fetchAll:
             generateFetchAllRequest({ router, model, middlewares });
             break;
         case REQUEST_TYPES.remove:
+            middlewares.push(validateObjectId);
             generateDeleteRequest({ router, model, middlewares });
             break;
     }
