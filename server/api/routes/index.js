@@ -29,4 +29,4 @@ router.get(
     fetchAggregatedOrderAmount
 );
 
-module.exports = router;
+export default router;
