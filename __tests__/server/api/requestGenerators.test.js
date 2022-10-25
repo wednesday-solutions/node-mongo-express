@@ -32,11 +32,18 @@ describe('requestGenerators tests', () => {
     beforeAll(() => {
         ENDPOINT = '/products';
     });
+
+    const mockProduct = {
+        _id: '62bd7bd6151f31799cc670a6',
+        name: 'Bat',
+        price: 29,
+        category: 'Sports',
+        quantity: 10
+    };
     describe('generatePostRequest tests', () => {
+        const reqBody = mockProduct;
         it('should generatePostRoute should perform success response', async () => {
-            const reqBody = {
-                name: 'Jane Doe'
-            };
+            delete reqBody['_id'];
             const createSpy = jest
                 .spyOn(daoUtils, 'createItem')
                 .mockImplementation((_, body) => Promise.resolve(body));
@@ -50,7 +57,7 @@ describe('requestGenerators tests', () => {
                 .send(reqBody);
             expect(res.statusCode).toBe(200);
             expect(createSpy).toBeCalled();
-            expect(res.body.data).toEqual(reqBody);
+            expect(res.body.data).toEqual(mockProduct);
         });
 
         it('should generatePostRoute should perform error response', async () => {
@@ -65,9 +72,22 @@ describe('requestGenerators tests', () => {
                     Accept: 'application/json',
                     Authorization: 'Bearer dummy-token'
                 })
-                .send({});
+                .send(reqBody);
             expect(res.statusCode).toBe(500);
             expect(res.body.error).toEqual(error.message);
+        });
+
+        it('should return an error from validateSchema middleware', async () => {
+            const res = await supertest(app)
+                .post(ENDPOINT)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
+                .send({
+                    name: 'Bat'
+                });
+            expect(res.statusCode).toBe(500);
         });
     });
 
@@ -77,7 +97,7 @@ describe('requestGenerators tests', () => {
             jest.spyOn(daoUtils, 'updateItem').mockResolvedValue(returnItem);
 
             const res = await supertest(app)
-                .patch(`${ENDPOINT}/7`)
+                .patch(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
                 .set({
                     Accept: 'application/json',
                     Authorization: 'Bearer dummy-token'
@@ -92,14 +112,42 @@ describe('requestGenerators tests', () => {
             jest.spyOn(daoUtils, 'updateItem').mockRejectedValue(error);
 
             const res = await supertest(app)
-                .patch(`${ENDPOINT}/7`)
+                .patch(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
                 .set({
                     Accept: 'application/json',
                     Authorization: 'Bearer dummy-token'
                 })
-                .send({});
+                .send({ name: 'Jane Doe' });
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
+        });
+
+        it('should return error from validateObjectId middleware', async () => {
+            const res = await supertest(app)
+                .patch(`${ENDPOINT}/62bd7bd6151f31799cc670a`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
+                .send({ name: 'Jane Doe' });
+            expect(res.statusCode).toBe(500);
+            expect(res.error.text).toEqual(
+                '{"error":{"message":"Invalid ObjectId"}}'
+            );
+        });
+
+        it('should return error from validateReqBody middleware', async () => {
+            const res = await supertest(app)
+                .patch(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                })
+                .send({ names: 'Jane Doe' });
+            expect(res.statusCode).toBe(500);
+            expect(res.error.text).toEqual(
+                '{"error":{"message":"Request schema is invalid"}}'
+            );
         });
     });
 
@@ -137,18 +185,17 @@ describe('requestGenerators tests', () => {
 
     describe('generateFetchOneRequest tests', () => {
         it('should generate get route that fetch single item', async () => {
-            const returnItem = { name: 'sasuke' };
-            jest.spyOn(daoUtils, 'fetchItem').mockResolvedValue(returnItem);
+            jest.spyOn(daoUtils, 'fetchItem').mockResolvedValue(mockProduct);
 
             const res = await supertest(app)
-                .get(`${ENDPOINT}/7`)
+                .get(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
                 .set({
                     Accept: 'application/json',
                     Authorization: 'Bearer dummy-token'
-                })
-                .send({ name: 'shikamaru' });
+                });
+
             expect(res.statusCode).toBe(200);
-            expect(res.body).toEqual({ data: returnItem });
+            expect(res.body).toEqual({ data: mockProduct });
         });
 
         it('should generate get route that could return error response', async () => {
@@ -156,26 +203,43 @@ describe('requestGenerators tests', () => {
             jest.spyOn(daoUtils, 'fetchItem').mockRejectedValue(error);
 
             const res = await supertest(app)
-                .get(`${ENDPOINT}/7`)
+                .get(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
                 .set({
                     Accept: 'application/json',
                     Authorization: 'Bearer dummy-token'
-                })
-                .send({});
+                });
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
+        });
+
+        it('should return error from validateObjectId', async () => {
+            const error = new Error('update failed');
+            jest.spyOn(daoUtils, 'fetchItem').mockRejectedValue(error);
+
+            const res = await supertest(app)
+                .get(`${ENDPOINT}/62bd7bd6151f31799cc670a`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                });
+            expect(res.statusCode).toBe(500);
+            expect(res.error.text).toEqual(
+                '{"error":{"message":"Invalid ObjectId"}}'
+            );
         });
     });
 
     describe('generateDeleteRequest tests', () => {
         it('should generate delete route that could delete item', async () => {
-            const deleteRes = 'item delete sucess';
+            const deleteRes = 'item delete success';
             jest.spyOn(daoUtils, 'deleteItem').mockResolvedValue(deleteRes);
 
-            const res = await supertest(app).delete(`${ENDPOINT}/7`).set({
-                Accept: 'application/json',
-                Authorization: 'Bearer dummy-token'
-            });
+            const res = await supertest(app)
+                .delete(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                });
             expect(res.statusCode).toBe(200);
             expect(res.body).toEqual({ data: deleteRes });
         });
@@ -184,12 +248,27 @@ describe('requestGenerators tests', () => {
             const error = new Error('delete failed');
             jest.spyOn(daoUtils, 'deleteItem').mockRejectedValue(error);
 
-            const res = await supertest(app).delete(`${ENDPOINT}/7`).set({
-                Accept: 'application/json',
-                Authorization: 'Bearer dummy-token'
-            });
+            const res = await supertest(app)
+                .delete(`${ENDPOINT}/62bd7bd6151f31799cc670a6`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                });
             expect(res.statusCode).toBe(500);
             expect(res.body).toEqual({ error: error.message });
+        });
+
+        it('should return error from validateObjectId', async () => {
+            const res = await supertest(app)
+                .delete(`${ENDPOINT}/62bd7bd6151f31799cc670a`)
+                .set({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer dummy-token'
+                });
+            expect(res.statusCode).toBe(500);
+            expect(res.error.text).toEqual(
+                '{"error":{"message":"Invalid ObjectId"}}'
+            );
         });
     });
 });
