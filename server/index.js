@@ -1,4 +1,6 @@
 import http from 'http';
+import i18n from 'i18n';
+import path from 'path';
 import express from 'express';
 import helmet from 'helmet';
 import responseTime from 'response-time';
@@ -13,12 +15,17 @@ import { initQueues } from 'utils/queue';
 import { injectRequestId } from 'middlewares/injectRequestId';
 import { checkJwt } from 'middlewares/auth';
 import { middleware as contextMiddleware } from 'express-http-context';
-
 /**
  * Create express server
  */
 
+i18n.configure({
+    locales: ['en', 'hi'],
+    directory: path.join(__dirname, './translations')
+});
+
 const app = express();
+app.use(i18n.init);
 app.use(responseTime());
 app.set('port', process.env.PORT || 9000);
 app.use(helmet());
@@ -42,7 +49,7 @@ if (!isTestEnv()) {
 }
 
 app.get('/', (req, res) => {
-    apiSuccess(res, 'node-express-mongo server at your service🖖');
+    apiSuccess(res, res.locals.__('response.health_check'));
 });
 list(app);
 
