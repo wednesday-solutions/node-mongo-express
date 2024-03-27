@@ -6,6 +6,7 @@
         "!**/node_modules/**",
         "!**/dist/**",
         "!**/models/**",
+        "!**/server/translations/**",
         "!__tests__/__load__/libs/**/*.*"
     ],
     "testRegex": "(/__tests__/.*\\.test)\\.js$",

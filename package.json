@@ -59,6 +59,7 @@
         "express-validator": "^6.14.0",
         "helmet": "^5.0.1",
         "husky": "^8.0.1",
+        "i18n": "^0.15.1",
         "ioredis": "^5.0.5",
         "jwks-rsa": "^2.0.5",
         "kill-port": "^1.6.1",
