@@ -10,7 +10,7 @@
         "!__tests__/__load__/libs/**/*.*"
     ],
     "testRegex": "(/__tests__/.*\\.test)\\.js$",
-    "coverageReporters": ["json-summary", "text", "lcov"],
+    "coverageReporters": ["json", "text", "lcov"],
     "testPathIgnorePatterns": ["<rootDir>/dist/"],
     "moduleNameMapper": {
         "@server(.*)$": "<rootDir>/server/$1",

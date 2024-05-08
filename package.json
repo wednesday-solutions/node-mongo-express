@@ -4,7 +4,11 @@
     "description": "A basic starter web app with node, express and mongoose",
     "main": "index.js",
     "scripts": {
-        "test": "jest --coverage",
+        "e2eTest": "nyc node dist/main.js",
+        "coverage:total": "yarn coverage:merge && yarn coverage:report",
+        "coverage:report": "nyc report --reporter=lcov --reporter=text",
+        "coverage:merge": "mkdir -p ./coverage && nyc merge ./coverage .nyc_output/out.json",
+        "test": "jest --coverage --collectCoverageFrom='src/**/*.{js,jsx}'",
         "start": "node dist/main.js",
         "start:development": "ENVIRONMENT_NAME=development node dist/main.js",
         "build:env": "webpack-cli --config webpack/production.config.js --stats-error-details",
@@ -26,6 +30,24 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/wednesday-solutions/node-mongo-express.git"
+    },
+    "nyc": {
+        "all": true,
+        "include": [
+            "server/**/**.js"
+        ],
+        "exclude": [
+            "**/*.test.js"
+        ],
+        "reporter": [
+            "lcov",
+            "text"
+        ],
+        "extension": [
+            ".js"
+        ],
+        "sourceMap": true,
+        "instrument": true
     },
     "keywords": [
         "node",
@@ -69,6 +91,7 @@
         "mongoose-to-swagger": "^1.4.0",
         "node-fetch": "2",
         "nodemon": "^2.0.15",
+        "nyc": "^15.1.0",
         "opossum": "^6.3.0",
         "pluralize": "^8.0.0",
         "response-time": "^2.3.2",

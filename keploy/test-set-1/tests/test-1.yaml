@@ -1,0 +1,86 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-1
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9000/api-docs/
+        header:
+            Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+            Accept-Encoding: gzip, deflate, br, zstd
+            Accept-Language: en-GB,en
+            Cache-Control: max-age=0
+            Connection: keep-alive
+            Cookie: csrftoken=5w8RtIXw5M4ixBeXNqB6wphbStVCywde
+            Host: localhost:9000
+            If-None-Match: W/"c1e-DIPJhvJVWYBJ25bYfVw0j7PM8bo"
+            Sec-Ch-Ua: '"Chromium";v="124", "Brave";v="124", "Not-A.Brand";v="99"'
+            Sec-Ch-Ua-Mobile: ?0
+            Sec-Ch-Ua-Platform: '"macOS"'
+            Sec-Fetch-Dest: document
+            Sec-Fetch-Mode: navigate
+            Sec-Fetch-Site: same-origin
+            Sec-Fetch-User: ?1
+            Sec-Gpc: "1"
+            Upgrade-Insecure-Requests: "1"
+            User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
+        body: ""
+        timestamp: 2024-04-24T16:03:57.261977234+05:30
+    resp:
+        status_code: 304
+        header:
+            Access-Control-Allow-Origin: '*'
+            Connection: keep-alive
+            Content-Security-Policy: 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self'' https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+            Cross-Origin-Embedder-Policy: require-corp
+            Cross-Origin-Opener-Policy: same-origin
+            Cross-Origin-Resource-Policy: same-origin
+            Date: Wed, 24 Apr 2024 10:33:57 GMT
+            Etag: W/"c1e-DIPJhvJVWYBJ25bYfVw0j7PM8bo"
+            Expect-Ct: max-age=0
+            Keep-Alive: timeout=5
+            Origin-Agent-Cluster: ?1
+            Referrer-Policy: no-referrer
+            Strict-Transport-Security: max-age=15552000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Dns-Prefetch-Control: "off"
+            X-Download-Options: noopen
+            X-Frame-Options: SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies: none
+            X-Response-Time: 14.431ms
+            X-Xss-Protection: "0"
+        body: ""
+        status_message: Not Modified
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-04-24T16:03:57.387275343+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+            header.X-Response-Time: []
+    created: 1713954837
+curl: |
+    curl --request GET \
+      --url http://localhost:9000/api-docs/ \
+      --header 'Host: localhost:9000' \
+      --header 'Accept-Language: en-GB,en' \
+      --header 'Sec-Fetch-Dest: document' \
+      --header 'Sec-Fetch-User: ?1' \
+      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
+      --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8' \
+      --header 'Sec-Ch-Ua-Platform: "macOS"' \
+      --header 'Sec-Ch-Ua-Mobile: ?0' \
+      --header 'Upgrade-Insecure-Requests: 1' \
+      --header 'Cookie: csrftoken=5w8RtIXw5M4ixBeXNqB6wphbStVCywde' \
+      --header 'Sec-Gpc: 1' \
+      --header 'Sec-Fetch-Mode: navigate' \
+      --header 'If-None-Match: W/"c1e-DIPJhvJVWYBJ25bYfVw0j7PM8bo"' \
+      --header 'Sec-Fetch-Site: same-origin' \
+      --header 'Connection: keep-alive' \
+      --header 'Sec-Ch-Ua: "Chromium";v="124", "Brave";v="124", "Not-A.Brand";v="99"' \
+      --header 'Cache-Control: max-age=0' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' \

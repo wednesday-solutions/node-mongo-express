@@ -53,11 +53,29 @@ app.get('/', (req, res) => {
 });
 list(app);
 
+let server;
 if (process.env.NODE_ENV !== 'test') {
-    const server = http.createServer(app);
+    server = http.createServer(app);
     server.listen(app.get('port'), () => {
         log.info('Server is running at port %s', app.get('port'));
     });
 }
+
+function gracefulShutdown(signal) {
+    log.info(`${signal} received`);
+    if (server) {
+        server.close(() => {
+            log.info('HTTP server closed');
+            // Clean up other resources here
+            process.exit(0);
+        });
+    } else {
+        log.info('No server to shut down.');
+        process.exit(0);
+    }
+}
+
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
 
 export default app;
