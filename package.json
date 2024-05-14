@@ -61,7 +61,7 @@
     "author": "Wednesday Solutions",
     "license": "MIT",
     "engines": {
-        "node": "14.17.x"
+        "node": "16.20.x"
     },
     "bugs": {
         "url": "https://github.com/wednesday-solutions/node-mongo-express/issues"

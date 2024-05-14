@@ -1,0 +1,81 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: login-user-test
+spec:
+    metadata: {}
+    req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9000/login
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Content-Length: "54"
+            Content-Type: application/json
+            Host: localhost:9000
+            Keploy-Test-Name: login-user-test
+            Postman-Token: 5e867848-030f-4ad2-bcc7-26a6e1da1abd
+            User-Agent: PostmanRuntime/7.37.3
+        body: |-
+            {
+              "username": "commodo enim",
+              "password": "esse"
+            }
+        timestamp: 2024-05-14T13:04:01.015253092+05:30
+    resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Connection: keep-alive
+            Content-Length: "216"
+            Content-Security-Policy: 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self'' https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+            Content-Type: application/json; charset=utf-8
+            Cross-Origin-Embedder-Policy: require-corp
+            Cross-Origin-Opener-Policy: same-origin
+            Cross-Origin-Resource-Policy: same-origin
+            Date: Tue, 14 May 2024 07:34:03 GMT
+            Etag: W/"d8-3dET7FkXk1RiEYRHSgxAM07KtC8"
+            Expect-Ct: max-age=0
+            Keep-Alive: timeout=5
+            Origin-Agent-Cluster: ?1
+            Ratelimit-Limit: "10"
+            Ratelimit-Remaining: "9"
+            Ratelimit-Reset: "21"
+            Referrer-Policy: no-referrer
+            Strict-Transport-Security: max-age=15552000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Dns-Prefetch-Control: "off"
+            X-Download-Options: noopen
+            X-Frame-Options: SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies: none
+            X-Response-Time: 2381.447ms
+            X-Xss-Protection: "0"
+        body: '{"data":{"error":"unauthorized_client","error_description":"Grant type ''http://auth0.com/oauth/grant-type/password-realm'' not allowed for the client.","error_uri":"https://auth0.com/docs/clients/client-grant-types"}}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-05-14T13:04:03.45471978+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+            header.X-Response-Time: []
+            header.Ratelimit-Reset: []
+    created: 1715672043
+curl: |-
+    curl --request POST \
+      --url http://localhost:9000/login \
+      --header 'Connection: keep-alive' \
+      --header 'Accept: */*' \
+      --header 'Content-Type: application/json' \
+      --header 'User-Agent: PostmanRuntime/7.37.3' \
+      --header 'Host: localhost:9000' \
+      --header 'Postman-Token: 5e867848-030f-4ad2-bcc7-26a6e1da1abd' \
+      --header 'Keploy-Test-Name: login-user-test' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --data '{
+      "username": "commodo enim",
+      "password": "esse"
+    }'

@@ -1,0 +1,66 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: delete-unsharded-referenced-order-test
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9000/unsharded-referenced-orders/nisi%20et
+        header:
+            Accept: application/json
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Host: localhost:9000
+            Keploy-Test-Name: delete-unsharded-referenced-order-test
+            Postman-Token: ccc6faff-5cef-4427-a390-f10b0e59bde3
+            User-Agent: PostmanRuntime/7.37.3
+        body: ""
+        timestamp: 2024-05-14T13:04:00.910760133+05:30
+    resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Connection: keep-alive
+            Content-Length: "11"
+            Content-Security-Policy: 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self'' https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+            Content-Type: application/json; charset=utf-8
+            Cross-Origin-Embedder-Policy: require-corp
+            Cross-Origin-Opener-Policy: same-origin
+            Cross-Origin-Resource-Policy: same-origin
+            Date: Tue, 14 May 2024 07:34:00 GMT
+            Etag: W/"b-EFAlOux7Kcr/ZEgGkn2r+oFAbu4"
+            Expect-Ct: max-age=0
+            Keep-Alive: timeout=5
+            Origin-Agent-Cluster: ?1
+            Referrer-Policy: no-referrer
+            Strict-Transport-Security: max-age=15552000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Dns-Prefetch-Control: "off"
+            X-Download-Options: noopen
+            X-Frame-Options: SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies: none
+            X-Response-Time: 2.783ms
+            X-Xss-Protection: "0"
+        body: '{"data":[]}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-05-14T13:04:01.137969503+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+            header.X-Response-Time: []
+    created: 1715672041
+curl: |
+    curl --request DELETE \
+      --url http://localhost:9000/unsharded-referenced-orders/nisi%20et \
+      --header 'Accept: application/json' \
+      --header 'Keploy-Test-Name: delete-unsharded-referenced-order-test' \
+      --header 'User-Agent: PostmanRuntime/7.37.3' \
+      --header 'Postman-Token: ccc6faff-5cef-4427-a390-f10b0e59bde3' \
+      --header 'Host: localhost:9000' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Connection: keep-alive' \

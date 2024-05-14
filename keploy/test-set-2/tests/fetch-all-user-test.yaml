@@ -1,0 +1,67 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: fetch-all-user-test
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9000/users
+        header:
+            Accept: application/json
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Host: localhost:9000
+            Keploy-Test-Name: fetch-all-user-test
+            Postman-Token: 71f1d699-0c01-4f3a-a2c7-ced8ae32e789
+            User-Agent: PostmanRuntime/7.37.3
+        body: ""
+        timestamp: 2024-05-14T13:04:00.994241819+05:30
+    resp:
+        status_code: 200
+        header:
+            Access-Control-Allow-Origin: '*'
+            Connection: keep-alive
+            Content-Length: "649"
+            Content-Security-Policy: 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self'' https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+            Content-Type: application/json; charset=utf-8
+            Cross-Origin-Embedder-Policy: require-corp
+            Cross-Origin-Opener-Policy: same-origin
+            Cross-Origin-Resource-Policy: same-origin
+            Date: Tue, 14 May 2024 07:34:00 GMT
+            Etag: W/"289-1M2b4mMmcoFFylpSpZh3fvTvtCY"
+            Expect-Ct: max-age=0
+            Keep-Alive: timeout=5
+            Origin-Agent-Cluster: ?1
+            Referrer-Policy: no-referrer
+            Strict-Transport-Security: max-age=15552000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Dns-Prefetch-Control: "off"
+            X-Download-Options: noopen
+            X-Frame-Options: SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies: none
+            X-Response-Time: 9.280ms
+            X-Xss-Protection: "0"
+        body: '{"data":[{"_id":"662819ea07cf91da3df1df07","firstName":"himanshu","lastName":"raj","email":"admin@gmail.com","role":"SUPER_ADMIN","__v":0},{"_id":"6628dac5a7d5b7f1edeaf328","firstName":"himanshu","lastName":"raj","email":"admin1@gmail.com","authId":"auth0|6628dac59949aabe059dbf5c","role":"SUPER_ADMIN","__v":0},{"_id":"6628dbffa7d5b7f1edeaf32a","firstName":"himanshu","lastName":"raj","email":"2@gmail.com","authId":"auth0|6628dbfee51cf81977d25c43","role":"SUPER_ADMIN","__v":0},{"_id":"6628e027b16d7879ac569043","firstName":"himanshu","lastName":"raj","email":"3@gmail.com","authId":"auth0|6628e027e51cf81977d25eec","role":"SUPER_ADMIN","__v":0}]}'
+        status_message: OK
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-05-14T13:04:01.440144531+05:30
+    objects: []
+    assertions:
+        noise:
+            body.data.email: []
+            header.Date: []
+            header.X-Response-Time: []
+    created: 1715672041
+curl: |
+    curl --request GET \
+      --url http://localhost:9000/users \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Connection: keep-alive' \
+      --header 'Accept: application/json' \
+      --header 'Keploy-Test-Name: fetch-all-user-test' \
+      --header 'User-Agent: PostmanRuntime/7.37.3' \
+      --header 'Postman-Token: 71f1d699-0c01-4f3a-a2c7-ced8ae32e789' \
+      --header 'Host: localhost:9000' \

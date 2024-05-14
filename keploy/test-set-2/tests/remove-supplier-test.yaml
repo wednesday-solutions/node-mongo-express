@@ -1,0 +1,66 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: remove-supplier-test
+spec:
+    metadata: {}
+    req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:9000/suppliers/nisi%20et
+        header:
+            Accept: application/json
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Host: localhost:9000
+            Keploy-Test-Name: remove-supplier-test
+            Postman-Token: dd9ec4b9-389e-48c0-b159-0b06a04c3502
+            User-Agent: PostmanRuntime/7.37.3
+        body: ""
+        timestamp: 2024-05-14T13:04:00.78801425+05:30
+    resp:
+        status_code: 500
+        header:
+            Access-Control-Allow-Origin: '*'
+            Connection: keep-alive
+            Content-Length: "40"
+            Content-Security-Policy: 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self'' https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+            Content-Type: application/json; charset=utf-8
+            Cross-Origin-Embedder-Policy: require-corp
+            Cross-Origin-Opener-Policy: same-origin
+            Cross-Origin-Resource-Policy: same-origin
+            Date: Tue, 14 May 2024 07:34:00 GMT
+            Etag: W/"28-u8SwiB6Bfmf65yEZGm9FPE8VFqg"
+            Expect-Ct: max-age=0
+            Keep-Alive: timeout=5
+            Origin-Agent-Cluster: ?1
+            Referrer-Policy: no-referrer
+            Strict-Transport-Security: max-age=15552000; includeSubDomains
+            X-Content-Type-Options: nosniff
+            X-Dns-Prefetch-Control: "off"
+            X-Download-Options: noopen
+            X-Frame-Options: SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies: none
+            X-Response-Time: 0.476ms
+            X-Xss-Protection: "0"
+        body: '{"error":{"message":"Invalid ObjectId"}}'
+        status_message: Internal Server Error
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2024-05-14T13:04:01.037114898+05:30
+    objects: []
+    assertions:
+        noise:
+            header.Date: []
+            header.X-Response-Time: []
+    created: 1715672041
+curl: |
+    curl --request DELETE \
+      --url http://localhost:9000/suppliers/nisi%20et \
+      --header 'Host: localhost:9000' \
+      --header 'Accept-Encoding: gzip, deflate, br' \
+      --header 'Connection: keep-alive' \
+      --header 'Accept: application/json' \
+      --header 'Keploy-Test-Name: remove-supplier-test' \
+      --header 'User-Agent: PostmanRuntime/7.37.3' \
+      --header 'Postman-Token: dd9ec4b9-389e-48c0-b159-0b06a04c3502' \
