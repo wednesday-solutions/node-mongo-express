@@ -130,7 +130,8 @@
         "*.js": [
             "npm run lint:eslint:fix",
             "git add --force",
-            "jest --findRelatedTests $STAGED_FILES"
+            "jest --findRelatedTests $STAGED_FILES",
+            "keploy test -c 'yarn e2eTest'"
         ],
         "*.json": [
             "prettier --write",
