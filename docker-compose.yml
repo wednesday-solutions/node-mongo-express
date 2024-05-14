@@ -1,20 +1,20 @@
 version: "3"
 services:
-  # app:
-  #   build:
-  #     context: .
-  #     args:
-  #         ENVIRONMENT_NAME: ${ENVIRONMENT_NAME}
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "9000:9000"
-  #   env_file:
-  #     - .env.local
-  #   environment:
-  #     - REDIS_DOMAIN=redis
-  #     - MONGO_BASE_URI=mongo
-  #   depends_on:
-  #     - mongo
+  app:
+    build:
+      context: .
+      args:
+          ENVIRONMENT_NAME: ${ENVIRONMENT_NAME}
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env.local
+    environment:
+      - REDIS_DOMAIN=redis
+      - MONGO_BASE_URI=mongo
+    depends_on:
+      - mongo
 
   mongo:
     container_name: mongo
