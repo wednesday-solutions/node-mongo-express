@@ -59,7 +59,6 @@ typings/
 .env
 .env.local
 .env.development
-.env.docker
 
 # next.js build output
 .next
@@ -67,4 +66,5 @@ typings/
 dist
 .env.development
 .env.docker
+report.json
 

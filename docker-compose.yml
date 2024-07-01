@@ -9,7 +9,7 @@ services:
     ports:
       - "9000:9000"
     env_file:
-      - .env.local
+      - .env.docker
     environment:
       - REDIS_DOMAIN=redis
       - MONGO_BASE_URI=mongo
