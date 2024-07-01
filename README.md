@@ -87,9 +87,9 @@ A basic starter for a web app with node, express and mongoose -->
 - Execute the following command: `k6 run __tests__/__load__/script.js`
 ## Build and run docker container locally
 
-    - docker-compose down
-    - docker-compose build
-    - docker-compose up
+    - docker-compose --env-file=.env.docker down
+    - docker-compose --env-file=.env.docker  build
+    - docker-compose --env-file=.env.docker  up
 
 # Shard setup
 

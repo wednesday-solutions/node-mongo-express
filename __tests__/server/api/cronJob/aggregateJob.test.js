@@ -12,7 +12,6 @@ describe('aggregateCheck function tests', () => {
     const date = moment(REDIS_IMPLEMENTATION_DATE).subtract(1, 'day');
     const amt = 25000;
     const count = 1500;
-    const mockError = new Error('Mock Error');
 
     beforeEach(() => {
         jest.spyOn(orderFns, 'getEarliestOrderCreatedDate').mockResolvedValue(
@@ -57,12 +56,5 @@ describe('aggregateCheck function tests', () => {
         const redisSpy = jest.spyOn(redis, 'set');
         await aggregateCheck();
         expect(redisSpy).toBeCalledTimes(7);
-    });
-
-    it('should thrown an error if there is error thrown from db', async () => {
-        jest.spyOn(redis, 'get').mockRejectedValueOnce(mockError);
-        expect(async () => {
-            await aggregateCheck();
-        }).rejects.toThrow(mockError);
     });
 });

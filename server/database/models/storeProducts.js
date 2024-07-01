@@ -3,11 +3,11 @@ const { schema: Store } = require('./stores');
 const { schema: Product } = require('./products');
 const schema = new mongoose.Schema({
     productId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.ObjectId,
         required: true
     },
     storeId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.ObjectId,
         required: true
     },
     store: Store,
