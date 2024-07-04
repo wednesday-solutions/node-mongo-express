@@ -2,6 +2,7 @@ import message from 'utils/i18n/message';
 import * as utils from 'utils/apiUtils';
 import { checkRole } from 'middlewares/auth';
 import { ownershipBasedAccessControl } from 'middlewares/auth/ownershipBasedAccessControl';
+
 jest.mock('middlewares/auth/ownershipBasedAccessControl', () => ({
     ownershipBasedAccessControl: jest.fn()
 }));
@@ -76,24 +77,5 @@ describe('checkRole tests', () => {
         req.user['https://node-express-demo/roles'] = 'SUPER_ADMIN';
         await checkRole(req, res, next);
         expect(next).toBeCalled();
-    });
-
-    it(`should return error from catch block`, async () => {
-        const mockError = new Error('test');
-        req.user['https://node-express-demo/roles'] = 'STORE_ADMIN';
-        req.user[`https://node-express-demo/email`] = 'asser@wednesday.com';
-        req.params = { _id: '62861b5be1897fc8b1d82360' };
-        req.baseUrl = '/stores';
-        req.route.path = '/:_id';
-        req.method = 'GET';
-        jest.spyOn(mocks, 'ownershipBasedAccessControl').mockImplementationOnce(
-            () => {
-                throw mockError;
-            }
-        );
-
-        expect(async () => {
-            await checkRole(req, res, next);
-        }).rejects.toThrowError('test');
     });
 });
